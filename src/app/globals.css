@@ -6,15 +6,17 @@
   --font-tungsten: var(--font-tungsten);
   --font-gilroy: var(--font-gilroy);
 
-  /* Brand colours */
-  --color-brand:        #E8184A;
-  --color-brand-dark:   #b8103a;
-  --color-ink:          #1a0a0e;
-  --color-muted:        #7a4455;
-  --color-muted-light:  #a07080;
-  --color-border:       #f2dde2;
-  --color-surface:      #fdf5f7;
-  --color-surface-deep: #fde8ed;
+  /* Brand colours — exact designer spec */
+  --color-brand:        #EE0026;  /* Mid Red */
+  --color-brand-dark:   #770000;  /* Dark Red */
+  --color-ink:          #000000;  /* Black */
+
+  /* Derived utility colours */
+  --color-muted:        #555555;  /* Body text on light bg */
+  --color-muted-light:  #888888;  /* Secondary/caption text */
+  --color-border:       #E0E0E0;  /* Subtle dividers */
+  --color-surface:      #F3F3F3;  /* Light Grey */
+  --color-surface-deep: #FFE8EC;  /* Light red tint for highlights */
 }
 
 * {
