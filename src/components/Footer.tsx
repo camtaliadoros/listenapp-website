@@ -17,13 +17,14 @@ export default async function Footer() {
 
   return (
     <footer className="bg-ink text-white mt-auto">
-      <div className="max-w-5xl mx-auto px-8 py-10 flex items-center justify-between flex-wrap gap-6">
+      <div className="max-w-5xl mx-auto px-4 md:px-8 py-10 flex flex-col md:flex-row md:items-center justify-between gap-8">
         <div>
           <Image
             src="/ListenAppLogo-White-Version.svg"
             alt="ListenApp"
-            width={140}
-            height={28}
+            width={84}
+            height={17}
+            style={{ height: "auto" }}
             className="mb-3"
           />
           <p className="text-sm text-muted-light leading-relaxed">
@@ -35,16 +36,13 @@ export default async function Footer() {
           </p>
         </div>
 
-        <div className="flex gap-8">
+        <div className="flex flex-wrap gap-x-6 gap-y-2">
           <Link href="/the-problem" className="text-sm text-muted-light hover:text-white transition-colors">The Problem</Link>
           <Link href="/partner" className="text-sm text-muted-light hover:text-white transition-colors">Partner with us</Link>
           <Link href="/about" className="text-sm text-muted-light hover:text-white transition-colors">About</Link>
           <Link href="/contact" className="text-sm text-muted-light hover:text-white transition-colors">Contact</Link>
-          {settings?.privacyPolicyUrl && (
-            <a href={settings.privacyPolicyUrl} className="text-sm text-muted-light hover:text-white transition-colors">
-              Privacy policy
-            </a>
-          )}
+          <Link href="/app-questionnaire" className="text-sm text-muted-light hover:text-white transition-colors">App questionnaire</Link>
+          <Link href="/privacy-policy" className="text-sm text-muted-light hover:text-white transition-colors">Privacy policy</Link>
         </div>
       </div>
     </footer>

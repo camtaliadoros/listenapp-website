@@ -12,24 +12,82 @@
   --color-ink:          #000000;  /* Black */
 
   /* Derived utility colours */
-  --color-muted:        #555555;  /* Body text on light bg */
-  --color-muted-light:  #888888;  /* Secondary/caption text */
+  --color-muted:        #555555;  /* Body text — 7.46:1 on white ✓ */
+  --color-muted-light:  #666666;  /* Secondary text — 5.74:1 on white, 4.67:1 on surface ✓ */
   --color-border:       #E0E0E0;  /* Subtle dividers */
   --color-surface:      #F3F3F3;  /* Light Grey */
   --color-surface-deep: #FFE8EC;  /* Light red tint for highlights */
 }
 
-* {
-  box-sizing: border-box;
+/* ── Animations ── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-body {
-  background: #fff;
-  color: #1a0a0e;
-  font-family: var(--font-graphik), sans-serif;
+.animate-fade-up {
+  animation: fade-up 0.6s ease both;
 }
 
-a {
+/* Animated underline */
+.link-underline {
+  position: relative;
   text-decoration: none;
-  color: inherit;
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 100%;
+  height: 1.5px;
+  background: currentColor;
+  transform-origin: right center;
+  transform: scaleX(1);
+  transition: transform 0.3s ease;
+}
+.link-underline:hover::after {
+  transform: scaleX(0);
+}
+
+/* Arrow nudge on button hover */
+.btn-arrow .arrow {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+.btn-arrow:hover .arrow {
+  transform: translateX(4px);
+}
+
+/* Card hover lift */
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card-hover:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    background: #fff;
+    color: #000000;
+    font-family: var(--font-graphik), sans-serif;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  /* Visible focus rings for keyboard navigation */
+  :focus-visible {
+    outline: 3px solid #EE0026;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
 }

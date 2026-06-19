@@ -1,4 +1,5 @@
 import { client } from "@/sanity/client";
+import FadeUp from "@/components/FadeUp";
 import { buildMetadata } from "@/lib/metadata";
 import type { Metadata } from "next";
 
@@ -36,33 +37,33 @@ export default async function AboutPage() {
   return (
     <>
       {/* ── Hero ── */}
-      <div className="bg-ink py-14">
-        <div className="max-w-5xl mx-auto px-8">
-          <p className="text-xs font-bold uppercase tracking-widest text-border mb-3">About us</p>
-          <h1 className="font-graphik text-5xl font-bold text-white tracking-tight leading-tight mb-4">
+      <div className="bg-ink py-12 md:py-14">
+        <div className="max-w-5xl mx-auto px-4 md:px-8">
+          <p className="text-sm font-bold uppercase tracking-widest text-brand mb-3">About us</p>
+          <h1 className="font-graphik text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-4">
             {page?.heading ?? "Built by people who know what's at stake."}
           </h1>
-          <p className="text-muted-light text-base max-w-xl leading-relaxed">{page?.intro}</p>
+          <p className="text-white/75 text-base max-w-xl leading-relaxed">{page?.intro}</p>
         </div>
       </div>
 
       {/* ── Team ── */}
-      <section className="max-w-5xl mx-auto px-8 py-14 grid grid-cols-2 gap-12">
+      <section className="max-w-5xl mx-auto px-4 md:px-8 py-12 md:py-14 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12">
         <div>
-          <p className="text-xs font-bold uppercase tracking-widest text-brand mb-2">Our experience</p>
+          <p className="text-sm font-bold uppercase tracking-widest text-brand mb-2">Our experience</p>
           <h2 className="font-graphik text-3xl font-bold text-ink tracking-tight mb-4">Three disciplines, one mission</h2>
           <p className="text-sm text-muted leading-relaxed mb-8">Our team combines direct clinical work with survivors, technological expertise, and experience in the philanthropic sector. This isn't a tech company that discovered a social problem — it's a team that lived the problem first.</p>
           <div className="flex flex-col gap-6">
             {teamStats.map((s) => (
               <div key={s.label} className="border-l-4 border-brand pl-5">
-                <div className="font-tungsten text-4xl font-bold text-brand leading-none">{s.num}</div>
+                <div className="font-tungsten text-4xl font-semibold text-brand leading-none tracking-normal">{s.num}</div>
                 <div className="text-sm text-muted mt-1">{s.label}</div>
               </div>
             ))}
           </div>
         </div>
         <div>
-          <p className="text-xs font-bold uppercase tracking-widest text-brand mb-2">Our expertise</p>
+          <p className="text-sm font-bold uppercase tracking-widest text-brand mb-2">Our expertise</p>
           <h2 className="font-graphik text-3xl font-bold text-ink tracking-tight mb-4">Qualified across disciplines</h2>
           <p className="text-sm text-muted leading-relaxed mb-4">Team members are qualified in Counselling, Hypnotherapy, and Trauma Recovery — with direct experience supporting victims of abuse and working alongside domestic abuse charities.</p>
           <p className="text-sm text-muted leading-relaxed mb-4">We are proud to work with IT and philanthropic consultants from Direction Forward, Metric, and Canvas Philanthropy.</p>
@@ -71,27 +72,29 @@ export default async function AboutPage() {
       </section>
 
       {/* ── Values ── */}
-      <section className="bg-surface border-t border-border py-14">
-        <div className="max-w-5xl mx-auto px-8">
-          <p className="text-xs font-bold uppercase tracking-widest text-brand mb-2">What we believe</p>
-          <h2 className="font-graphik text-4xl font-bold text-ink tracking-tight mb-10">Our values</h2>
-          <div className="grid grid-cols-3 gap-5">
-            {values?.map((v) => (
-              <div key={v._id} className="border border-border rounded-2xl p-6">
+      <section className="bg-surface py-12 md:py-14">
+        <div className="max-w-5xl mx-auto px-4 md:px-8">
+          <p className="text-sm font-bold uppercase tracking-widest text-brand mb-2">What we believe</p>
+          <h2 className="font-graphik text-3xl md:text-4xl font-bold text-ink tracking-tight mb-10">Our values</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {values?.map((v, i) => (
+              <FadeUp key={v._id} delay={i * 80}>
+              <div className="bg-surface rounded-2xl p-6 card-hover h-full">
                 <div className="text-2xl text-brand mb-4">
                   <i className={`ti ${v.icon}`} aria-hidden="true" />
                 </div>
                 <h3 className="text-sm font-semibold text-ink mb-2">{v.title}</h3>
                 <p className="text-xs text-muted leading-relaxed">{v.body}</p>
               </div>
+              </FadeUp>
             ))}
           </div>
         </div>
       </section>
 
       {/* ── Footer detail ── */}
-      <section className="max-w-5xl mx-auto px-8 py-12 text-center">
-        <p className="text-xs font-bold uppercase tracking-widest text-brand mb-2">ListenApp CIC</p>
+      <section className="max-w-5xl mx-auto px-4 md:px-8 py-12 text-center">
+        <p className="text-sm font-bold uppercase tracking-widest text-brand mb-2">ListenApp CIC</p>
         <p className="text-sm text-muted">Company no. {settings?.companyNumber} · {settings?.companyLocations}</p>
         <p className="text-sm text-muted mt-1">
           Contact us at{" "}

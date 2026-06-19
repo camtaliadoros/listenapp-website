@@ -27,17 +27,17 @@ export default async function ContactPage() {
   return (
     <>
       {/* ── Hero ── */}
-      <div className="bg-ink py-14">
-        <div className="max-w-5xl mx-auto px-8">
-          <p className="text-xs font-bold uppercase tracking-widest text-border mb-3">Contact</p>
-          <h1 className="font-graphik text-5xl font-bold text-white tracking-tight leading-tight mb-4">
+      <div className="bg-ink py-12 md:py-14">
+        <div className="max-w-5xl mx-auto px-4 md:px-8">
+          <p className="text-sm font-bold uppercase tracking-widest text-brand mb-3">Contact</p>
+          <h1 className="font-graphik text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-4">
             {page?.heading ?? "Get in touch"}
           </h1>
-          <p className="text-muted-light text-base max-w-xl leading-relaxed">{page?.intro}</p>
+          <p className="text-white/75 text-base max-w-xl leading-relaxed">{page?.intro}</p>
         </div>
       </div>
 
-      <section className="max-w-5xl mx-auto px-8 py-14 grid grid-cols-2 gap-16">
+      <section className="max-w-5xl mx-auto px-4 md:px-8 py-12 md:py-14 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16">
         {/* Form */}
         <ContactForm
           enquiryCategories={page?.enquiryCategories ?? []}
@@ -49,7 +49,7 @@ export default async function ContactPage() {
           <h2 className="font-graphik text-xl font-bold text-ink mb-4">Other ways to reach us</h2>
           <div className="space-y-5">
             <div>
-              <p className="text-xs font-bold uppercase tracking-widest text-brand mb-1">Email</p>
+              <p className="text-sm font-bold uppercase tracking-widest text-brand mb-1">Email</p>
               <a
                 href={`mailto:${page?.contactEmail ?? "info@listenapp.org"}`}
                 className="text-sm text-ink font-medium hover:text-brand transition-colors"
@@ -58,7 +58,7 @@ export default async function ContactPage() {
               </a>
             </div>
             <div>
-              <p className="text-xs font-bold uppercase tracking-widest text-brand mb-1">Request a demo</p>
+              <p className="text-sm font-bold uppercase tracking-widest text-brand mb-1">Request a demo</p>
               <a
                 href="mailto:natasha@listenapp.org"
                 className="text-sm text-ink font-medium hover:text-brand transition-colors"
@@ -66,7 +66,7 @@ export default async function ContactPage() {
                 natasha@listenapp.org
               </a>
             </div>
-            <div className="bg-surface border border-border rounded-2xl p-5 mt-6">
+            <div className="bg-surface rounded-2xl p-5 mt-6">
               <p className="text-sm font-semibold text-ink mb-1">ListenApp CIC</p>
               <p className="text-xs text-muted leading-relaxed">
                 A non-profit Community Interest Company<br />

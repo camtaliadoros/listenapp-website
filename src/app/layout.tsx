@@ -49,7 +49,7 @@ export default function RootLayout({
       lang="en"
       className={`${graphik.variable} ${tungsten.variable} ${gilroy.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-graphik">
+      <body className="min-h-full flex flex-col font-graphik" suppressHydrationWarning>
         <Nav />
         <main className="flex-1">{children}</main>
         <Footer />

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { client } from "@/sanity/client";
+import FadeUp from "@/components/FadeUp";
 import { buildMetadata } from "@/lib/metadata";
 import type { Metadata } from "next";
 
@@ -25,13 +26,13 @@ export default async function ProblemPage() {
   return (
     <>
       {/* ── Hero ── */}
-      <div className="bg-ink py-14">
-        <div className="max-w-5xl mx-auto px-8">
-          <p className="text-xs font-bold uppercase tracking-widest text-border mb-3">The Problem</p>
-          <h1 className="font-graphik text-5xl font-bold text-white tracking-tight leading-tight mb-4">
+      <div className="bg-ink py-12 md:py-14">
+        <div className="max-w-5xl mx-auto px-4 md:px-8">
+          <p className="text-sm font-bold uppercase tracking-widest text-brand mb-3">The Problem</p>
+          <h1 className="font-graphik text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-4">
             {page?.heading ?? "The scale of domestic abuse is staggering."}
           </h1>
-          <p className="text-muted-light text-base max-w-xl leading-relaxed">
+          <p className="text-white/75 text-base max-w-xl leading-relaxed">
             {page?.intro}
           </p>
         </div>
@@ -39,13 +40,15 @@ export default async function ProblemPage() {
 
       {/* ── Stats grid ── */}
       {stats && stats.length > 0 && (
-        <section className="max-w-5xl mx-auto px-8 py-12">
-          <div className="grid grid-cols-4 gap-4">
-            {stats.map((s) => (
-              <div key={s._id} className="bg-surface border border-border rounded-xl p-5">
-                <div className="font-tungsten text-5xl font-bold text-brand leading-none tracking-tight">{s.number}</div>
+        <section className="max-w-5xl mx-auto px-4 md:px-8 py-12">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {stats.map((s, i) => (
+              <FadeUp key={s._id} delay={i * 80}>
+              <div className="bg-surface rounded-xl p-5 card-hover">
+                <div className="font-tungsten text-5xl font-semibold text-brand leading-none tracking-normal">{s.number}</div>
                 <div className="text-xs text-muted mt-2 leading-snug">{s.label}</div>
               </div>
+              </FadeUp>
             ))}
           </div>
         </section>
@@ -53,7 +56,7 @@ export default async function ProblemPage() {
 
       {/* ── Pull quote ── */}
       {page?.pullQuote && (
-        <div className="max-w-5xl mx-auto px-8 mb-10">
+        <div className="max-w-5xl mx-auto px-4 md:px-8 mb-10">
           <blockquote className="border-l-4 border-brand pl-6 py-3 bg-surface rounded-r-xl">
             <p className="font-gilroy text-lg font-semibold text-ink leading-snug">&ldquo;{page.pullQuote}&rdquo;</p>
           </blockquote>
@@ -61,7 +64,7 @@ export default async function ProblemPage() {
       )}
 
       {/* ── Body copy ── */}
-      <section className="max-w-5xl mx-auto px-8 pb-16 grid grid-cols-2 gap-10">
+      <section className="max-w-5xl mx-auto px-4 md:px-8 pb-12 md:pb-16 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
         <div>
           <h2 className="font-graphik text-2xl font-bold text-ink tracking-tight mb-3">The gap nobody is filling</h2>
           <p className="text-sm text-muted leading-relaxed mb-4">We live in a time of extraordinary technology, yet almost nothing exists to connect people in danger to the help they need — silently, instantly, when no one is around.</p>
@@ -75,18 +78,18 @@ export default async function ProblemPage() {
       </section>
 
       {/* ── What ListenApp does ── */}
-      <section className="bg-surface border-t border-border py-14">
-        <div className="max-w-5xl mx-auto px-8">
-          <p className="text-xs font-bold uppercase tracking-widest text-brand mb-2">What ListenApp does about it</p>
-          <h2 className="font-graphik text-4xl font-bold text-ink tracking-tight mb-2">Closing the gap with technology</h2>
+      <section className="bg-surface py-12 md:py-14">
+        <div className="max-w-5xl mx-auto px-4 md:px-8">
+          <p className="text-sm font-bold uppercase tracking-widest text-brand mb-2">What ListenApp does about it</p>
+          <h2 className="font-graphik text-3xl md:text-4xl font-bold text-ink tracking-tight mb-2">Closing the gap with technology</h2>
           <p className="text-muted text-base mb-10 max-w-lg">ListenApp puts a discreet safety tool into the hands of every person at risk — through the charities already serving them.</p>
-          <div className="grid grid-cols-3 gap-5 mb-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
             {[
               { title: "Instant connection", body: "Connects users to contacts and helplines without needing to visibly make a call — by touch or voice trigger." },
               { title: "Tangible evidence", body: "Discreet audio recordings provide proof of abuse — helping close the evidence gap that keeps charging rates low." },
               { title: "Hidden in plain sight", body: "The app is disguised as a calculator, protecting users from abusers who may check their phone." },
             ].map((c) => (
-              <div key={c.title} className="bg-white border border-border rounded-2xl p-6">
+              <div key={c.title} className="bg-surface rounded-2xl p-6">
                 <h3 className="text-sm font-semibold text-ink mb-2">{c.title}</h3>
                 <p className="text-xs text-muted leading-relaxed">{c.body}</p>
               </div>
@@ -94,9 +97,9 @@ export default async function ProblemPage() {
           </div>
           <Link
             href="/partner"
-            className="inline-flex items-center gap-2 bg-brand text-white font-semibold text-sm px-6 py-3 rounded-lg hover:bg-brand-dark transition-colors"
+            className="btn-arrow inline-flex items-center gap-2 bg-brand text-white font-semibold text-sm px-6 py-3 rounded-lg hover:bg-brand-dark hover:text-white transition-colors"
           >
-            Partner with us →
+            Partner with us <span className="arrow">→</span>
           </Link>
         </div>
       </section>
