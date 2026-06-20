@@ -89,7 +89,7 @@ export default async function ProblemPage() {
               { title: "Tangible evidence", body: "Discreet audio recordings provide proof of abuse — helping close the evidence gap that keeps charging rates low." },
               { title: "Hidden in plain sight", body: "The app is disguised as a calculator, protecting users from abusers who may check their phone." },
             ].map((c) => (
-              <div key={c.title} className="bg-surface rounded-2xl p-6">
+              <div key={c.title} className="bg-white rounded-2xl p-6">
                 <h3 className="text-sm font-semibold text-ink mb-2">{c.title}</h3>
                 <p className="text-xs text-muted leading-relaxed">{c.body}</p>
               </div>
