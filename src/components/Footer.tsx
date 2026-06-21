@@ -5,7 +5,7 @@ import { client } from "@/sanity/client";
 async function getSettings() {
   return client.fetch(
     `*[_type == "siteSettings"][0]{
-      contactEmail, companyNumber, companyLocations, privacyPolicyUrl
+      contactEmail, companyNumber, companyLocations
     }`,
     {},
     { next: { revalidate: 3600 } }

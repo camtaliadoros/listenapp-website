@@ -12,8 +12,6 @@ export default defineType({
     defineField({ name: "demoEmail", title: "Demo request email", type: "string" }),
     defineField({ name: "companyNumber", title: "Company number", type: "string" }),
     defineField({ name: "companyLocations", title: "Locations (e.g. Liverpool and London)", type: "string" }),
-    defineField({ name: "thinkDifferentUrl", title: "Think Different site URL", type: "url" }),
-    defineField({ name: "privacyPolicyUrl", title: "Privacy policy URL", type: "url" }),
     defineField({
       name: "researchBand",
       title: "Research band",
