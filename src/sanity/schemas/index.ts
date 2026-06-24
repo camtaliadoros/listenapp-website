@@ -7,11 +7,6 @@ import partnerPage from "./partnerPage";
 import aboutPage from "./aboutPage";
 import contactPage from "./contactPage";
 import questionnairePage from "./questionnairePage";
-import feature from "./feature";
-import stat from "./stat";
-import partner from "./partner";
-import partnershipStep from "./partnershipStep";
-import value from "./value";
 
 export const schemaTypes: SchemaTypeDefinition[] = [
   // objects
@@ -24,10 +19,4 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   aboutPage,
   contactPage,
   questionnairePage,
-  // lists
-  feature,
-  stat,
-  partner,
-  partnershipStep,
-  value,
 ];

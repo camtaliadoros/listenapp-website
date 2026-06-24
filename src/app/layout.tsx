@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { buildMetadata } from "@/lib/metadata";
-import Nav from "@/components/Nav";
-import Footer from "@/components/Footer";
 import "./globals.css";
 
 const graphik = localFont({
@@ -50,9 +48,7 @@ export default function RootLayout({
       className={`${graphik.variable} ${tungsten.variable} ${gilroy.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-graphik" suppressHydrationWarning>
-        <Nav />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        {children}
       </body>
     </html>
   );

@@ -1,4 +1,5 @@
 import { client } from "@/sanity/client";
+import { sanityFetch } from "@/sanity/live";
 import { buildMetadata } from "@/lib/metadata";
 import ContactForm from "./ContactForm";
 import type { Metadata } from "next";
@@ -7,13 +8,19 @@ type ContactPage = {
   heading: string;
   intro: string;
   contactEmail: string;
+  asideHeading: string;
   enquiryCategories: string[];
   successMessage: { heading: string; body: string };
   seo?: object;
 };
+type SiteSettings = { demoEmail: string; companyNumber: string; companyLocations: string };
 
 async function getData() {
-  return client.fetch<ContactPage>(`*[_type == "contactPage"][0]`, {}, { next: { revalidate: 60 } });
+  const [{ data: page }, { data: settings }] = await Promise.all([
+    sanityFetch({ query: `*[_type == "contactPage"][0]` }),
+    sanityFetch({ query: `*[_type == "siteSettings"][0]{ demoEmail, companyNumber, companyLocations }` }),
+  ]);
+  return { page: page as ContactPage | null, settings: settings as SiteSettings | null };
 }
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -22,7 +29,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function ContactPage() {
-  const page = await getData();
+  const { page, settings } = await getData();
 
   return (
     <>
@@ -46,7 +53,7 @@ export default async function ContactPage() {
 
         {/* Aside */}
         <div className="pt-1">
-          <h2 className="font-graphik text-xl font-bold text-ink mb-4">Other ways to reach us</h2>
+          <h2 className="font-graphik text-xl font-bold text-ink mb-4">{page?.asideHeading ?? "Other ways to reach us"}</h2>
           <div className="space-y-5">
             <div>
               <p className="text-sm font-bold uppercase tracking-widest text-brand mb-1">Email</p>
@@ -60,18 +67,18 @@ export default async function ContactPage() {
             <div>
               <p className="text-sm font-bold uppercase tracking-widest text-brand mb-1">Request a demo</p>
               <a
-                href="mailto:natasha@listenapp.org"
+                href={`mailto:${settings?.demoEmail ?? "natasha@listenapp.org"}`}
                 className="text-sm text-ink font-medium hover:text-brand transition-colors"
               >
-                natasha@listenapp.org
+                {settings?.demoEmail ?? "natasha@listenapp.org"}
               </a>
             </div>
             <div className="bg-surface rounded-2xl p-5 mt-6">
               <p className="text-sm font-semibold text-ink mb-1">ListenApp CIC</p>
               <p className="text-xs text-muted leading-relaxed">
                 A non-profit Community Interest Company<br />
-                Company no. 13740982<br />
-                Liverpool and London
+                Company no. {settings?.companyNumber}<br />
+                {settings?.companyLocations}
               </p>
             </div>
           </div>

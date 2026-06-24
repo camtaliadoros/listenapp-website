@@ -1,15 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
-import { client } from "@/sanity/client";
+import { sanityFetch } from "@/sanity/live";
+
+type Settings = { contactEmail?: string; companyNumber?: string; companyLocations?: string };
 
 async function getSettings() {
-  return client.fetch(
-    `*[_type == "siteSettings"][0]{
+  const { data } = await sanityFetch({
+    query: `*[_type == "siteSettings"][0]{
       contactEmail, companyNumber, companyLocations
     }`,
-    {},
-    { next: { revalidate: 3600 } }
-  );
+  });
+  return data as Settings | null;
 }
 
 export default async function Footer() {

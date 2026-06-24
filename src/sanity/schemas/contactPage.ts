@@ -8,6 +8,7 @@ export default defineType({
     defineField({ name: "heading", title: "Heading", type: "string", initialValue: "Get in touch" }),
     defineField({ name: "intro", title: "Intro text", type: "text", rows: 2 }),
     defineField({ name: "contactEmail", title: "Display email address", type: "string" }),
+    defineField({ name: "asideHeading", title: "Aside heading", type: "string", initialValue: "Other ways to reach us" }),
     defineField({
       name: "enquiryCategories",
       title: "Enquiry categories",

@@ -1,4 +1,5 @@
 import { client } from "@/sanity/client";
+import { sanityFetch } from "@/sanity/live";
 import { buildMetadata } from "@/lib/metadata";
 import QuestionnaireForm from "./QuestionnaireForm";
 import type { Metadata } from "next";
@@ -11,7 +12,8 @@ type QPage = {
 };
 
 async function getData() {
-  return client.fetch<QPage>(`*[_type == "questionnairePage"][0]`, {}, { next: { revalidate: 60 } });
+  const { data } = await sanityFetch({ query: `*[_type == "questionnairePage"][0]` });
+  return data as QPage | null;
 }
 
 export async function generateMetadata(): Promise<Metadata> {

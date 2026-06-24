@@ -11,7 +11,7 @@ const links = [
   { label: "Contact", href: "/contact" },
 ];
 
-export default function Nav() {
+export default function Nav({ demoEmail }: { demoEmail: string }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
@@ -46,7 +46,7 @@ export default function Nav() {
 
         <div className="flex items-center gap-3">
           <Link
-            href="mailto:natasha@listenapp.org"
+            href={`mailto:${demoEmail}`}
             className="hidden md:inline-flex bg-brand text-white text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-brand-dark hover:text-white transition-all hover:scale-105 active:scale-95"
           >
             Request demo
@@ -81,7 +81,7 @@ export default function Nav() {
             </Link>
           ))}
           <Link
-            href="mailto:natasha@listenapp.org"
+            href={`mailto:${demoEmail}`}
             onClick={() => setOpen(false)}
             className="mt-3 bg-brand text-white text-sm font-semibold px-5 py-3 rounded-lg text-center hover:bg-brand-dark transition-colors"
           >
