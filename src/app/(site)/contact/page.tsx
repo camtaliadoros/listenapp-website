@@ -53,13 +53,13 @@ export default async function ContactPage() {
 
         {/* Aside */}
         <div className="pt-1">
-          <h2 className="font-graphik text-xl font-bold text-ink mb-4">{page?.asideHeading ?? "Other ways to reach us"}</h2>
+          <h2 className="font-graphik text-xl font-bold text-ink dark:text-white mb-4">{page?.asideHeading ?? "Other ways to reach us"}</h2>
           <div className="space-y-5">
             <div>
               <p className="text-sm font-bold uppercase tracking-widest text-brand mb-1">Email</p>
               <a
                 href={`mailto:${page?.contactEmail ?? "info@listenapp.org"}`}
-                className="text-sm text-ink font-medium hover:text-brand transition-colors"
+                className="text-sm text-ink dark:text-white font-medium hover:text-brand transition-colors"
               >
                 {page?.contactEmail ?? "info@listenapp.org"}
               </a>
@@ -68,14 +68,14 @@ export default async function ContactPage() {
               <p className="text-sm font-bold uppercase tracking-widest text-brand mb-1">Request a demo</p>
               <a
                 href={`mailto:${settings?.demoEmail ?? "natasha@listenapp.org"}`}
-                className="text-sm text-ink font-medium hover:text-brand transition-colors"
+                className="text-sm text-ink dark:text-white font-medium hover:text-brand transition-colors"
               >
                 {settings?.demoEmail ?? "natasha@listenapp.org"}
               </a>
             </div>
-            <div className="bg-surface rounded-2xl p-5 mt-6">
-              <p className="text-sm font-semibold text-ink mb-1">ListenApp CIC</p>
-              <p className="text-xs text-muted leading-relaxed">
+            <div className="bg-surface dark:bg-surface-night rounded-2xl p-5 mt-6">
+              <p className="text-sm font-semibold text-ink dark:text-white mb-1">ListenApp CIC</p>
+              <p className="text-xs text-muted dark:text-muted-night leading-relaxed">
                 A non-profit Community Interest Company<br />
                 Company no. {settings?.companyNumber}<br />
                 {settings?.companyLocations}

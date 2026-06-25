@@ -60,7 +60,7 @@ export default function PrivacyPolicyPage() {
       </div>
 
       <div className="max-w-3xl mx-auto px-4 md:px-8 py-12 md:py-16">
-        <p className="text-sm text-muted mb-10">
+        <p className="text-sm text-muted dark:text-muted-night mb-10">
           This policy applies to all information collected or submitted on the ListenApp CIC website and services.
           ListenApp CIC · Company no. 13740982 · Liverpool and London.
         </p>
@@ -68,14 +68,14 @@ export default function PrivacyPolicyPage() {
         <div className="space-y-10">
           {sections.map((s) => (
             <div key={s.title}>
-              <h2 className="font-graphik text-lg font-bold text-ink mb-3">{s.title}</h2>
-              <p className="text-sm text-muted leading-relaxed">{s.body}</p>
+              <h2 className="font-graphik text-lg font-bold text-ink dark:text-white mb-3">{s.title}</h2>
+              <p className="text-sm text-muted dark:text-muted-night leading-relaxed">{s.body}</p>
             </div>
           ))}
         </div>
 
-        <div className="mt-12 pt-8 border-t border-border">
-          <p className="text-xs text-muted">
+        <div className="mt-12 pt-8 border-t border-border dark:border-border-night">
+          <p className="text-xs text-muted dark:text-muted-night">
             Questions about this policy? Contact us at{" "}
             <a href="mailto:info@listenapp.org" className="text-brand font-medium hover:underline">
               info@listenapp.org

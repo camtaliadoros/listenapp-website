@@ -38,12 +38,12 @@ export default function ContactForm({ enquiryCategories, successMessage }: Props
 
   if (submitted) {
     return (
-      <div className="bg-surface-deep rounded-2xl p-8 text-center flex flex-col items-center justify-center min-h-[320px]">
+      <div className="bg-surface-deep dark:bg-surface-deep-night rounded-2xl p-8 text-center flex flex-col items-center justify-center min-h-[320px]">
         <div className="w-12 h-12 bg-brand rounded-full flex items-center justify-center text-white text-xl mx-auto mb-4">✓</div>
-        <h3 className="font-gilroy text-xl font-bold text-ink mb-2">
+        <h3 className="font-gilroy text-xl font-bold text-ink dark:text-white mb-2">
           {successMessage?.heading ?? "Message sent"}
         </h3>
-        <p className="text-sm text-muted">{successMessage?.body ?? "We'll be in touch as soon as possible."}</p>
+        <p className="text-sm text-muted dark:text-muted-night">{successMessage?.body ?? "We'll be in touch as soon as possible."}</p>
       </div>
     );
   }
@@ -54,23 +54,23 @@ export default function ContactForm({ enquiryCategories, successMessage }: Props
       <input type="hidden" name="from_name" value="ListenApp Website" />
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-semibold text-ink mb-1.5">First name <span className="text-brand">*</span></label>
-          <input required type="text" name="first_name" placeholder="First name" className="w-full px-3.5 py-2.5 border border-border rounded-lg text-sm text-ink placeholder:text-muted-light focus:outline-none focus:border-brand transition-colors" />
+          <label className="block text-sm font-semibold text-ink dark:text-white mb-1.5">First name <span className="text-brand">*</span></label>
+          <input required type="text" name="first_name" placeholder="First name" className="w-full px-3.5 py-2.5 border border-border dark:border-border-night rounded-lg text-sm text-ink dark:text-white placeholder:text-muted-light dark:bg-surface-night focus:outline-none focus:border-brand transition-colors" />
         </div>
         <div>
-          <label className="block text-sm font-semibold text-ink mb-1.5">Last name <span className="text-brand">*</span></label>
-          <input required type="text" name="last_name" placeholder="Last name" className="w-full px-3.5 py-2.5 border border-border rounded-lg text-sm text-ink placeholder:text-muted-light focus:outline-none focus:border-brand transition-colors" />
+          <label className="block text-sm font-semibold text-ink dark:text-white mb-1.5">Last name <span className="text-brand">*</span></label>
+          <input required type="text" name="last_name" placeholder="Last name" className="w-full px-3.5 py-2.5 border border-border dark:border-border-night rounded-lg text-sm text-ink dark:text-white placeholder:text-muted-light dark:bg-surface-night focus:outline-none focus:border-brand transition-colors" />
         </div>
       </div>
 
       <div>
-        <label className="block text-sm font-semibold text-ink mb-1.5">Email address <span className="text-brand">*</span></label>
-        <input required type="email" name="email" placeholder="you@example.com" className="w-full px-3.5 py-2.5 border border-border rounded-lg text-sm text-ink placeholder:text-muted-light focus:outline-none focus:border-brand transition-colors" />
+        <label className="block text-sm font-semibold text-ink dark:text-white mb-1.5">Email address <span className="text-brand">*</span></label>
+        <input required type="email" name="email" placeholder="you@example.com" className="w-full px-3.5 py-2.5 border border-border dark:border-border-night rounded-lg text-sm text-ink dark:text-white placeholder:text-muted-light dark:bg-surface-night focus:outline-none focus:border-brand transition-colors" />
       </div>
 
       <div>
-        <label className="block text-sm font-semibold text-ink mb-1.5">Enquiry type <span className="text-brand">*</span></label>
-        <select required name="enquiry_type" defaultValue="" className="w-full px-3.5 py-2.5 border border-border rounded-lg text-sm text-ink focus:outline-none focus:border-brand transition-colors appearance-none bg-white">
+        <label className="block text-sm font-semibold text-ink dark:text-white mb-1.5">Enquiry type <span className="text-brand">*</span></label>
+        <select required name="enquiry_type" defaultValue="" className="w-full px-3.5 py-2.5 border border-border dark:border-border-night rounded-lg text-sm text-ink dark:text-white focus:outline-none focus:border-brand transition-colors appearance-none bg-white dark:bg-surface-night">
           <option value="" disabled>Select a category</option>
           {enquiryCategories.map((cat) => (
             <option key={cat} value={cat}>{cat}</option>
@@ -79,18 +79,18 @@ export default function ContactForm({ enquiryCategories, successMessage }: Props
       </div>
 
       <div>
-        <label className="block text-sm font-semibold text-ink mb-1.5">Organisation</label>
-        <input type="text" name="organisation" placeholder="Your organisation (optional)" className="w-full px-3.5 py-2.5 border border-border rounded-lg text-sm text-ink placeholder:text-muted-light focus:outline-none focus:border-brand transition-colors" />
+        <label className="block text-sm font-semibold text-ink dark:text-white mb-1.5">Organisation</label>
+        <input type="text" name="organisation" placeholder="Your organisation (optional)" className="w-full px-3.5 py-2.5 border border-border dark:border-border-night rounded-lg text-sm text-ink dark:text-white placeholder:text-muted-light dark:bg-surface-night focus:outline-none focus:border-brand transition-colors" />
       </div>
 
       <div>
-        <label className="block text-sm font-semibold text-ink mb-1.5">Message <span className="text-brand">*</span></label>
-        <textarea required name="message" rows={4} placeholder="How can we help?" className="w-full px-3.5 py-2.5 border border-border rounded-lg text-sm text-ink placeholder:text-muted-light focus:outline-none focus:border-brand transition-colors resize-none" />
+        <label className="block text-sm font-semibold text-ink dark:text-white mb-1.5">Message <span className="text-brand">*</span></label>
+        <textarea required name="message" rows={4} placeholder="How can we help?" className="w-full px-3.5 py-2.5 border border-border dark:border-border-night rounded-lg text-sm text-ink dark:text-white placeholder:text-muted-light dark:bg-surface-night focus:outline-none focus:border-brand transition-colors resize-none" />
       </div>
 
       <div className="flex items-start gap-3">
         <input required type="checkbox" id="consent" name="consent" className="mt-0.5 accent-brand" />
-        <label htmlFor="consent" className="text-xs text-muted leading-relaxed">
+        <label htmlFor="consent" className="text-xs text-muted dark:text-muted-night leading-relaxed">
           I consent to ListenApp storing my data in accordance with the{" "}
           <a href="/privacy-policy" className="text-brand font-medium hover:underline">Privacy Policy</a>.
         </label>

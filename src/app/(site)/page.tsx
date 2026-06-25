@@ -10,7 +10,7 @@ import type { Metadata } from "next";
 
 type Feature = { _key: string; title: string; description: string; icon: string };
 type Stat    = { _key: string; number: string; label: string };
-type Partner = { _key: string; name: string; type: string; url?: string; logo?: { asset?: { _ref: string } } };
+type Partner = { _key: string; name: string; type: string; url?: string; logo?: { asset?: { _ref: string } }; logoDark?: { asset?: { _ref: string } } };
 type HomePage = {
   heroEyebrowBadge: string;
   heroHeading: string;
@@ -50,7 +50,8 @@ async function getData() {
   ]);
   const typedPage = page as HomePage | null;
   const partners = (typedPage?.partners ?? []).filter((p) => p.type === "Partner charity");
-  return { page: typedPage, settings: settings as SiteSettings | null, partners };
+  const supporters = (typedPage?.partners ?? []).filter((p) => p.type === "Supporter");
+  return { page: typedPage, settings: settings as SiteSettings | null, partners, supporters };
 }
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -59,7 +60,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function HomePage() {
-  const { page, settings, partners } = await getData();
+  const { page, settings, partners, supporters } = await getData();
   const features = page?.features ?? [];
   const stats = page?.stats ?? [];
 
@@ -68,14 +69,14 @@ export default async function HomePage() {
       {/* ── Hero ── */}
       <section className="max-w-5xl mx-auto px-4 md:px-8 py-12 md:py-16 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 items-center">
         <div className="animate-fade-up">
-          <div className="inline-flex items-center gap-2 bg-surface-deep text-brand-dark text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider mb-6">
+          <div className="inline-flex items-center gap-2 bg-surface-deep dark:bg-surface-deep-night text-brand-dark dark:text-brand text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider mb-6">
             <span className="w-1.5 h-1.5 bg-brand rounded-full" />
             {page?.heroEyebrowBadge ?? "Safety technology"}
           </div>
-          <h1 className="font-graphik text-4xl md:text-5xl font-bold text-ink leading-tight tracking-tight mb-5">
+          <h1 className="font-graphik text-4xl md:text-5xl font-bold text-ink dark:text-white leading-tight tracking-tight mb-5">
             {page?.heroHeading ?? "Protect yourself silently. Even when you can't speak."}
           </h1>
-          <p className="text-muted text-base leading-relaxed mb-8 max-w-md">
+          <p className="text-muted dark:text-muted-night text-base leading-relaxed mb-8 max-w-md">
             {page?.heroDescription}
           </p>
           <div className="flex flex-wrap items-center gap-4">
@@ -139,17 +140,17 @@ export default async function HomePage() {
       {/* ── Features ── */}
       <section className="max-w-5xl mx-auto px-4 md:px-8 py-12 md:py-16">
         <p className="text-sm font-bold uppercase tracking-widest text-brand mb-2">{page?.featuresEyebrow ?? "How it works"}</p>
-        <h2 className="font-graphik text-3xl md:text-4xl font-bold text-ink tracking-tight mb-2">{page?.featuresHeading ?? "Critical features, hidden in plain sight"}</h2>
-        <p className="text-muted text-base mb-10 max-w-lg">{page?.featuresIntro}</p>
+        <h2 className="font-graphik text-3xl md:text-4xl font-bold text-ink dark:text-white tracking-tight mb-2">{page?.featuresHeading ?? "Critical features, hidden in plain sight"}</h2>
+        <p className="text-muted dark:text-muted-night text-base mb-10 max-w-lg">{page?.featuresIntro}</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {features.map((f, i) => (
             <FadeUp key={f._key} delay={i * 80}>
-              <div className="bg-surface rounded-2xl p-6 h-full">
-                <div className="w-10 h-10 bg-surface-deep rounded-xl flex items-center justify-center mb-4 text-brand">
+              <div className="bg-surface dark:bg-surface-night rounded-2xl p-6 h-full">
+                <div className="w-10 h-10 bg-surface-deep dark:bg-surface-deep-night rounded-xl flex items-center justify-center mb-4 text-brand">
                   <Icon name={f.icon} size={20} stroke={2} />
                 </div>
-                <h3 className="text-sm font-semibold text-ink mb-1.5">{f.title}</h3>
-                <p className="text-xs text-muted leading-relaxed">{f.description}</p>
+                <h3 className="text-sm font-semibold text-ink dark:text-white mb-1.5">{f.title}</h3>
+                <p className="text-xs text-muted dark:text-muted-night leading-relaxed">{f.description}</p>
               </div>
             </FadeUp>
           ))}
@@ -157,20 +158,20 @@ export default async function HomePage() {
       </section>
 
       {/* ── Security section ── */}
-      <section className="bg-surface py-12 md:py-14">
+      <section className="bg-surface dark:bg-surface-night py-12 md:py-14">
         <div className="max-w-5xl mx-auto px-4 md:px-8 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 items-center">
           <div>
             <p className="text-sm font-bold uppercase tracking-widest text-brand mb-2">{page?.securityEyebrow ?? "Security by design"}</p>
-            <h2 className="font-graphik text-3xl md:text-4xl font-bold text-ink tracking-tight mb-4 leading-tight">
+            <h2 className="font-graphik text-3xl md:text-4xl font-bold text-ink dark:text-white tracking-tight mb-4 leading-tight">
               {page?.securityHeading ?? "Built to protect, not attract attention"}
             </h2>
-            <p className="text-sm text-muted leading-relaxed mb-6">
+            <p className="text-sm text-muted dark:text-muted-night leading-relaxed mb-6">
               {page?.securityBody}
             </p>
             <ul className="space-y-3">
               {(page?.securityChecklist ?? []).map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-ink">
-                  <span className="w-5 h-5 bg-surface-deep rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 text-[10px] text-brand font-bold">✓</span>
+                <li key={item} className="flex items-start gap-3 text-sm text-ink dark:text-white">
+                  <span className="w-5 h-5 bg-surface-deep dark:bg-surface-deep-night rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 text-[10px] text-brand font-bold">✓</span>
                   {item}
                 </li>
               ))}
@@ -198,29 +199,52 @@ export default async function HomePage() {
       {partners.length > 0 && (
         <section className="py-12">
           <div className="max-w-5xl mx-auto px-4 md:px-8">
-            <p className="text-xs font-bold uppercase tracking-widest text-muted-light text-center mb-7">{page?.partnersHeading ?? "Proud to work alongside"}</p>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+            <p className="text-xs font-bold uppercase tracking-widest text-muted-light dark:text-muted-light-night text-center mb-7">{page?.partnersHeading ?? "Proud to work alongside"}</p>
+            <div className="flex flex-wrap justify-center gap-3">
               {partners.map((p) => {
-                const logoUrl = urlForImage(p.logo)?.width(160).height(60).fit("max").url();
+                const logoUrl = urlForImage(p.logo)?.height(80).fit("max").url();
+                const logoDarkUrl = urlForImage(p.logoDark)?.height(80).fit("max").url() ?? logoUrl;
                 const CardTag = p.url ? "a" : "div";
                 return (
                   <CardTag
                     key={p._key}
                     {...(p.url ? { href: p.url, target: "_blank", rel: "noopener noreferrer" } : {})}
-                    className={`bg-surface rounded-lg px-4 py-3 text-center flex flex-col items-center justify-center gap-1.5 min-h-[88px] ${p.url ? "card-hover" : ""}`}
+                    className={`bg-surface dark:bg-surface-night rounded-lg px-4 py-3 text-center flex flex-col items-center justify-center gap-1.5 min-h-[88px] w-[calc(50%-0.375rem)] md:w-[calc(33.333%-0.5rem)] ${p.url ? "card-hover" : ""}`}
                   >
                     {logoUrl ? (
-                      <Image src={logoUrl} alt={p.name} width={120} height={40} className="object-contain max-h-10" />
+                      <div className="relative w-28 h-10">
+                        <Image src={logoUrl} alt={p.name} fill className="object-contain dark:hidden" sizes="112px" />
+                        {logoDarkUrl && (
+                          <Image src={logoDarkUrl} alt={p.name} fill className="object-contain hidden dark:block" sizes="112px" />
+                        )}
+                      </div>
                     ) : (
-                      <p className="text-sm font-bold text-ink">{p.name}</p>
+                      <p className="text-sm font-bold text-ink dark:text-white">{p.name}</p>
                     )}
-                    <p className="text-[10px] text-muted-light mt-0.5">{p.type}</p>
+                    <p className="text-[10px] text-muted-light dark:text-muted-light-night mt-0.5">{p.type}</p>
                   </CardTag>
                 );
               })}
             </div>
-            {page?.partnersThanksNote && (
-              <p className="text-center text-xs text-muted-light mt-5">{page.partnersThanksNote}</p>
+            {supporters.length > 0 ? (
+              <p className="text-center text-xs text-muted-light dark:text-muted-light-night mt-5">
+                Special thanks to{" "}
+                {supporters.map((s, i) => (
+                  <span key={s._key}>
+                    {s.url ? (
+                      <a href={s.url} target="_blank" rel="noopener noreferrer" className="font-medium hover:text-brand transition-colors">
+                        {s.name}
+                      </a>
+                    ) : (
+                      s.name
+                    )}
+                    {i < supporters.length - 2 ? ", " : i === supporters.length - 2 ? ", and " : ""}
+                  </span>
+                ))}{" "}
+                for their support.
+              </p>
+            ) : page?.partnersThanksNote && (
+              <p className="text-center text-xs text-muted-light dark:text-muted-light-night mt-5">{page.partnersThanksNote}</p>
             )}
           </div>
         </section>
@@ -249,13 +273,13 @@ export default async function HomePage() {
       {/* ── CTA ── */}
       <section className="max-w-5xl mx-auto px-4 md:px-8 py-16 md:py-20 text-center">
         <p className="text-sm font-bold uppercase tracking-widest text-brand mb-3">{page?.ctaEyebrow ?? "Get involved"}</p>
-        <h2 className="font-graphik text-3xl md:text-4xl font-bold text-ink tracking-tight mb-4">{page?.ctaHeading ?? "Ready to protect more people?"}</h2>
-        <p className="text-muted text-base mb-8 max-w-md mx-auto">{page?.ctaBody}</p>
+        <h2 className="font-graphik text-3xl md:text-4xl font-bold text-ink dark:text-white tracking-tight mb-4">{page?.ctaHeading ?? "Ready to protect more people?"}</h2>
+        <p className="text-muted dark:text-muted-night text-base mb-8 max-w-md mx-auto">{page?.ctaBody}</p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a href={`mailto:${settings?.demoEmail ?? "natasha@listenapp.org"}`} className="w-full sm:w-auto bg-brand text-white font-semibold text-sm px-7 py-3.5 rounded-lg hover:bg-brand-dark hover:text-white transition-colors text-center">
             {page?.ctaPrimaryLabel ?? "Request a demo"}
           </a>
-          <Link href="/partner" className="w-full sm:w-auto bg-ink text-white font-semibold text-sm px-7 py-3.5 rounded-lg hover:opacity-80 transition-opacity text-center">
+          <Link href="/partner" className="w-full sm:w-auto bg-ink text-white font-semibold text-sm px-7 py-3.5 rounded-lg hover:opacity-80 transition-opacity text-center border border-transparent dark:border-border-night">
             {page?.ctaSecondaryLabel ?? "Partnership info"}
           </Link>
         </div>

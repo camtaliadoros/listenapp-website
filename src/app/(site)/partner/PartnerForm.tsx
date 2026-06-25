@@ -34,10 +34,10 @@ export default function PartnerForm() {
 
   if (submitted) {
     return (
-      <div className="bg-surface-deep rounded-2xl p-8 text-center max-w-lg">
+      <div className="bg-surface-deep dark:bg-surface-deep-night rounded-2xl p-8 text-center max-w-lg">
         <div className="w-12 h-12 bg-brand rounded-full flex items-center justify-center text-white text-xl mx-auto mb-4">✓</div>
-        <h3 className="font-gilroy text-xl font-bold text-ink mb-2">Enquiry sent</h3>
-        <p className="text-sm text-muted">Thanks for getting in touch. We'll be in contact to arrange a demo at a time that works for you.</p>
+        <h3 className="font-gilroy text-xl font-bold text-ink dark:text-white mb-2">Enquiry sent</h3>
+        <p className="text-sm text-muted dark:text-muted-night">Thanks for getting in touch. We'll be in contact to arrange a demo at a time that works for you.</p>
       </div>
     );
   }
@@ -54,7 +54,7 @@ export default function PartnerForm() {
         { label: "How did you hear about ListenApp?", name: "referral", type: "text", placeholder: "e.g. referral, event, search", required: false },
       ].map((f) => (
         <div key={f.name}>
-          <label className="block text-sm font-semibold text-ink mb-1.5">
+          <label className="block text-sm font-semibold text-ink dark:text-white mb-1.5">
             {f.label} {f.required && <span className="text-brand">*</span>}
           </label>
           <input
@@ -62,7 +62,7 @@ export default function PartnerForm() {
             name={f.name}
             placeholder={f.placeholder}
             required={f.required}
-            className="w-full px-3.5 py-2.5 border border-border rounded-lg text-sm text-ink placeholder:text-muted-light focus:outline-none focus:border-brand transition-colors"
+            className="w-full px-3.5 py-2.5 border border-border dark:border-border-night rounded-lg text-sm text-ink dark:text-white placeholder:text-muted-light dark:bg-surface-night focus:outline-none focus:border-brand transition-colors"
           />
         </div>
       ))}

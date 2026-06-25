@@ -17,6 +17,14 @@
   --color-border:       #E0E0E0;  /* Subtle dividers */
   --color-surface:      #F3F3F3;  /* Light Grey */
   --color-surface-deep: #FFE8EC;  /* Light red tint for highlights */
+
+  /* Dark mode equivalents — follows prefers-color-scheme */
+  --color-surface-night:      #1A1A1A;  /* Dark section background */
+  --color-surface-raised-night: #242424;  /* Dark card, one step lighter than surface-night */
+  --color-surface-deep-night: #2A0E14;  /* Dark muted red tint */
+  --color-border-night:       #2E2E2E;  /* Dark dividers */
+  --color-muted-night:        #B3B3B3;  /* Dark body text — 10:1 on black ✓ */
+  --color-muted-light-night:  #8C8C8C;  /* Dark secondary text — 6.4:1 on black ✓ */
 }
 
 /* ── Animations ── */
@@ -67,6 +75,11 @@
   transform: translateY(-3px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
+@media (prefers-color-scheme: dark) {
+  .card-hover:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  }
+}
 
 @layer base {
   * {
@@ -77,6 +90,13 @@
     background: #fff;
     color: #000000;
     font-family: var(--font-graphik), sans-serif;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    body {
+      background: #0a0a0a;
+      color: #ffffff;
+    }
   }
 
   a {

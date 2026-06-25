@@ -10,6 +10,9 @@ import {
   IconRefresh,
   IconAccessible,
   IconWorld,
+  IconBolt,
+  IconFileText,
+  IconEyeOff,
   type IconProps,
 } from "@tabler/icons-react";
 
@@ -25,6 +28,9 @@ const ICONS: Record<string, React.ComponentType<IconProps>> = {
   "ti-refresh": IconRefresh,
   "ti-accessible": IconAccessible,
   "ti-world": IconWorld,
+  "ti-bolt": IconBolt,
+  "ti-file-text": IconFileText,
+  "ti-eye-off": IconEyeOff,
 };
 
 export default function Icon({ name, ...props }: { name?: string } & IconProps) {

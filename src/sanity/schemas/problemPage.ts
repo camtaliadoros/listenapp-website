@@ -75,6 +75,7 @@ export default defineType({
           fields: [
             defineField({ name: "title", title: "Title", type: "string", validation: (r) => r.required() }),
             defineField({ name: "body", title: "Body text", type: "text", rows: 3, validation: (r) => r.required() }),
+            defineField({ name: "icon", title: "Icon name (Tabler Icons)", type: "string", description: "e.g. ti-bolt" }),
           ],
           preview: { select: { title: "title", subtitle: "body" } },
         },

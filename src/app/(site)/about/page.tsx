@@ -60,41 +60,41 @@ export default async function AboutPage() {
       <section className="max-w-5xl mx-auto px-4 md:px-8 py-12 md:py-14 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12">
         <div>
           <p className="text-sm font-bold uppercase tracking-widest text-brand mb-2">{page?.experienceEyebrow ?? "Our experience"}</p>
-          <h2 className="font-graphik text-3xl font-bold text-ink tracking-tight mb-4">{page?.experienceHeading ?? "Three disciplines, one mission"}</h2>
-          <p className="text-sm text-muted leading-relaxed mb-8">{page?.experienceBody}</p>
+          <h2 className="font-graphik text-3xl font-bold text-ink dark:text-white tracking-tight mb-4">{page?.experienceHeading ?? "Three disciplines, one mission"}</h2>
+          <p className="text-sm text-muted dark:text-muted-night leading-relaxed mb-8">{page?.experienceBody}</p>
           <div className="flex flex-col gap-6">
             {experienceStats.map((s) => (
               <div key={s._key} className="border-l-4 border-brand pl-5">
                 <div className="font-tungsten text-4xl font-semibold text-brand leading-none tracking-normal">{s.number}</div>
-                <div className="text-sm text-muted mt-1">{s.label}</div>
+                <div className="text-sm text-muted dark:text-muted-night mt-1">{s.label}</div>
               </div>
             ))}
           </div>
         </div>
         <div>
           <p className="text-sm font-bold uppercase tracking-widest text-brand mb-2">{page?.expertiseEyebrow ?? "Our expertise"}</p>
-          <h2 className="font-graphik text-3xl font-bold text-ink tracking-tight mb-4">{page?.expertiseHeading ?? "Qualified across disciplines"}</h2>
+          <h2 className="font-graphik text-3xl font-bold text-ink dark:text-white tracking-tight mb-4">{page?.expertiseHeading ?? "Qualified across disciplines"}</h2>
           {expertiseParagraphs.map((p, i) => (
-            <p key={i} className={`text-sm text-muted leading-relaxed ${i < expertiseParagraphs.length - 1 ? "mb-4" : ""}`}>{p}</p>
+            <p key={i} className={`text-sm text-muted dark:text-muted-night leading-relaxed ${i < expertiseParagraphs.length - 1 ? "mb-4" : ""}`}>{p}</p>
           ))}
         </div>
       </section>
 
       {/* ── Values ── */}
       {values.length > 0 && (
-        <section className="bg-surface py-12 md:py-14">
+        <section className="bg-surface dark:bg-surface-night py-12 md:py-14">
           <div className="max-w-5xl mx-auto px-4 md:px-8">
             <p className="text-sm font-bold uppercase tracking-widest text-brand mb-2">{page?.valuesEyebrow ?? "What we believe"}</p>
-            <h2 className="font-graphik text-3xl md:text-4xl font-bold text-ink tracking-tight mb-10">{page?.valuesHeading ?? "Our values"}</h2>
+            <h2 className="font-graphik text-3xl md:text-4xl font-bold text-ink dark:text-white tracking-tight mb-10">{page?.valuesHeading ?? "Our values"}</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {values.map((v, i) => (
                 <FadeUp key={v._key} delay={i * 80}>
-                <div className="bg-surface rounded-2xl p-6 h-full">
+                <div className="bg-surface dark:bg-surface-night rounded-2xl p-6 h-full">
                   <div className="text-brand mb-4">
                     <Icon name={v.icon} size={28} stroke={2} />
                   </div>
-                  <h3 className="text-sm font-semibold text-ink mb-2">{v.title}</h3>
-                  <p className="text-xs text-muted leading-relaxed">{v.body}</p>
+                  <h3 className="text-sm font-semibold text-ink dark:text-white mb-2">{v.title}</h3>
+                  <p className="text-xs text-muted dark:text-muted-night leading-relaxed">{v.body}</p>
                 </div>
                 </FadeUp>
               ))}
@@ -106,8 +106,8 @@ export default async function AboutPage() {
       {/* ── Footer detail ── */}
       <section className="max-w-5xl mx-auto px-4 md:px-8 py-12 text-center">
         <p className="text-sm font-bold uppercase tracking-widest text-brand mb-2">ListenApp CIC</p>
-        <p className="text-sm text-muted">Company no. {settings?.companyNumber} · {settings?.companyLocations}</p>
-        <p className="text-sm text-muted mt-1">
+        <p className="text-sm text-muted dark:text-muted-night">Company no. {settings?.companyNumber} · {settings?.companyLocations}</p>
+        <p className="text-sm text-muted dark:text-muted-night mt-1">
           Contact us at{" "}
           <a href={`mailto:${settings?.contactEmail}`} className="text-brand font-semibold hover:underline">
             {settings?.contactEmail}

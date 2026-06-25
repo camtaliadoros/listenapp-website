@@ -107,7 +107,14 @@ export default defineType({
               options: { list: ["Partner charity", "Supporter"] },
               validation: (r) => r.required(),
             }),
-            defineField({ name: "logo", title: "Logo", type: "image", options: { hotspot: true } }),
+            defineField({ name: "logo", title: "Logo (light backgrounds)", type: "image", options: { hotspot: true } }),
+            defineField({
+              name: "logoDark",
+              title: "Logo (dark mode)",
+              type: "image",
+              options: { hotspot: true },
+              description: "Optional white/light version for dark mode. Falls back to the regular logo above if not set.",
+            }),
             defineField({ name: "url", title: "Website URL", type: "url", description: "If set, the card links out to this URL." }),
           ],
           preview: {
