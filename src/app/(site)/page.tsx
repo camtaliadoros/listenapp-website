@@ -252,7 +252,8 @@ export default async function HomePage() {
       )}
 
 {/* ── CTA ── */}
-      <section className="max-w-5xl mx-auto px-4 md:px-8 py-16 md:py-20 text-center">
+      <section className="bg-surface dark:bg-surface-night py-16 md:py-20">
+      <div className="max-w-5xl mx-auto px-4 md:px-8 text-center">
         <p className="text-sm font-bold uppercase tracking-widest text-brand mb-3">{page?.ctaEyebrow ?? "Get involved"}</p>
         <h2 className="font-graphik text-3xl md:text-4xl font-bold text-ink dark:text-white tracking-tight mb-4">{page?.ctaHeading ?? "Ready to protect more people?"}</h2>
         <p className="text-muted dark:text-muted-night text-base mb-8 max-w-md mx-auto">{page?.ctaBody}</p>
@@ -264,6 +265,7 @@ export default async function HomePage() {
             {page?.ctaSecondaryLabel ?? "Partnership info"}
           </Link>
         </div>
+      </div>
       </section>
     </>
   );
