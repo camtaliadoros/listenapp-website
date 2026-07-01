@@ -15,12 +15,12 @@ type ContactPage = {
   successMessage: { heading: string; body: string };
   seo?: object;
 };
-type SiteSettings = { demoEmail: string; companyNumber: string; companyLocations: string };
+type SiteSettings = { companyNumber: string };
 
 async function getData() {
   const [{ data: page }, { data: settings }] = await Promise.all([
     sanityFetch({ query: `*[_type == "contactPage"][0]` }),
-    sanityFetch({ query: `*[_type == "siteSettings"][0]{ demoEmail, companyNumber, companyLocations }` }),
+    sanityFetch({ query: `*[_type == "siteSettings"][0]{ companyNumber }` }),
   ]);
   return { page: page as ContactPage | null, settings: settings as SiteSettings | null };
 }
@@ -66,21 +66,11 @@ export default async function ContactPage() {
                 {page?.contactEmail ?? "info@listenapp.org"}
               </a>
             </div>
-            <div>
-              <p className="text-sm font-bold uppercase tracking-widest text-brand mb-1">Request a demo</p>
-              <a
-                href={`mailto:${settings?.demoEmail ?? "natasha@listenapp.org"}`}
-                className="text-sm text-ink dark:text-white font-medium hover:text-brand transition-colors"
-              >
-                {settings?.demoEmail ?? "natasha@listenapp.org"}
-              </a>
-            </div>
             <div className="bg-surface dark:bg-surface-night rounded-2xl p-5 mt-6">
               <p className="text-sm font-semibold text-ink dark:text-white mb-1">ListenApp CIC</p>
               <p className="text-xs text-muted dark:text-muted-night leading-relaxed">
                 A non-profit Community Interest Company<br />
-                Company no. {settings?.companyNumber}<br />
-                {settings?.companyLocations}
+                Company no. {settings?.companyNumber}
               </p>
             </div>
           </div>
