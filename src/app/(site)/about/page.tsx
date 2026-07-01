@@ -24,14 +24,9 @@ type AboutPage = {
   values: Value[];
   seo?: object;
 };
-type SiteSettings = { contactEmail: string; companyNumber: string; companyLocations: string };
-
 async function getData() {
-  const [{ data: page }, { data: settings }] = await Promise.all([
-    sanityFetch({ query: `*[_type == "aboutPage"][0]` }),
-    sanityFetch({ query: `*[_type == "siteSettings"][0]{ contactEmail, companyNumber, companyLocations }` }),
-  ]);
-  return { page: page as AboutPage | null, settings: settings as SiteSettings | null };
+  const { data: page } = await sanityFetch({ query: `*[_type == "aboutPage"][0]` });
+  return { page: page as AboutPage | null };
 }
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -40,7 +35,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function AboutPage() {
-  const { page, settings } = await getData();
+  const { page } = await getData();
   const experienceStats = page?.experienceStats ?? [];
   const expertiseParagraphs = page?.expertiseParagraphs ?? [];
   const values = page?.values ?? [];
@@ -105,17 +100,6 @@ export default async function AboutPage() {
         </section>
       )}
 
-      {/* ── Footer detail ── */}
-      <section className="max-w-5xl mx-auto px-4 md:px-8 py-12 text-center">
-        <p className="text-sm font-bold uppercase tracking-widest text-brand mb-2">ListenApp CIC</p>
-        <p className="text-sm text-muted dark:text-muted-night">Company no. {settings?.companyNumber} · {settings?.companyLocations}</p>
-        <p className="text-sm text-muted dark:text-muted-night mt-1">
-          Contact us at{" "}
-          <a href={`mailto:${settings?.contactEmail}`} className="text-brand font-semibold hover:underline">
-            {settings?.contactEmail}
-          </a>
-        </p>
-      </section>
     </>
   );
 }
