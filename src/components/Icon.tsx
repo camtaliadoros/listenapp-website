@@ -13,6 +13,7 @@ import {
   IconBolt,
   IconFileText,
   IconEyeOff,
+  IconMicrophone2,
   type IconProps,
 } from "@tabler/icons-react";
 
@@ -31,6 +32,7 @@ const ICONS: Record<string, React.ComponentType<IconProps>> = {
   "ti-bolt": IconBolt,
   "ti-file-text": IconFileText,
   "ti-eye-off": IconEyeOff,
+  "ti-voice": IconMicrophone2,
 };
 
 export default function Icon({ name, ...props }: { name?: string } & IconProps) {
