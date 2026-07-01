@@ -24,7 +24,7 @@ export default function Nav({ demoEmail }: { demoEmail: string }) {
             alt="ListenApp"
             width={80}
             height={16}
-            style={{ height: "auto" }}
+            style={{ width: 80, height: "auto" }}
             className="dark:hidden"
             priority
           />
@@ -33,7 +33,7 @@ export default function Nav({ demoEmail }: { demoEmail: string }) {
             alt="ListenApp"
             width={80}
             height={16}
-            style={{ height: "auto" }}
+            style={{ width: 80, height: "auto" }}
             className="hidden dark:block"
             priority
           />
