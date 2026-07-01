@@ -13,7 +13,6 @@ const ROUTE_BY_TYPE: Record<string, string> = {
   partnerPage: "/partner",
   aboutPage: "/about",
   contactPage: "/contact",
-  questionnairePage: "/app-questionnaire",
 };
 
 export default defineConfig({

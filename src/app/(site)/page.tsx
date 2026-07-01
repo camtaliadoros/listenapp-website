@@ -42,13 +42,12 @@ type HomePage = {
 };
 type SiteSettings = {
   demoEmail: string;
-  researchBand: { stat: string; heading: string; body: string; ctaLabel: string; ctaUrl: string };
 };
 
 async function getData() {
   const [{ data: page }, { data: settings }] = await Promise.all([
     sanityFetch({ query: `*[_type == "homePage"][0]` }),
-    sanityFetch({ query: `*[_type == "siteSettings"][0]{ demoEmail, researchBand }` }),
+    sanityFetch({ query: `*[_type == "siteSettings"][0]{ demoEmail }` }),
   ]);
   const typedPage = page as HomePage | null;
   const partners = (typedPage?.partners ?? []).filter((p) => p.type === "Partner charity");
@@ -252,27 +251,7 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* ── Research band ── */}
-      {settings?.researchBand && (
-        <section className="bg-brand py-12">
-          <div className="max-w-5xl mx-auto px-4 md:px-8 flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-10">
-            <div className="font-tungsten text-7xl md:text-8xl font-semibold text-white leading-none tracking-normal flex-shrink-0">
-              {settings.researchBand.stat}
-            </div>
-            <div>
-              <h3 className="font-gilroy text-xl font-bold text-white mb-2">{settings.researchBand.heading}</h3>
-              <p className="text-sm text-white/80 leading-relaxed mb-4">{settings.researchBand.body}</p>
-              {settings.researchBand.ctaUrl && (
-                <a href={settings.researchBand.ctaUrl} className="text-white font-semibold text-sm link-underline">
-                  {settings.researchBand.ctaLabel} →
-                </a>
-              )}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* ── CTA ── */}
+{/* ── CTA ── */}
       <section className="max-w-5xl mx-auto px-4 md:px-8 py-16 md:py-20 text-center">
         <p className="text-sm font-bold uppercase tracking-widest text-brand mb-3">{page?.ctaEyebrow ?? "Get involved"}</p>
         <h2 className="font-graphik text-3xl md:text-4xl font-bold text-ink dark:text-white tracking-tight mb-4">{page?.ctaHeading ?? "Ready to protect more people?"}</h2>

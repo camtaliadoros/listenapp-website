@@ -10,7 +10,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const base = settings?.siteUrl ?? "https://listenapp.org";
 
-  const routes = ["/", "/the-problem", "/partner", "/about", "/contact", "/app-questionnaire"];
+  const routes = ["/", "/the-problem", "/partner", "/about", "/contact"];
 
   return routes.map((route) => ({
     url: `${base}${route}`,

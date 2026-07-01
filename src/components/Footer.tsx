@@ -42,8 +42,7 @@ export default async function Footer() {
           <Link href="/partner" className="text-sm text-muted-light hover:text-white transition-colors">Partner with us</Link>
           <Link href="/about" className="text-sm text-muted-light hover:text-white transition-colors">About</Link>
           <Link href="/contact" className="text-sm text-muted-light hover:text-white transition-colors">Contact</Link>
-          <Link href="/app-questionnaire" className="text-sm text-muted-light hover:text-white transition-colors">App questionnaire</Link>
-          <Link href="/privacy-policy" className="text-sm text-muted-light hover:text-white transition-colors">Privacy policy</Link>
+<Link href="/privacy-policy" className="text-sm text-muted-light hover:text-white transition-colors">Privacy policy</Link>
         </div>
       </div>
     </footer>

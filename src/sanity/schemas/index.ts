@@ -6,8 +6,6 @@ import problemPage from "./problemPage";
 import partnerPage from "./partnerPage";
 import aboutPage from "./aboutPage";
 import contactPage from "./contactPage";
-import questionnairePage from "./questionnairePage";
-
 export const schemaTypes: SchemaTypeDefinition[] = [
   // objects
   seo,
@@ -18,5 +16,4 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   partnerPage,
   aboutPage,
   contactPage,
-  questionnairePage,
 ];
