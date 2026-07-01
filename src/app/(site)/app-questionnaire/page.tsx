@@ -4,6 +4,8 @@ import { buildMetadata } from "@/lib/metadata";
 import QuestionnaireForm from "./QuestionnaireForm";
 import type { Metadata } from "next";
 
+export const revalidate = 0;
+
 type QPage = {
   heading: string;
   intro: string;

@@ -6,6 +6,8 @@ import Icon from "@/components/Icon";
 import { buildMetadata } from "@/lib/metadata";
 import type { Metadata } from "next";
 
+export const revalidate = 0;
+
 type Stat        = { _key: string; number: string; label: string };
 type BodyColumn  = { _key: string; heading: string; paragraphs: string[] };
 type SolutionCard = { _key: string; title: string; body: string; icon?: string };

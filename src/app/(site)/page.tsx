@@ -8,6 +8,8 @@ import FadeUp from "@/components/FadeUp";
 import Icon from "@/components/Icon";
 import type { Metadata } from "next";
 
+export const revalidate = 0;
+
 type Feature = { _key: string; title: string; description: string; icon: string };
 type Stat    = { _key: string; number: string; label: string };
 type Partner = { _key: string; name: string; type: string; url?: string; logo?: { asset?: { _ref: string } }; logoDark?: { asset?: { _ref: string } } };

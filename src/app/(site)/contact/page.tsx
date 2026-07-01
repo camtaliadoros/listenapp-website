@@ -4,6 +4,8 @@ import { buildMetadata } from "@/lib/metadata";
 import ContactForm from "./ContactForm";
 import type { Metadata } from "next";
 
+export const revalidate = 0;
+
 type ContactPage = {
   heading: string;
   intro: string;
