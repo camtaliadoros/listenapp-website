@@ -29,11 +29,7 @@ export default async function Footer() {
             className="mb-3"
           />
           <p className="text-sm text-muted-light leading-relaxed">
-            ListenApp CIC · Company no. {settings?.companyNumber}<br />
-            {settings?.companyLocations}<br />
-            <a href={`mailto:${settings?.contactEmail}`} className="hover:text-white transition-colors">
-              {settings?.contactEmail}
-            </a>
+            ListenApp CIC ({settings?.companyNumber ?? "13740982"})
           </p>
         </div>
 
