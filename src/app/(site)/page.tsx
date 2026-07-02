@@ -88,7 +88,8 @@ export default async function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-b from-ink/50 via-ink/10 to-ink/85" />
 
         {/* Content */}
-        <div className="relative z-10 max-w-5xl mx-auto px-4 md:px-8 pb-16 md:pb-24 w-full">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-12 pb-16 md:pb-24 grid grid-cols-1 md:grid-cols-2">
+          <div className="md:col-start-2">
           <div className="inline-flex items-center gap-2 bg-brand/85 text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider mb-6">
             <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
             {page?.heroEyebrowBadge ?? "Safety technology"}
@@ -109,6 +110,7 @@ export default async function HomePage() {
             <Link href="/the-problem" className="text-white font-semibold text-sm border-b border-white/60 hover:border-white transition-colors pb-0.5">
               {page?.heroSecondaryCtaLabel ?? "Learn how it works"}
             </Link>
+          </div>
           </div>
         </div>
       </section>
