@@ -5,7 +5,7 @@ import Icon from "@/components/Icon";
 import { buildMetadata } from "@/lib/metadata";
 import type { Metadata } from "next";
 
-export const revalidate = 0;
+export const revalidate = 60;
 
 type Value          = { _key: string; title: string; body: string; icon: string };
 type ExperienceStat = { _key: string; number: string; label: string };

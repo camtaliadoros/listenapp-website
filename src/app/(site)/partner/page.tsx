@@ -5,7 +5,7 @@ import { buildMetadata } from "@/lib/metadata";
 import PartnerForm from "./PartnerForm";
 import type { Metadata } from "next";
 
-export const revalidate = 0;
+export const revalidate = 60;
 
 type Step      = { _key: string; title: string; body: string };
 type TrustCard = { _key: string; title: string; body: string };
