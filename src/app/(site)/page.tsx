@@ -69,24 +69,22 @@ export default async function HomePage() {
   return (
     <>
       {/* ── Hero ── */}
-      <section className="-mt-16 relative min-h-screen flex items-end overflow-hidden">
-        {/* Background image */}
+      <section className="-mt-16 relative min-h-screen flex items-end overflow-hidden bg-ink">
+        {/* Image sits in the right 80%, left 20% is solid dark bg */}
         {page?.heroImage?.asset && (
-          <Image
-            src={urlForImage(page.heroImage)?.width(1920).fit("max").url() ?? ""}
-            alt="ListenApp hero"
-            fill
-            className="object-cover object-[right_20%]"
-            priority
-          />
+          <div className="absolute left-[20%] right-0 inset-y-0">
+            <Image
+              src={urlForImage(page.heroImage)?.width(1920).fit("max").url() ?? ""}
+              alt="ListenApp hero"
+              fill
+              className="object-cover object-left-top"
+              priority
+            />
+          </div>
         )}
-        {/* Fallback if no image uploaded yet */}
-        {!page?.heroImage?.asset && (
-          <div className="absolute inset-0 bg-gradient-to-br from-ink via-[#2a0a14] to-[#1a0508]" />
-        )}
-        {/* Overlay gradient */}
-        <div className="absolute inset-0 bg-gradient-to-r from-ink/80 via-ink/40 to-ink/10" />
-        <div className="absolute inset-0 bg-gradient-to-b from-ink/30 via-transparent to-ink/60" />
+        {/* Blend the dark panel into the image */}
+        <div className="absolute inset-0 bg-gradient-to-r from-ink from-[18%] via-ink/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-ink/20 via-transparent to-ink/50" />
 
         {/* Content */}
         <div className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-12 pb-16 md:pb-24 grid grid-cols-1 md:grid-cols-2">
