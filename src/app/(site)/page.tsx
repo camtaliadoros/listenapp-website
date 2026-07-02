@@ -167,7 +167,7 @@ export default async function HomePage() {
               ))}
             </ul>
           </div>
-          <div className="bg-ink rounded-2xl p-8 flex items-center justify-center">
+          <div className="p-8 flex items-center justify-center">
             <svg width="300" height="300" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
               {/* Subtle outer rings */}
               <circle cx="110" cy="120" r="95" stroke="rgba(232,24,74,0.08)" strokeWidth="1"/>
@@ -187,7 +187,7 @@ export default async function HomePage() {
               <path d="M55 82 C55 61.5 81.5 46 111.7 46 C141.9 46 168.4 61.5 168.4 82" stroke="#E8184A" strokeWidth="5" strokeLinecap="butt" fill="none">
                 <animate attributeName="opacity" values="0.15;1;0.15" dur="2.4s" repeatCount="indefinite" begin="0.8s"/>
               </path>
-              <text x="111.7" y="165" textAnchor="middle" fontFamily="Inter, sans-serif" fontSize="11" fontWeight="600" letterSpacing="2" fill="rgba(255,255,255,0.25)">LISTENING</text>
+              <text x="111.7" y="165" textAnchor="middle" fontFamily="Inter, sans-serif" fontSize="11" fontWeight="600" letterSpacing="2" fill="rgba(0,0,0,0.15)">LISTENING</text>
             </svg>
           </div>
         </div>
