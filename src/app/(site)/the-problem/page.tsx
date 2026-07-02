@@ -58,10 +58,10 @@ export default async function ProblemPage() {
       {/* ── Stats grid ── */}
       {stats.length > 0 && (
         <section className="max-w-5xl mx-auto px-4 md:px-8 py-12">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 items-stretch">
             {stats.map((s, i) => (
-              <FadeUp key={s._key} delay={i * 80}>
-              <div className="bg-surface dark:bg-surface-night rounded-xl p-5">
+              <FadeUp key={s._key} delay={i * 80} className="h-full">
+              <div className="bg-surface dark:bg-surface-night rounded-xl p-5 h-full">
                 <div className="font-tungsten text-5xl font-semibold text-brand leading-none tracking-normal">{s.number}</div>
                 <div className="text-xs text-muted dark:text-muted-night mt-2 leading-snug">{s.label}</div>
               </div>
