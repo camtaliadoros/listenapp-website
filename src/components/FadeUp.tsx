@@ -16,10 +16,11 @@ export default function FadeUp({ children, className = "", delay = 0 }: Props) {
     if (!el) return;
     const observer = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) { setVisible(true); observer.disconnect(); } },
-      { threshold: 0.12 }
+      { threshold: 0.05 }
     );
-    observer.observe(el);
-    return () => observer.disconnect();
+    // Small defer so elements already in view still animate on load
+    const t = setTimeout(() => observer.observe(el), 50);
+    return () => { clearTimeout(t); observer.disconnect(); };
   }, []);
 
   return (
