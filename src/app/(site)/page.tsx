@@ -85,11 +85,12 @@ export default async function HomePage() {
           <div className="absolute inset-0 bg-gradient-to-br from-ink via-[#2a0a14] to-[#1a0508]" />
         )}
         {/* Overlay gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-ink/50 via-ink/10 to-ink/85" />
+        <div className="absolute inset-0 bg-gradient-to-r from-ink/80 via-ink/40 to-ink/10" />
+        <div className="absolute inset-0 bg-gradient-to-b from-ink/30 via-transparent to-ink/60" />
 
         {/* Content */}
         <div className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-12 pb-16 md:pb-24 grid grid-cols-1 md:grid-cols-2">
-          <div className="md:col-start-2">
+          <div className="md:col-start-1">
           <div className="inline-flex items-center gap-2 bg-brand/85 text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider mb-6">
             <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
             {page?.heroEyebrowBadge ?? "Safety technology"}
