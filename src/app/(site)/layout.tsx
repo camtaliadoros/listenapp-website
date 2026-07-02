@@ -14,7 +14,7 @@ export default async function SiteLayout({
     draftMode(),
     sanityFetch({ query: `*[_type == "siteSettings"][0]{ demoEmail }` }),
   ]);
-  const demoEmail = (settings as { demoEmail?: string } | null)?.demoEmail ?? "natasha@listenapp.org";
+  const demoEmail = (settings as { demoEmail?: string } | null)?.demoEmail ?? "info@listenapp.org";
 
   return (
     <>
