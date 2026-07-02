@@ -60,12 +60,14 @@ export default async function ProblemPage() {
         <section className="max-w-5xl mx-auto px-4 md:px-8 py-12">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 items-stretch">
             {stats.map((s, i) => (
-              <FadeUp key={s._key} delay={i * 80} className="h-full">
-              <div className="bg-surface dark:bg-surface-night rounded-xl p-5 h-full">
+              <div
+                key={s._key}
+                className="bg-surface dark:bg-surface-night rounded-xl p-5 h-full animate-fade-up"
+                style={{ animationDelay: `${i * 100}ms` }}
+              >
                 <div className="font-tungsten text-5xl font-semibold text-brand leading-none tracking-normal">{s.number}</div>
                 <div className="text-xs text-muted dark:text-muted-night mt-2 leading-snug">{s.label}</div>
               </div>
-              </FadeUp>
             ))}
           </div>
         </section>
@@ -101,14 +103,16 @@ export default async function ProblemPage() {
           <h2 className="font-graphik text-3xl md:text-4xl font-bold text-ink dark:text-white tracking-tight mb-2">{page?.solutionHeading ?? "Closing the gap with technology"}</h2>
           <p className="text-muted dark:text-muted-night text-base mb-10 max-w-lg">{page?.solutionIntro}</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
-            {solutionCards.map((c) => (
-              <div key={c._key} className="bg-white dark:bg-surface-raised-night rounded-2xl p-6">
+            {solutionCards.map((c, i) => (
+              <FadeUp key={c._key} delay={i * 100}>
+              <div className="bg-white dark:bg-surface-raised-night rounded-2xl p-6 h-full">
                 <div className="w-10 h-10 bg-surface-deep dark:bg-surface-deep-night rounded-xl flex items-center justify-center mb-4 text-brand">
                   <Icon name={c.icon} size={20} stroke={2} />
                 </div>
                 <h3 className="text-sm font-semibold text-ink dark:text-white mb-2">{c.title}</h3>
                 <p className="text-xs text-muted dark:text-muted-night leading-relaxed">{c.body}</p>
               </div>
+              </FadeUp>
             ))}
           </div>
           <Link
