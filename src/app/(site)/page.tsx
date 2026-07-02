@@ -171,10 +171,6 @@ export default async function HomePage() {
           </div>
           <div className="p-8 flex items-center justify-center">
             <svg width="300" height="300" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
-              {/* Subtle outer rings */}
-              <circle cx="110" cy="120" r="95" stroke="rgba(232,24,74,0.08)" strokeWidth="1"/>
-              <circle cx="110" cy="120" r="72" stroke="rgba(232,24,74,0.08)" strokeWidth="1"/>
-              <circle cx="110" cy="120" r="49" stroke="rgba(232,24,74,0.08)" strokeWidth="1"/>
               {/* Heart */}
               <path d="M100 117C100 112.8 103.1 109.5 107 109.5C108.9 109.5 110.6 110.4 111.7 111.8C112.8 110.4 114.5 109.5 116.4 109.5C120.3 109.5 123.4 112.8 123.4 117C123.4 122.8 111.7 130 111.7 130C111.7 130 100 122.8 100 117Z" fill="#E8184A"/>
               {/* Arc 1 — small */}
@@ -189,7 +185,7 @@ export default async function HomePage() {
               <path d="M55 82 C55 61.5 81.5 46 111.7 46 C141.9 46 168.4 61.5 168.4 82" stroke="#E8184A" strokeWidth="5" strokeLinecap="butt" fill="none">
                 <animate attributeName="opacity" values="0.15;1;0.15" dur="2.4s" repeatCount="indefinite" begin="0.8s"/>
               </path>
-              <text x="111.7" y="165" textAnchor="middle" fontFamily="Inter, sans-serif" fontSize="11" fontWeight="600" letterSpacing="2" fill="rgba(0,0,0,0.15)">LISTENING</text>
+              <text x="111.7" y="165" textAnchor="middle" fontFamily="Inter, sans-serif" fontSize="11" fontWeight="600" letterSpacing="2" fill="rgba(0,0,0,0.4)">LISTENING</text>
             </svg>
           </div>
         </div>
