@@ -14,6 +14,7 @@ type Feature = { _key: string; title: string; description: string; icon: string 
 type Stat    = { _key: string; number: string; label: string };
 type Partner = { _key: string; name: string; type: string; url?: string; logo?: { asset?: { _ref: string } }; logoDark?: { asset?: { _ref: string } } };
 type HomePage = {
+  heroImage?: { asset?: { _ref: string } };
   heroEyebrowBadge: string;
   heroHeading: string;
   heroDescription: string;
@@ -68,58 +69,46 @@ export default async function HomePage() {
   return (
     <>
       {/* ── Hero ── */}
-      <section className="max-w-5xl mx-auto px-4 md:px-8 py-12 md:py-16 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 items-center">
-        <div className="animate-fade-up">
-          <div className="inline-flex items-center gap-2 bg-surface-deep dark:bg-surface-deep-night text-brand-dark dark:text-brand text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider mb-6">
-            <span className="w-1.5 h-1.5 bg-brand rounded-full" />
+      <section className="-mt-16 relative min-h-screen flex items-end overflow-hidden">
+        {/* Background image */}
+        {page?.heroImage?.asset && (
+          <Image
+            src={urlForImage(page.heroImage)?.width(1920).fit("max").url() ?? ""}
+            alt="ListenApp hero"
+            fill
+            className="object-cover object-[center_20%]"
+            priority
+          />
+        )}
+        {/* Fallback if no image uploaded yet */}
+        {!page?.heroImage?.asset && (
+          <div className="absolute inset-0 bg-gradient-to-br from-ink via-[#2a0a14] to-[#1a0508]" />
+        )}
+        {/* Overlay gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-ink/50 via-ink/10 to-ink/85" />
+
+        {/* Content */}
+        <div className="relative z-10 max-w-5xl mx-auto px-4 md:px-8 pb-16 md:pb-24 w-full">
+          <div className="inline-flex items-center gap-2 bg-brand/85 text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider mb-6">
+            <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
             {page?.heroEyebrowBadge ?? "Safety technology"}
           </div>
-          <h1 className="font-graphik text-4xl md:text-5xl font-bold text-ink dark:text-white leading-tight tracking-tight mb-5">
-            {page?.heroHeading ?? "Protect yourself silently. Even when you can't speak."}
+          <h1 className="font-graphik text-4xl md:text-6xl font-bold text-white leading-tight tracking-tight mb-5 max-w-2xl [text-shadow:0_2px_30px_rgba(0,0,0,0.25)]">
+            {page?.heroHeading ?? "The first UK support app that hears you, even when you can't reach your phone."}
           </h1>
-          <p className="text-muted dark:text-muted-night text-base leading-relaxed mb-8 max-w-md">
+          <p className="text-white/85 text-base md:text-lg leading-relaxed mb-8 max-w-lg">
             {page?.heroDescription}
           </p>
           <div className="flex flex-wrap items-center gap-4">
             <a
               href={`mailto:${settings?.demoEmail ?? "natasha@listenapp.org"}`}
-              className="btn-arrow inline-flex items-center gap-2 bg-brand text-white font-semibold text-sm px-6 py-3 rounded-lg hover:bg-brand-dark hover:text-white transition-colors"
+              className="inline-flex items-center gap-2 bg-brand text-white font-semibold text-sm px-6 py-3.5 rounded-lg hover:bg-brand-dark transition-colors"
             >
-              {page?.heroPrimaryCtaLabel ?? "Request a demo"} <span className="arrow">→</span>
+              {page?.heroPrimaryCtaLabel ?? "Request a demo"} →
             </a>
-            <Link href="/the-problem" className="text-brand font-semibold text-sm link-underline">
+            <Link href="/the-problem" className="text-white font-semibold text-sm border-b border-white/60 hover:border-white transition-colors pb-0.5">
               {page?.heroSecondaryCtaLabel ?? "Learn how it works"}
             </Link>
-          </div>
-        </div>
-
-        {/* Phone mockup — hidden on small screens */}
-        <div className="hidden md:flex justify-center relative">
-          <div className="w-52 bg-ink rounded-3xl p-5 border-4 border-[#2e0f18]">
-            <div className="bg-surface rounded-2xl p-4 overflow-hidden">
-              <div className="flex justify-between items-center mb-2">
-                <span className="text-xs font-semibold text-ink">9:41</span>
-                <span className="text-[10px] text-muted">Calculator</span>
-              </div>
-              <div className="bg-ink rounded-xl p-3 mb-2 text-right">
-                <span className="text-2xl text-white font-light tracking-tight">1,247</span>
-              </div>
-              <div className="grid grid-cols-4 gap-1">
-                {["AC", "+/-", "%", "÷", "7", "8", "9", "×", "4", "5", "6", "−", "1", "2", "3", "+"].map((k) => (
-                  <div key={k} className={`rounded-md py-2 text-center text-xs font-medium ${["÷","×","−","+"].includes(k) ? "bg-surface-deep text-brand-dark" : "bg-[#ecdde1] text-ink"}`}>
-                    {k}
-                  </div>
-                ))}
-                <div className="col-span-2 bg-[#ecdde1] text-ink rounded-md py-2 text-center text-xs font-medium">0</div>
-                <div className="bg-[#ecdde1] text-ink rounded-md py-2 text-center text-xs font-medium">.</div>
-                <div className="bg-brand text-white rounded-md py-2 text-center text-xs font-bold">=</div>
-              </div>
-            </div>
-          </div>
-          <div className="absolute -bottom-2 -right-4 bg-ink text-white rounded-xl px-3 py-2.5 text-xs font-semibold w-32 leading-snug">
-            <span className="inline-block w-2 h-2 bg-brand rounded-full mr-1.5 animate-pulse align-middle" />
-            Alert sent<br />
-            <span className="text-[10px] opacity-75">Location shared · Recording on</span>
           </div>
         </div>
       </section>
@@ -178,20 +167,28 @@ export default async function HomePage() {
               ))}
             </ul>
           </div>
-          <div className="bg-ink rounded-2xl p-7 text-white">
-            <p className="text-sm font-bold mb-1">{page?.secretCodeHeading ?? "Enter your secret code"}</p>
-            <p className="text-xs text-muted-light mb-5">{page?.secretCodeSubtext ?? "Looks like a calculator. Acts as your guardian."}</p>
-            <div className="bg-white/5 rounded-xl p-3 text-right mb-4">
-              <span className="text-3xl font-light tracking-[0.3em]">••••</span>
-            </div>
-            <div className="grid grid-cols-3 gap-2">
-              {([["1",""],["2","ABC"],["3","DEF"],["4","GHI"],["5","JKL"],["6","MNO"],["7","PQRS"],["8","TUV"],["9","WXYZ"],["*",""],["0","+"],["#",""]] as [string,string][]).map(([num, sub], i) => (
-                <div key={i} className={`rounded-lg p-3 text-center ${i === 4 ? "bg-brand" : "bg-white/10"}`}>
-                  <span className="block text-lg font-light">{num}</span>
-                  {sub && <span className="block text-[7px] text-muted-light tracking-widest uppercase">{sub}</span>}
-                </div>
-              ))}
-            </div>
+          <div className="bg-ink rounded-2xl p-8 flex items-center justify-center">
+            <svg width="300" height="300" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+              {/* Subtle outer rings */}
+              <circle cx="110" cy="120" r="95" stroke="rgba(232,24,74,0.08)" strokeWidth="1"/>
+              <circle cx="110" cy="120" r="72" stroke="rgba(232,24,74,0.08)" strokeWidth="1"/>
+              <circle cx="110" cy="120" r="49" stroke="rgba(232,24,74,0.08)" strokeWidth="1"/>
+              {/* Heart */}
+              <path d="M100 117C100 112.8 103.1 109.5 107 109.5C108.9 109.5 110.6 110.4 111.7 111.8C112.8 110.4 114.5 109.5 116.4 109.5C120.3 109.5 123.4 112.8 123.4 117C123.4 122.8 111.7 130 111.7 130C111.7 130 100 122.8 100 117Z" fill="#E8184A"/>
+              {/* Arc 1 — small */}
+              <path d="M90 107 C90 96.5 100 89 111.7 89 C123.4 89 133.4 96.5 133.4 107" stroke="#E8184A" strokeWidth="5" strokeLinecap="butt" fill="none">
+                <animate attributeName="opacity" values="0.15;1;0.15" dur="2.4s" repeatCount="indefinite" begin="0s"/>
+              </path>
+              {/* Arc 2 — medium */}
+              <path d="M73 95 C73 79.5 91 68 111.7 68 C132.4 68 150.4 79.5 150.4 95" stroke="#E8184A" strokeWidth="5" strokeLinecap="butt" fill="none">
+                <animate attributeName="opacity" values="0.15;1;0.15" dur="2.4s" repeatCount="indefinite" begin="0.4s"/>
+              </path>
+              {/* Arc 3 — large */}
+              <path d="M55 82 C55 61.5 81.5 46 111.7 46 C141.9 46 168.4 61.5 168.4 82" stroke="#E8184A" strokeWidth="5" strokeLinecap="butt" fill="none">
+                <animate attributeName="opacity" values="0.15;1;0.15" dur="2.4s" repeatCount="indefinite" begin="0.8s"/>
+              </path>
+              <text x="111.7" y="165" textAnchor="middle" fontFamily="Inter, sans-serif" fontSize="11" fontWeight="600" letterSpacing="2" fill="rgba(255,255,255,0.25)">LISTENING</text>
+            </svg>
           </div>
         </div>
       </section>

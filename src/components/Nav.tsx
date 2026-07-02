@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const links = [
   { label: "The Problem", href: "/the-problem" },
@@ -14,27 +14,42 @@ const links = [
 export default function Nav({ demoEmail }: { demoEmail: string }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  const isHome = pathname === "/";
+  const transparent = isHome && !scrolled;
+
+  useEffect(() => {
+    const handler = () => setScrolled(window.scrollY > 80);
+    handler();
+    window.addEventListener("scroll", handler, { passive: true });
+    return () => window.removeEventListener("scroll", handler);
+  }, []);
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/95 dark:bg-black/95 backdrop-blur-sm border-b border-border dark:border-border-night">
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      transparent
+        ? "bg-transparent border-transparent"
+        : "bg-white/95 dark:bg-black/95 backdrop-blur-sm border-b border-border dark:border-border-night"
+    }`}>
       <div className="flex items-center justify-between px-4 md:px-8 py-4">
         <Link href="/" className="flex items-center" onClick={() => setOpen(false)}>
-          <Image
-            src="/ListenAppLogo-For-Light-Background.svg"
-            alt="ListenApp"
-            width={80}
-            height={16}
-            style={{ width: 80, height: "auto" }}
-            className="dark:hidden"
-            priority
-          />
           <Image
             src="/ListenAppLogo-White-Version.svg"
             alt="ListenApp"
             width={80}
             height={16}
             style={{ width: 80, height: "auto" }}
-            className="hidden dark:block"
+            className={transparent ? "" : "hidden dark:block"}
+            priority
+          />
+          <Image
+            src="/ListenAppLogo-For-Light-Background.svg"
+            alt="ListenApp"
+            width={80}
+            height={16}
+            style={{ width: 80, height: "auto" }}
+            className={transparent ? "hidden" : "dark:hidden"}
             priority
           />
         </Link>
@@ -46,7 +61,11 @@ export default function Nav({ demoEmail }: { demoEmail: string }) {
               key={href}
               href={href}
               className={`text-sm font-medium transition-colors ${
-                pathname === href ? "text-brand" : "text-muted dark:text-muted-night hover:text-brand"
+                transparent
+                  ? "text-white/90 hover:text-white"
+                  : pathname === href
+                    ? "text-brand"
+                    : "text-muted dark:text-muted-night hover:text-brand"
               }`}
             >
               {label}
@@ -57,7 +76,11 @@ export default function Nav({ demoEmail }: { demoEmail: string }) {
         <div className="flex items-center gap-3">
           <Link
             href={`mailto:${demoEmail}`}
-            className="hidden md:inline-flex bg-brand text-white text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-brand-dark hover:text-white transition-all hover:scale-105 active:scale-95"
+            className={`hidden md:inline-flex text-sm font-semibold px-5 py-2.5 rounded-lg transition-all hover:scale-105 active:scale-95 ${
+              transparent
+                ? "bg-white/15 border border-white/50 text-white hover:bg-white/25"
+                : "bg-brand text-white hover:bg-brand-dark hover:text-white"
+            }`}
           >
             Request demo
           </Link>
@@ -68,9 +91,9 @@ export default function Nav({ demoEmail }: { demoEmail: string }) {
             onClick={() => setOpen(!open)}
             aria-label={open ? "Close menu" : "Open menu"}
           >
-            <span className={`block h-0.5 bg-ink dark:bg-white transition-all duration-300 ${open ? "rotate-45 translate-y-2" : ""}`} />
-            <span className={`block h-0.5 bg-ink dark:bg-white transition-all duration-300 ${open ? "opacity-0" : ""}`} />
-            <span className={`block h-0.5 bg-ink dark:bg-white transition-all duration-300 ${open ? "-rotate-45 -translate-y-2" : ""}`} />
+            <span className={`block h-0.5 transition-all duration-300 ${transparent ? "bg-white" : "bg-ink dark:bg-white"} ${open ? "rotate-45 translate-y-2" : ""}`} />
+            <span className={`block h-0.5 transition-all duration-300 ${transparent ? "bg-white" : "bg-ink dark:bg-white"} ${open ? "opacity-0" : ""}`} />
+            <span className={`block h-0.5 transition-all duration-300 ${transparent ? "bg-white" : "bg-ink dark:bg-white"} ${open ? "-rotate-45 -translate-y-2" : ""}`} />
           </button>
         </div>
       </div>

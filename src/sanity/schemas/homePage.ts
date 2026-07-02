@@ -15,6 +15,7 @@ export default defineType({
   ],
   fields: [
     // ── Hero ──
+    defineField({ name: "heroImage", title: "Hero background photo", type: "image", group: "hero", options: { hotspot: true }, description: "Full-bleed background photo for the homepage hero." }),
     defineField({ name: "heroEyebrowBadge", title: "Eyebrow badge text", type: "string", group: "hero", initialValue: "Safety technology" }),
     defineField({ name: "heroHeading", title: "Heading", type: "string", group: "hero" }),
     defineField({ name: "heroDescription", title: "Description", type: "text", rows: 2, group: "hero" }),
