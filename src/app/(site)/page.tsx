@@ -72,19 +72,19 @@ export default async function HomePage() {
       <section className="-mt-16 relative min-h-screen flex items-end overflow-hidden bg-ink">
         {/* Image sits in the right 80%, left 20% is solid dark bg */}
         {page?.heroImage?.asset && (
-          <div className="absolute left-[20%] right-0 inset-y-0">
+          <div className="absolute inset-y-0 right-0 left-0 md:left-[20%]">
             <Image
               src={urlForImage(page.heroImage)?.width(1920).fit("max").url() ?? ""}
               alt="ListenApp hero"
               fill
-              className="object-cover object-left-top"
+              className="object-cover object-right-top"
               priority
             />
           </div>
         )}
         {/* Blend the dark panel into the image */}
-        <div className="absolute inset-0 bg-gradient-to-r from-ink from-[18%] via-ink/40 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-b from-ink/20 via-transparent to-ink/50" />
+        <div className="absolute inset-0 bg-gradient-to-r from-ink/95 via-ink/60 to-transparent md:from-ink md:from-[18%] md:via-ink/40 md:to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-ink/30 via-transparent to-ink/60" />
 
         {/* Content */}
         <div className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-12 pb-16 md:pb-24 grid grid-cols-1 md:grid-cols-2">
@@ -93,7 +93,7 @@ export default async function HomePage() {
             <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
             {page?.heroEyebrowBadge ?? "Safety technology"}
           </div>
-          <h1 className="font-graphik text-4xl md:text-6xl font-bold text-white leading-tight tracking-tight mb-5 max-w-2xl [text-shadow:0_2px_30px_rgba(0,0,0,0.25)]">
+          <h1 className="font-graphik text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight mb-5 max-w-2xl [text-shadow:0_2px_30px_rgba(0,0,0,0.25)]">
             {page?.heroHeading ?? "The first UK support app that hears you, even when you can't reach your phone."}
           </h1>
           <p className="text-white/85 text-base md:text-lg leading-relaxed mb-8 max-w-lg">
