@@ -77,7 +77,7 @@ export default async function HomePage() {
               src={urlForImage(page.heroImage)?.width(1920).fit("max").url() ?? ""}
               alt="ListenApp hero"
               fill
-              className="object-cover object-right-top"
+              className="object-cover object-center"
               priority
             />
           </div>
