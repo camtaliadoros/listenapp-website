@@ -9,6 +9,7 @@ export default defineType({
     defineField({ name: "siteName", title: "Site name", type: "string", initialValue: "ListenApp" }),
     defineField({ name: "defaultSeo", title: "Default SEO (fallback for all pages)", type: "seo" }),
     defineField({ name: "contactEmail", title: "Contact email", type: "string" }),
+    defineField({ name: "demoEmail", title: "Demo request email", type: "string", description: "Used for the 'Request demo' button in the nav and hero." }),
     defineField({ name: "companyNumber", title: "Company number", type: "string" }),
   ],
   preview: { select: { title: "contactEmail" }, prepare: () => ({ title: "Site Settings" }) },
