@@ -52,6 +52,7 @@ export default function ContactForm({ enquiryCategories, successMessage }: Props
     <form onSubmit={handleSubmit} className="space-y-5">
       <input type="hidden" name="subject" value="New contact enquiry — ListenApp" />
       <input type="hidden" name="from_name" value="ListenApp Website" />
+      <input type="checkbox" name="botcheck" className="hidden" />
       <div className="grid grid-cols-2 gap-4">
         <div>
           <label className="block text-sm font-semibold text-ink dark:text-white mb-1.5">First name <span className="text-brand">*</span></label>

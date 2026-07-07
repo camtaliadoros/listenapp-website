@@ -47,6 +47,8 @@ export default function PartnerForm() {
       <input type="hidden" name="subject" value="New partnership enquiry — ListenApp" />
       <input type="hidden" name="from_name" value="ListenApp Website" />
 
+      <input type="checkbox" name="botcheck" className="hidden" />
+
       {[
         { label: "Full name", name: "name", type: "text", placeholder: "Your name", required: true },
         { label: "Organisation", name: "organisation", type: "text", placeholder: "Your charity or organisation", required: true },
@@ -66,6 +68,27 @@ export default function PartnerForm() {
           />
         </div>
       ))}
+
+      <div>
+        <label className="block text-sm font-semibold text-ink dark:text-white mb-1.5">
+          Message <span className="text-brand">*</span>
+        </label>
+        <textarea
+          required
+          name="message"
+          rows={4}
+          placeholder="Tell us about your organisation and the people you support"
+          className="w-full px-3.5 py-2.5 border border-border dark:border-border-night rounded-lg text-sm text-ink dark:text-white placeholder:text-muted-light dark:bg-surface-night focus:outline-none focus:border-brand transition-colors resize-none"
+        />
+      </div>
+
+      <div className="flex items-start gap-3">
+        <input required type="checkbox" id="consent" name="consent" className="mt-0.5 accent-brand" />
+        <label htmlFor="consent" className="text-xs text-muted dark:text-muted-night leading-relaxed">
+          I consent to ListenApp storing my data in accordance with the{" "}
+          <a href="/privacy-policy" className="text-brand font-medium hover:underline">Privacy Policy</a>.
+        </label>
+      </div>
 
       {error && <p className="text-sm text-brand">{error}</p>}
 
