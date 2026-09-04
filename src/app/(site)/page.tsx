@@ -100,12 +100,12 @@ export default async function HomePage() {
             {page?.heroDescription}
           </p>
           <div className="flex flex-wrap items-center gap-4">
-            <a
-              href={`mailto:${settings?.demoEmail ?? "info@listenapp.org"}`}
+            <Link
+              href="/contact"
               className="inline-flex items-center gap-2 bg-brand text-white font-semibold text-sm px-6 py-3.5 rounded-lg hover:bg-brand-dark transition-colors"
             >
               {page?.heroPrimaryCtaLabel ?? "Request a demo"} →
-            </a>
+            </Link>
             <Link href="/the-problem" className="text-white font-semibold text-sm border-b border-white/60 hover:border-white transition-colors pb-0.5">
               {page?.heroSecondaryCtaLabel ?? "Learn how it works"}
             </Link>
@@ -252,9 +252,9 @@ export default async function HomePage() {
         <h2 className="font-graphik text-3xl md:text-4xl font-bold text-ink dark:text-white tracking-tight mb-4">{page?.ctaHeading ?? "Ready to protect more people?"}</h2>
         <p className="text-muted dark:text-muted-night text-base mb-8 max-w-md mx-auto">{page?.ctaBody}</p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a href={`mailto:${settings?.demoEmail ?? "info@listenapp.org"}`} className="w-full sm:w-auto bg-brand text-white font-semibold text-sm px-7 py-3.5 rounded-lg hover:bg-brand-dark hover:text-white transition-colors text-center">
+          <Link href="/contact" className="w-full sm:w-auto bg-brand text-white font-semibold text-sm px-7 py-3.5 rounded-lg hover:bg-brand-dark hover:text-white transition-colors text-center">
             {page?.ctaPrimaryLabel ?? "Request a demo"}
-          </a>
+          </Link>
           <Link href="/partner" className="w-full sm:w-auto bg-ink text-white font-semibold text-sm px-7 py-3.5 rounded-lg hover:opacity-80 transition-opacity text-center border border-transparent dark:border-border-night">
             {page?.ctaSecondaryLabel ?? "Partnership info"}
           </Link>

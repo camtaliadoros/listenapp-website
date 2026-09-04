@@ -11,7 +11,7 @@ const links = [
   { label: "Contact", href: "/contact" },
 ];
 
-export default function Nav({ demoEmail }: { demoEmail: string }) {
+export default function Nav({ demoEmail: _demoEmail }: { demoEmail: string }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -75,7 +75,7 @@ export default function Nav({ demoEmail }: { demoEmail: string }) {
 
         <div className="flex items-center gap-3">
           <Link
-            href={`mailto:${demoEmail}`}
+            href="/contact"
             className={`hidden md:inline-flex text-sm font-semibold px-5 py-2.5 rounded-lg transition-all hover:scale-105 active:scale-95 ${
               transparent
                 ? "bg-white/15 border border-white/50 text-white hover:bg-white/25"
@@ -114,7 +114,7 @@ export default function Nav({ demoEmail }: { demoEmail: string }) {
             </Link>
           ))}
           <Link
-            href={`mailto:${demoEmail}`}
+            href="/contact"
             onClick={() => setOpen(false)}
             className="mt-3 bg-brand text-white text-sm font-semibold px-5 py-3 rounded-lg text-center hover:bg-brand-dark transition-colors"
           >
