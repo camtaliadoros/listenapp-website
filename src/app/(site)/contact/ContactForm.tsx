@@ -80,6 +80,17 @@ export default function ContactForm({ enquiryCategories, successMessage }: Props
       </div>
 
       <div>
+        <label className="block text-sm font-semibold text-ink dark:text-white mb-1.5">I am a <span className="text-brand">*</span></label>
+        <select required name="sender_type" defaultValue="" className="w-full px-3.5 py-2.5 border border-border dark:border-border-night rounded-lg text-sm text-ink dark:text-white focus:outline-none focus:border-brand transition-colors appearance-none bg-white dark:bg-surface-night">
+          <option value="" disabled>Select an option</option>
+          <option value="Charity">Charity</option>
+          <option value="Individual">Individual</option>
+          <option value="Organisation">Organisation</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <div>
         <label className="block text-sm font-semibold text-ink dark:text-white mb-1.5">Organisation</label>
         <input type="text" name="organisation" placeholder="Your organisation (optional)" className="w-full px-3.5 py-2.5 border border-border dark:border-border-night rounded-lg text-sm text-ink dark:text-white placeholder:text-muted-light dark:bg-surface-night focus:outline-none focus:border-brand transition-colors" />
       </div>
