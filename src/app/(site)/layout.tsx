@@ -2,6 +2,7 @@ import { draftMode } from "next/headers";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import CookieConsent from "@/components/CookieConsent";
+import QuickExit from "@/components/QuickExit";
 import { sanityFetch } from "@/sanity/live";
 import { SanityLive } from "@/sanity/live";
 import { VisualEditing } from "next-sanity/visual-editing";
@@ -28,6 +29,7 @@ export default async function SiteLayout({
       <Nav demoEmail={demoEmail} />
       <main id="main-content" className="flex-1 pt-16">{children}</main>
       <Footer />
+      <QuickExit />
       <CookieConsent />
       <SanityLive />
       {isDraftMode && <VisualEditing />}
