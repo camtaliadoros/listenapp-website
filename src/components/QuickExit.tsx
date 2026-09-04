@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-const SAFE_URL = "https://www.bbc.co.uk/weather";
+const SAFE_URL = "https://www.google.com";
 
 function exit() {
   // Replace current history entry so back button doesn't return here
