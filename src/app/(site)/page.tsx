@@ -12,6 +12,7 @@ export const revalidate = 60;
 
 type Feature = { _key: string; title: string; description: string; icon: string };
 type Stat    = { _key: string; number: string; label: string };
+type AppScreen = { _key: string; caption: string; alt?: string; asset?: { _ref: string } };
 type Partner = { _key: string; name: string; type: string; url?: string; logo?: { asset?: { _ref: string } }; logoDark?: { asset?: { _ref: string } } };
 type HomePage = {
   heroImage?: { asset?: { _ref: string } };
@@ -25,6 +26,10 @@ type HomePage = {
   featuresHeading: string;
   featuresIntro: string;
   features: Feature[];
+  screensEyebrow: string;
+  screensHeading: string;
+  screensIntro: string;
+  appScreens: AppScreen[];
   securityEyebrow: string;
   securityHeading: string;
   securityBody: string;
@@ -67,6 +72,7 @@ export default async function HomePage() {
   const { page, settings, partners, supporters } = await getData();
   const features = page?.features ?? [];
   const stats = page?.stats ?? [];
+  const appScreens = (page?.appScreens ?? []).filter((s) => s.asset);
 
   return (
     <>
@@ -149,6 +155,33 @@ export default async function HomePage() {
           ))}
         </div>
       </section>
+
+      {/* ── App screenshots ── */}
+      {appScreens.length > 0 && (
+        <section className="max-w-5xl mx-auto px-4 md:px-8 pb-12 md:pb-16">
+          <p className="text-sm font-bold uppercase tracking-widest text-brand mb-2">{page?.screensEyebrow ?? "Inside the app"}</p>
+          <h2 className="font-graphik text-3xl md:text-4xl font-bold text-ink dark:text-white tracking-tight mb-2">{page?.screensHeading ?? "Simple to set up, quick to use"}</h2>
+          {page?.screensIntro && <p className="text-muted dark:text-muted-night text-base max-w-lg">{page.screensIntro}</p>}
+          <div className="mt-10 flex flex-wrap justify-center gap-8 md:gap-12">
+            {appScreens.map((s, i) => (
+              <FadeUp key={s._key} delay={i * 80}>
+                <figure className="w-[220px] md:w-[240px]">
+                  <div className="relative aspect-[716/1600] rounded-[2rem] overflow-hidden border-[6px] border-ink shadow-xl bg-ink">
+                    <Image
+                      src={urlForImage(s)?.width(480).fit("max").url() ?? ""}
+                      alt={s.alt ?? s.caption}
+                      fill
+                      sizes="240px"
+                      className="object-cover object-top"
+                    />
+                  </div>
+                  <figcaption className="text-sm font-semibold text-ink dark:text-white text-center mt-4">{s.caption}</figcaption>
+                </figure>
+              </FadeUp>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* ── Security section ── */}
       <section className="bg-surface dark:bg-surface-night py-12 md:py-14">

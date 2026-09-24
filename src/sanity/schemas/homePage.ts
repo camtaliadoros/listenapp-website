@@ -8,6 +8,7 @@ export default defineType({
     { name: "hero", title: "Hero" },
     { name: "stats", title: "Stats bar" },
     { name: "features", title: "Features" },
+    { name: "screens", title: "App screenshots" },
     { name: "security", title: "Security section" },
     { name: "disclaimer", title: "Safety disclaimer" },
     { name: "partners", title: "Partners & supporters" },
@@ -63,6 +64,29 @@ export default defineType({
             defineField({ name: "icon", title: "Icon name (Tabler Icons)", type: "string", description: "e.g. ti-microphone" }),
           ],
           preview: { select: { title: "title", subtitle: "description" } },
+        },
+      ],
+    }),
+
+    // ── App screenshots ──
+    defineField({ name: "screensEyebrow", title: "Eyebrow", type: "string", group: "screens", initialValue: "Inside the app" }),
+    defineField({ name: "screensHeading", title: "Heading", type: "string", group: "screens", initialValue: "Simple to set up, quick to use" }),
+    defineField({ name: "screensIntro", title: "Intro text", type: "text", rows: 2, group: "screens" }),
+    defineField({
+      name: "appScreens",
+      title: "Screenshots",
+      type: "array",
+      group: "screens",
+      description: "Phone screenshots (portrait). Two or three work best. Drag to reorder. Check they don't show real locations, names or numbers.",
+      of: [
+        {
+          type: "image",
+          name: "appScreen",
+          fields: [
+            defineField({ name: "caption", title: "Caption", type: "string", validation: (r) => r.required() }),
+            defineField({ name: "alt", title: "Alt text", type: "string", description: "Describe the screen for screen-reader users." }),
+          ],
+          preview: { select: { title: "caption", media: "asset" } },
         },
       ],
     }),
