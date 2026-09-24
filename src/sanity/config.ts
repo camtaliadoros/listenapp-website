@@ -15,6 +15,11 @@ const ROUTE_BY_TYPE: Record<string, string> = {
   contactPage: "/contact",
 };
 
+const ROUTE_BY_ID: Record<string, string> = {
+  appPrivacyPolicy: "/app-privacy-policy",
+  appTermsOfUse: "/app-terms-of-use",
+};
+
 export default defineConfig({
   basePath: "/studio",
   projectId,
@@ -32,7 +37,7 @@ export default defineConfig({
       },
       resolve: {
         locations: (params) => {
-          const href = ROUTE_BY_TYPE[params.type];
+          const href = ROUTE_BY_ID[params.id.replace(/^drafts\./, "")] ?? ROUTE_BY_TYPE[params.type];
           if (!href) return null;
           return { locations: [{ title: "Live page", href }] };
         },
