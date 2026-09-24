@@ -94,7 +94,7 @@ export default function PartnerForm() {
         disabled={loading}
         className="btn-arrow inline-flex items-center gap-2 bg-brand text-white font-semibold text-sm px-6 py-3 rounded-lg hover:bg-brand-hover hover:text-white transition-colors disabled:opacity-60"
       >
-        {loading ? "Sending…" : <><span>Send enquiry</span> <span className="arrow">→</span></>}
+        {loading ? "Sending…" : <><span>Submit</span> <span className="arrow">→</span></>}
       </button>
     </form>
   );
