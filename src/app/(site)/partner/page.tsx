@@ -16,6 +16,11 @@ type PartnerPage = {
   stepsHeading: string;
   steps: Step[];
   trustCards: TrustCard[];
+  limitationsEyebrow: string;
+  limitationsHeading: string;
+  limitationsParagraphs: string[];
+  statusHeading: string;
+  statusParagraphs: string[];
   registerEyebrow: string;
   registerHeading: string;
   registerIntro: string;
@@ -36,6 +41,15 @@ export default async function PartnerPage() {
   const page = await getData();
   const steps = page?.steps ?? [];
   const trustCards = page?.trustCards ?? [];
+  const limitationsParagraphs = page?.limitationsParagraphs?.length ? page.limitationsParagraphs : [
+    "ListenApp is designed as an additional safety tool, not a replacement for professional support, emergency services or an individual's safety plan.",
+    "The current version is available on Android. An internet connection is required for voice-trigger processing and SMS alerts. Voice recognition can be affected by factors including background noise, microphone position and connectivity. Calls made to 999 through the app will appear in the phone's normal call history.",
+    "We explain these limitations clearly to partner organisations so they can be incorporated into safe onboarding and individual safety planning.",
+  ];
+  const statusParagraphs = page?.statusParagraphs?.length ? page.statusParagraphs : [
+    "ListenApp is now available on Android and is being introduced through partner organisations to people accessing domestic abuse and support services.",
+    "Alongside delivery, we are gathering partner feedback and anonymised usage information to improve onboarding, accessibility and future development. Further development includes iOS and additional accessibility features.",
+  ];
 
   return (
     <>
@@ -92,6 +106,31 @@ export default async function PartnerPage() {
           </div>
         </section>
       )}
+
+      {/* ── Safety & current limitations ── */}
+      <section className="max-w-5xl mx-auto px-4 md:px-8 py-12 md:py-14">
+        <p className="text-sm font-bold uppercase tracking-widest text-brand mb-2">{page?.limitationsEyebrow ?? "Safety & current limitations"}</p>
+        <h2 className="font-graphik text-3xl md:text-4xl font-bold text-ink dark:text-white tracking-tight mb-6">{page?.limitationsHeading ?? "Transparent about what ListenApp can and cannot do"}</h2>
+        <div className="max-w-3xl space-y-4 mb-10">
+          {limitationsParagraphs.map((p, i) => (
+            <p key={i} className="text-base text-muted dark:text-muted-night leading-relaxed">{p}</p>
+          ))}
+        </div>
+
+        {/* Current status */}
+        <div className="bg-ink rounded-2xl p-7 md:p-8">
+          <div className="inline-flex items-center gap-2 bg-brand/85 text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider mb-4">
+            <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
+            Current status
+          </div>
+          <h3 className="font-gilroy text-xl md:text-2xl font-bold text-white mb-3">{page?.statusHeading ?? "Now moving into frontline use"}</h3>
+          <div className="space-y-3 max-w-3xl">
+            {statusParagraphs.map((p, i) => (
+              <p key={i} className="text-sm text-white/75 leading-relaxed">{p}</p>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* ── Contact form ── */}
       <section className="max-w-5xl mx-auto px-4 md:px-8 py-12 md:py-14" id="register">

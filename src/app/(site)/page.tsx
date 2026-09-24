@@ -31,6 +31,8 @@ type HomePage = {
   securityChecklist: string[];
   secretCodeHeading: string;
   secretCodeSubtext: string;
+  disclaimerHeading: string;
+  disclaimerBody: string;
   partnersHeading: string;
   partnersThanksNote: string;
   partners: Partner[];
@@ -101,10 +103,10 @@ export default async function HomePage() {
           </p>
           <div className="flex flex-wrap items-center gap-4">
             <Link
-              href="/contact"
+              href="/partner#register"
               className="inline-flex items-center gap-2 bg-brand text-white font-semibold text-sm px-6 py-3.5 rounded-lg hover:bg-brand-dark transition-colors"
             >
-              {page?.heroPrimaryCtaLabel ?? "Request a demo"} →
+              {page?.heroPrimaryCtaLabel ?? "Register interest"} →
             </Link>
             <Link href="/the-problem" className="text-white font-semibold text-sm border-b border-white/60 hover:border-white transition-colors pb-0.5">
               {page?.heroSecondaryCtaLabel ?? "Learn how it works"}
@@ -190,6 +192,18 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* ── Disclaimer ── */}
+      <section className="max-w-5xl mx-auto px-4 md:px-8 pt-12 md:pt-14">
+        <div className="border-l-4 border-brand bg-surface dark:bg-surface-night rounded-r-2xl p-6 md:p-8">
+          <h2 className="font-graphik text-xl md:text-2xl font-bold text-ink dark:text-white tracking-tight mb-3">
+            {page?.disclaimerHeading ?? "Designed to support, not replace, existing safety planning"}
+          </h2>
+          <p className="text-sm text-muted dark:text-muted-night leading-relaxed max-w-3xl">
+            {page?.disclaimerBody ?? "ListenApp is an additional safety tool and does not replace emergency services or professional domestic abuse support. Voice recognition and message delivery can be affected by factors such as connectivity, background noise and phone settings."}
+          </p>
+        </div>
+      </section>
+
       {/* ── Partners ── */}
       {partners.length > 0 && (
         <section className="py-12">
@@ -252,8 +266,8 @@ export default async function HomePage() {
         <h2 className="font-graphik text-3xl md:text-4xl font-bold text-ink dark:text-white tracking-tight mb-4">{page?.ctaHeading ?? "Ready to protect more people?"}</h2>
         <p className="text-muted dark:text-muted-night text-base mb-8 max-w-md mx-auto">{page?.ctaBody}</p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Link href="/contact" className="w-full sm:w-auto bg-brand text-white font-semibold text-sm px-7 py-3.5 rounded-lg hover:bg-brand-dark hover:text-white transition-colors text-center">
-            {page?.ctaPrimaryLabel ?? "Request a demo"}
+          <Link href="/partner#register" className="w-full sm:w-auto bg-brand text-white font-semibold text-sm px-7 py-3.5 rounded-lg hover:bg-brand-dark hover:text-white transition-colors text-center">
+            {page?.ctaPrimaryLabel ?? "Register interest"}
           </Link>
           <Link href="/partner" className="w-full sm:w-auto bg-ink text-white font-semibold text-sm px-7 py-3.5 rounded-lg hover:opacity-80 transition-opacity text-center border border-transparent dark:border-border-night">
             {page?.ctaSecondaryLabel ?? "Partnership info"}

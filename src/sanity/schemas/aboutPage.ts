@@ -18,6 +18,7 @@ export default defineType({
     defineField({ name: "experienceEyebrow", title: "Eyebrow", type: "string", group: "experience", initialValue: "Our experience" }),
     defineField({ name: "experienceHeading", title: "Heading", type: "string", group: "experience", initialValue: "Three disciplines, one mission" }),
     defineField({ name: "experienceBody", title: "Body text", type: "text", rows: 4, group: "experience" }),
+    defineField({ name: "experienceStatsHeading", title: "Stats heading", type: "string", group: "experience", initialValue: "Combined team experience" }),
     defineField({
       name: "experienceStats",
       title: "Stats",

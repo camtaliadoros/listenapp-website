@@ -8,6 +8,7 @@ export default defineType({
     { name: "hero", title: "Hero" },
     { name: "steps", title: "How it works" },
     { name: "trust", title: "Trust cards" },
+    { name: "limitations", title: "Safety & limitations" },
     { name: "register", title: "Register interest" },
     { name: "seo", title: "SEO" },
   ],
@@ -58,6 +59,12 @@ export default defineType({
         { title: "15+ years in digital for charities", body: "Our development team has spent over 15 years building digital solutions for the charitable sector — we understand your constraints and your users." },
       ],
     }),
+
+    defineField({ name: "limitationsEyebrow", title: "Eyebrow", type: "string", group: "limitations", initialValue: "Safety & current limitations" }),
+    defineField({ name: "limitationsHeading", title: "Heading", type: "string", group: "limitations", initialValue: "Transparent about what ListenApp can and cannot do" }),
+    defineField({ name: "limitationsParagraphs", title: "Paragraphs", type: "array", group: "limitations", of: [{ type: "text", rows: 3 }] }),
+    defineField({ name: "statusHeading", title: "Current status box heading", type: "string", group: "limitations", initialValue: "Now moving into frontline use" }),
+    defineField({ name: "statusParagraphs", title: "Current status box paragraphs", type: "array", group: "limitations", of: [{ type: "text", rows: 3 }] }),
 
     defineField({ name: "registerEyebrow", title: "Eyebrow", type: "string", group: "register", initialValue: "Register interest" }),
     defineField({ name: "registerHeading", title: "Heading", type: "string", group: "register", initialValue: "Get in touch" }),

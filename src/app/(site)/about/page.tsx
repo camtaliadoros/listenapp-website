@@ -15,6 +15,7 @@ type AboutPage = {
   experienceEyebrow: string;
   experienceHeading: string;
   experienceBody: string;
+  experienceStatsHeading: string;
   experienceStats: ExperienceStat[];
   expertiseEyebrow: string;
   expertiseHeading: string;
@@ -59,6 +60,7 @@ export default async function AboutPage() {
           <p className="text-sm font-bold uppercase tracking-widest text-brand mb-2">{page?.experienceEyebrow ?? "Our experience"}</p>
           <h2 className="font-graphik text-3xl font-bold text-ink dark:text-white tracking-tight mb-4">{page?.experienceHeading ?? "Three disciplines, one mission"}</h2>
           <p className="text-sm text-muted dark:text-muted-night leading-relaxed mb-8">{page?.experienceBody}</p>
+          <h3 className="text-base font-semibold text-ink dark:text-white mb-4">{page?.experienceStatsHeading ?? "Combined team experience"}</h3>
           <div className="flex flex-col gap-6">
             {experienceStats.map((s) => (
               <div key={s._key} className="border-l-4 border-brand pl-5">

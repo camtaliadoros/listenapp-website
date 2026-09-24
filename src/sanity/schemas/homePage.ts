@@ -9,6 +9,7 @@ export default defineType({
     { name: "stats", title: "Stats bar" },
     { name: "features", title: "Features" },
     { name: "security", title: "Security section" },
+    { name: "disclaimer", title: "Safety disclaimer" },
     { name: "partners", title: "Partners & supporters" },
     { name: "cta", title: "Bottom CTA" },
     { name: "seo", title: "SEO" },
@@ -86,6 +87,10 @@ export default defineType({
     defineField({ name: "secretCodeHeading", title: "Keypad mockup heading", type: "string", group: "security", initialValue: "Enter your secret code" }),
     defineField({ name: "secretCodeSubtext", title: "Keypad mockup subtext", type: "string", group: "security", initialValue: "Looks like a calculator. Acts as your guardian." }),
 
+    // ── Safety disclaimer ──
+    defineField({ name: "disclaimerHeading", title: "Heading", type: "string", group: "disclaimer", initialValue: "Designed to support, not replace, existing safety planning" }),
+    defineField({ name: "disclaimerBody", title: "Body text", type: "text", rows: 3, group: "disclaimer" }),
+
     // ── Partners ──
     defineField({ name: "partnersHeading", title: "Section heading", type: "string", group: "partners", initialValue: "Proud to work alongside" }),
     defineField({ name: "partnersThanksNote", title: "Thanks note", type: "string", group: "partners", description: "Small text below the grid, e.g. naming supporters." }),
@@ -129,7 +134,7 @@ export default defineType({
     defineField({ name: "ctaEyebrow", title: "Eyebrow", type: "string", group: "cta", initialValue: "Get involved" }),
     defineField({ name: "ctaHeading", title: "Heading", type: "string", group: "cta", initialValue: "Ready to protect more people?" }),
     defineField({ name: "ctaBody", title: "Body text", type: "text", rows: 2, group: "cta" }),
-    defineField({ name: "ctaPrimaryLabel", title: "Primary button label", type: "string", group: "cta", initialValue: "Request a demo" }),
+    defineField({ name: "ctaPrimaryLabel", title: "Primary button label", type: "string", group: "cta", initialValue: "Register interest" }),
     defineField({ name: "ctaSecondaryLabel", title: "Secondary button label", type: "string", group: "cta", initialValue: "Partnership info" }),
 
     defineField({ name: "seo", title: "SEO", type: "seo", group: "seo" }),
