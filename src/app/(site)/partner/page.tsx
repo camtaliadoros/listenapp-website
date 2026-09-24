@@ -62,7 +62,13 @@ export default async function PartnerPage() {
                 {i + 1}
               </div>
               <div>
-                <h3 className="text-base font-semibold text-ink dark:text-white mb-1">{s.title}</h3>
+                <h3 className="text-base font-semibold text-ink dark:text-white mb-1">
+                  {i === 0 ? (
+                    <a href="#register" className="hover:text-brand hover:underline transition-colors">{s.title}</a>
+                  ) : (
+                    s.title
+                  )}
+                </h3>
                 <p className="text-sm text-muted dark:text-muted-night leading-relaxed">{s.body}</p>
               </div>
             </div>
