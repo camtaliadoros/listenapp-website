@@ -66,9 +66,9 @@ export default async function PartnerPage() {
   return (
     <>
       {/* ── Hero ── */}
-      <div className="bg-ink py-12 md:py-14">
+      <div className="bg-panel py-12 md:py-14">
         <div className="max-w-5xl mx-auto px-4 md:px-8">
-          <p className="text-sm font-bold uppercase tracking-widest text-brand mb-3">Partnership</p>
+          <p className="text-sm font-bold uppercase tracking-widest text-panel-accent mb-3">Partnership</p>
           <h1 className="font-graphik text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-4">
             {page?.heading ?? "Bring ListenApp to your beneficiaries."}
           </h1>
@@ -109,7 +109,7 @@ export default async function PartnerPage() {
           <div className="max-w-5xl mx-auto px-4 md:px-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {trustCards.map((c) => (
-                <div key={c._key} className="bg-ink rounded-2xl p-7">
+                <div key={c._key} className="bg-panel rounded-2xl p-7">
                   <h3 className="font-gilroy text-base font-bold text-white mb-3">{c.title}</h3>
                   <p className="text-sm text-white/75 leading-relaxed">{c.body}</p>
                 </div>
@@ -130,7 +130,7 @@ export default async function PartnerPage() {
         </div>
 
         {/* Current status */}
-        <div className="bg-ink rounded-2xl p-7 md:p-8">
+        <div className="bg-panel rounded-2xl p-7 md:p-8">
           <div className="inline-flex items-center gap-2 bg-brand/85 text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider mb-4">
             <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
             Current status

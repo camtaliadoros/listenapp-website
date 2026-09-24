@@ -15,9 +15,9 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className="min-h-screen bg-ink flex items-center">
+    <div className="min-h-screen bg-panel flex items-center">
       <div className="max-w-5xl mx-auto px-4 md:px-8 py-24">
-        <p className="text-sm font-bold uppercase tracking-widest text-brand mb-3">Error</p>
+        <p className="text-sm font-bold uppercase tracking-widest text-panel-accent mb-3">Error</p>
         <h1 className="font-graphik text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-4">
           Something went wrong.
         </h1>

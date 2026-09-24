@@ -43,9 +43,9 @@ export default async function ProblemPage() {
   return (
     <>
       {/* ── Hero ── */}
-      <div className="bg-ink py-12 md:py-14">
+      <div className="bg-panel py-12 md:py-14">
         <div className="max-w-5xl mx-auto px-4 md:px-8">
-          <p className="text-sm font-bold uppercase tracking-widest text-brand mb-3">The Problem</p>
+          <p className="text-sm font-bold uppercase tracking-widest text-panel-accent mb-3">The Problem</p>
           <h1 className="font-graphik text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-4">
             {page?.heading ?? "The scale of domestic abuse is staggering."}
           </h1>

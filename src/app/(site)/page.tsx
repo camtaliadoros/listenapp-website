@@ -77,7 +77,7 @@ export default async function HomePage() {
   return (
     <>
       {/* ── Hero ── */}
-      <section className="-mt-16 relative min-h-screen flex items-end overflow-hidden bg-ink">
+      <section className="-mt-16 relative min-h-screen flex items-end overflow-hidden bg-panel">
         {/* Image sits in the right 80%, left 20% is solid dark bg */}
         {page?.heroImage?.asset && (
           <div className="absolute inset-y-0 right-0 left-0 md:left-[20%]">
@@ -91,8 +91,8 @@ export default async function HomePage() {
           </div>
         )}
         {/* Blend the dark panel into the image */}
-        <div className="absolute inset-0 bg-gradient-to-r from-ink/95 via-ink/60 to-transparent md:from-ink md:from-[18%] md:via-ink/40 md:to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-b from-ink/30 via-transparent to-ink/60" />
+        <div className="absolute inset-0 bg-gradient-to-r from-panel/95 via-panel/60 to-transparent md:from-panel md:from-[18%] md:via-panel/40 md:to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-panel/30 via-transparent to-panel/60" />
 
         {/* Content */}
         <div className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-12 pb-16 md:pb-24 grid grid-cols-1 md:grid-cols-2">
@@ -124,7 +124,7 @@ export default async function HomePage() {
 
       {/* ── Stats bar ── */}
       {stats.length > 0 && (
-        <div className="bg-ink py-8">
+        <div className="bg-panel py-8">
           <div className="max-w-5xl mx-auto px-4 md:px-8 grid grid-cols-3 gap-4 text-center">
             {stats.map((s) => (
               <div key={s._key}>

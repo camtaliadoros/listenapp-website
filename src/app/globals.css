@@ -11,6 +11,11 @@
   --color-brand-dark:   #770000;  /* Dark Red */
   --color-ink:          #000000;  /* Black */
 
+  /* Dark panels (hero sections, stats bar, dark cards, footer).
+     Separate from ink so the panel colour can change without affecting text. */
+  --color-panel:        #000000;
+  --color-panel-accent: #EE0026;  /* Eyebrow text on panels */
+
   /* Derived utility colours */
   --color-muted:        #555555;  /* Body text — 7.46:1 on white ✓ */
   --color-muted-light:  #666666;  /* Secondary text — 5.74:1 on white, 4.67:1 on surface ✓ */
