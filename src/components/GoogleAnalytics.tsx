@@ -1,21 +1,12 @@
 "use client";
 
 import Script from "next/script";
-import { useEffect, useState } from "react";
+import { useCookieConsent } from "@/lib/cookieConsent";
 
 const GA_ID = "G-EG59VZ9S98";
 
 export default function GoogleAnalytics() {
-  const [consented, setConsented] = useState(false);
-
-  useEffect(() => {
-    if (localStorage.getItem("cookieConsent") === "accepted") {
-      setConsented(true);
-    }
-    const handler = () => setConsented(true);
-    window.addEventListener("cookieConsentAccepted", handler);
-    return () => window.removeEventListener("cookieConsentAccepted", handler);
-  }, []);
+  const consented = useCookieConsent() === "accepted";
 
   if (!consented) return null;
 

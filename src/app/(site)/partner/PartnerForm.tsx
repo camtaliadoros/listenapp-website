@@ -37,7 +37,7 @@ export default function PartnerForm() {
       <div className="bg-surface-deep dark:bg-surface-deep-night rounded-2xl p-8 text-center max-w-lg">
         <div className="w-12 h-12 bg-brand rounded-full flex items-center justify-center text-white text-xl mx-auto mb-4">✓</div>
         <h3 className="font-gilroy text-xl font-bold text-ink dark:text-white mb-2">Enquiry sent</h3>
-        <p className="text-sm text-muted dark:text-muted-night">Thanks for getting in touch. We'll be in contact to arrange a demo at a time that works for you.</p>
+        <p className="text-sm text-muted dark:text-muted-night">Thanks for getting in touch. We&apos;ll be in contact to arrange a demo at a time that works for you.</p>
       </div>
     );
   }

@@ -54,7 +54,7 @@ export default function PrivacyPolicyPage() {
             Privacy Policy
           </h1>
           <p className="text-white/75 text-base leading-relaxed">
-            Your privacy is important to us. We don't ask for your personal information unless we truly need it.
+            Your privacy is important to us. We don&apos;t ask for your personal information unless we truly need it.
           </p>
         </div>
       </div>

@@ -1,27 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { setCookieConsent, useCookieConsent } from "@/lib/cookieConsent";
 
 export default function CookieConsent() {
-  const [visible, setVisible] = useState(false);
+  const consent = useCookieConsent();
 
-  useEffect(() => {
-    const consent = localStorage.getItem("cookieConsent");
-    if (!consent) setVisible(true);
-  }, []);
+  const accept = () => setCookieConsent("accepted");
+  const decline = () => setCookieConsent("declined");
 
-  function accept() {
-    localStorage.setItem("cookieConsent", "accepted");
-    setVisible(false);
-    window.dispatchEvent(new Event("cookieConsentAccepted"));
-  }
-
-  function decline() {
-    localStorage.setItem("cookieConsent", "declined");
-    setVisible(false);
-  }
-
-  if (!visible) return null;
+  if (consent !== null) return null;
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 p-4 md:p-6 bg-ink border-t border-white/10">
