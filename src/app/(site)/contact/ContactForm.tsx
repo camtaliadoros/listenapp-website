@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { submitForm } from "@/lib/submitForm";
 
 interface Props {
   enquiryCategories: string[];
@@ -16,15 +17,9 @@ export default function ContactForm({ enquiryCategories, successMessage }: Props
     setLoading(true);
 
     const formData = new FormData(e.currentTarget);
-    formData.append("access_key", "f38fe4b1-cd56-4dea-80bd-a7884ac1471f");
 
     try {
-      const res = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: formData,
-      });
-      const data = await res.json();
-      if (data.success) {
+      if (await submitForm("contact", formData, "f38fe4b1-cd56-4dea-80bd-a7884ac1471f")) {
         setSubmitted(true);
       } else {
         setError("Something went wrong. Please try again or email us directly.");

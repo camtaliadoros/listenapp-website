@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { submitForm } from "@/lib/submitForm";
 
 export default function PartnerForm() {
   const [submitted, setSubmitted] = useState(false);
@@ -12,15 +13,9 @@ export default function PartnerForm() {
     setError("");
 
     const formData = new FormData(e.currentTarget);
-    formData.append("access_key", "8b52a967-01b5-4fa1-83d2-4f7160d218ed");
 
     try {
-      const res = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: formData,
-      });
-      const data = await res.json();
-      if (data.success) {
+      if (await submitForm("partner", formData, "8b52a967-01b5-4fa1-83d2-4f7160d218ed")) {
         setSubmitted(true);
       } else {
         setError("Something went wrong. Please try again or email us directly.");
