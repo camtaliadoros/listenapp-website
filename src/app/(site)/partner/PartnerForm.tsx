@@ -53,6 +53,7 @@ export default function PartnerForm() {
         { label: "Full name", name: "name", type: "text", placeholder: "Your name", required: true },
         { label: "Organisation", name: "organisation", type: "text", placeholder: "Your charity or organisation", required: true },
         { label: "Email address", name: "email", type: "email", placeholder: "you@organisation.org", required: true },
+        { label: "How many beneficiaries do you support?", name: "beneficiaries", type: "number", placeholder: "e.g. 250", required: false, min: 0 },
         { label: "How did you hear about ListenApp?", name: "referral", type: "text", placeholder: "e.g. referral, event, search", required: false },
       ].map((f) => (
         <div key={f.name}>
@@ -64,6 +65,7 @@ export default function PartnerForm() {
             name={f.name}
             placeholder={f.placeholder}
             required={f.required}
+            min={f.min}
             className="w-full px-3.5 py-2.5 border border-border dark:border-border-night rounded-lg text-sm text-ink dark:text-white placeholder:text-muted-light dark:bg-surface-night focus:outline-none focus:border-brand transition-colors"
           />
         </div>
