@@ -61,7 +61,7 @@ export default defineType({
     }),
 
     defineField({ name: "limitationsEyebrow", title: "Eyebrow", type: "string", group: "limitations", initialValue: "Safety & current limitations" }),
-    defineField({ name: "limitationsHeading", title: "Heading", type: "string", group: "limitations", initialValue: "Transparent about what ListenApp can and cannot do" }),
+    defineField({ name: "limitationsHeading", title: "Heading", type: "string", group: "limitations", initialValue: "What partners need to know" }),
     defineField({ name: "limitationsParagraphs", title: "Paragraphs", type: "array", group: "limitations", of: [{ type: "text", rows: 3 }] }),
     defineField({ name: "statusHeading", title: "Current status box heading", type: "string", group: "limitations", initialValue: "Now moving into frontline use" }),
     defineField({ name: "statusParagraphs", title: "Current status box paragraphs", type: "array", group: "limitations", of: [{ type: "text", rows: 3 }] }),

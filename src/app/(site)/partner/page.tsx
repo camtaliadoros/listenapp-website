@@ -110,7 +110,7 @@ export default async function PartnerPage() {
       {/* ── Safety & current limitations ── */}
       <section className="max-w-5xl mx-auto px-4 md:px-8 py-12 md:py-14">
         <p className="text-sm font-bold uppercase tracking-widest text-brand mb-2">{page?.limitationsEyebrow ?? "Safety & current limitations"}</p>
-        <h2 className="font-graphik text-3xl md:text-4xl font-bold text-ink dark:text-white tracking-tight mb-6">{page?.limitationsHeading ?? "Transparent about what ListenApp can and cannot do"}</h2>
+        <h2 className="font-graphik text-3xl md:text-4xl font-bold text-ink dark:text-white tracking-tight mb-6">{page?.limitationsHeading ?? "What partners need to know"}</h2>
         <div className="max-w-3xl space-y-4 mb-10">
           {limitationsParagraphs.map((p, i) => (
             <p key={i} className="text-base text-muted dark:text-muted-night leading-relaxed">{p}</p>
