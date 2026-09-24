@@ -75,14 +75,14 @@ export default function Nav({ demoEmail: _demoEmail }: { demoEmail: string }) {
 
         <div className="flex items-center gap-3">
           <Link
-            href="/contact"
+            href="/partner#register"
             className={`hidden md:inline-flex text-sm font-semibold px-5 py-2.5 rounded-lg transition-all hover:scale-105 active:scale-95 ${
               transparent
                 ? "bg-white/15 border border-white/50 text-white hover:bg-white/25"
                 : "bg-brand text-white hover:bg-brand-dark hover:text-white"
             }`}
           >
-            Request demo
+            Register Interest
           </Link>
 
           {/* Hamburger */}
@@ -114,11 +114,11 @@ export default function Nav({ demoEmail: _demoEmail }: { demoEmail: string }) {
             </Link>
           ))}
           <Link
-            href="/contact"
+            href="/partner#register"
             onClick={() => setOpen(false)}
             className="mt-3 bg-brand text-white text-sm font-semibold px-5 py-3 rounded-lg text-center hover:bg-brand-dark transition-colors"
           >
-            Request demo
+            Register Interest
           </Link>
         </div>
       )}
