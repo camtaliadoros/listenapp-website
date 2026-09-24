@@ -17,7 +17,7 @@ export default async function Footer() {
   const settings = await getSettings();
 
   return (
-    <footer className="bg-panel text-white mt-auto">
+    <footer className="bg-ink text-white mt-auto">
       <div className="max-w-5xl mx-auto px-4 md:px-8 py-10 flex flex-col md:flex-row md:items-center justify-between gap-8">
         <div>
           <Image
