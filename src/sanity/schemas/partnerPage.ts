@@ -9,6 +9,7 @@ export default defineType({
     { name: "steps", title: "How it works" },
     { name: "trust", title: "Trust cards" },
     { name: "limitations", title: "Safety & limitations" },
+    { name: "licences", title: "Licence options" },
     { name: "register", title: "Register interest" },
     { name: "seo", title: "SEO" },
   ],
@@ -65,6 +66,31 @@ export default defineType({
     defineField({ name: "limitationsParagraphs", title: "Paragraphs", type: "array", group: "limitations", of: [{ type: "text", rows: 3 }] }),
     defineField({ name: "statusHeading", title: "Current status box heading", type: "string", group: "limitations", initialValue: "Now moving into frontline use" }),
     defineField({ name: "statusParagraphs", title: "Current status box paragraphs", type: "array", group: "limitations", of: [{ type: "text", rows: 3 }] }),
+
+    defineField({ name: "licencesEyebrow", title: "Eyebrow", type: "string", group: "licences", initialValue: "Pricing" }),
+    defineField({ name: "licencesHeading", title: "Heading", type: "string", group: "licences", initialValue: "Licence options" }),
+    defineField({
+      name: "licences",
+      title: "Licences",
+      type: "array",
+      group: "licences",
+      description: "Shown as cards, in this order. Drag to reorder.",
+      of: [
+        {
+          type: "object",
+          name: "licence",
+          fields: [
+            defineField({ name: "name", title: "Name", type: "string", validation: (r) => r.required() }),
+            defineField({ name: "price", title: "Price", type: "string", description: "e.g. £499/month", validation: (r) => r.required() }),
+            defineField({ name: "description", title: "Description", type: "text", rows: 3, validation: (r) => r.required() }),
+          ],
+          preview: { select: { title: "name", subtitle: "price" } },
+        },
+      ],
+    }),
+    defineField({ name: "licencesHelpHeading", title: "Help box heading", type: "string", group: "licences", initialValue: "Not sure which licence is right for your service?" }),
+    defineField({ name: "licencesHelpBody", title: "Help box text", type: "text", rows: 2, group: "licences" }),
+    defineField({ name: "licencesHelpCtaLabel", title: "Help box button label", type: "string", group: "licences", initialValue: "Register your interest" }),
 
     defineField({ name: "registerEyebrow", title: "Eyebrow", type: "string", group: "register", initialValue: "Register interest" }),
     defineField({ name: "registerHeading", title: "Heading", type: "string", group: "register", initialValue: "Get in touch" }),
