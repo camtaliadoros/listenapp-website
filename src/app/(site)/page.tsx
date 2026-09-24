@@ -302,7 +302,7 @@ export default async function HomePage() {
           <Link href="/partner#register" className="w-full sm:w-auto bg-brand text-white font-semibold text-sm px-7 py-3.5 rounded-lg hover:bg-brand-dark hover:text-white transition-colors text-center">
             {page?.ctaPrimaryLabel ?? "Register interest"}
           </Link>
-          <Link href="/partner" className="w-full sm:w-auto bg-ink text-white font-semibold text-sm px-7 py-3.5 rounded-lg hover:opacity-80 transition-opacity text-center border border-transparent dark:border-border-night">
+          <Link href="/partner" className="w-full sm:w-auto bg-panel text-white font-semibold text-sm px-7 py-3.5 rounded-lg hover:opacity-80 transition-opacity text-center border border-transparent dark:border-border-night">
             {page?.ctaSecondaryLabel ?? "Partnership info"}
           </Link>
         </div>
