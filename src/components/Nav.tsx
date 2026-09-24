@@ -82,7 +82,7 @@ export default function Nav({ demoEmail: _demoEmail }: { demoEmail: string }) {
                 : "bg-brand text-white hover:bg-brand-hover hover:text-white"
             }`}
           >
-            Register Interest
+            Register your interest
           </Link>
 
           {/* Hamburger */}
@@ -118,7 +118,7 @@ export default function Nav({ demoEmail: _demoEmail }: { demoEmail: string }) {
             onClick={() => setOpen(false)}
             className="mt-3 bg-brand text-white text-sm font-semibold px-5 py-3 rounded-lg text-center hover:bg-brand-hover transition-colors"
           >
-            Register Interest
+            Register your interest
           </Link>
         </div>
       )}
