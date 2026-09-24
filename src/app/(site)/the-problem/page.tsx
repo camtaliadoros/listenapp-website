@@ -117,7 +117,7 @@ export default async function ProblemPage() {
           </div>
           <Link
             href="/partner"
-            className="btn-arrow inline-flex items-center gap-2 bg-brand text-white font-semibold text-sm px-6 py-3 rounded-lg hover:bg-brand-dark hover:text-white transition-colors"
+            className="btn-arrow inline-flex items-center gap-2 bg-brand text-white font-semibold text-sm px-6 py-3 rounded-lg hover:bg-brand-hover hover:text-white transition-colors"
           >
             Partner with us <span className="arrow">→</span>
           </Link>

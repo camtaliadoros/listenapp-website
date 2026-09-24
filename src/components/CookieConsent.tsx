@@ -43,7 +43,7 @@ export default function CookieConsent() {
           </button>
           <button
             onClick={accept}
-            className="text-sm font-semibold bg-brand text-white px-5 py-2 rounded-lg hover:bg-brand-dark transition-colors"
+            className="text-sm font-semibold bg-brand text-white px-5 py-2 rounded-lg hover:bg-brand-hover transition-colors"
           >
             Accept
           </button>

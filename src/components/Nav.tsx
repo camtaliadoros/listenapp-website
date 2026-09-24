@@ -79,7 +79,7 @@ export default function Nav({ demoEmail: _demoEmail }: { demoEmail: string }) {
             className={`hidden md:inline-flex text-sm font-semibold px-5 py-2.5 rounded-lg transition-all hover:scale-105 active:scale-95 ${
               transparent
                 ? "bg-white/15 border border-white/50 text-white hover:bg-white/25"
-                : "bg-brand text-white hover:bg-brand-dark hover:text-white"
+                : "bg-brand text-white hover:bg-brand-hover hover:text-white"
             }`}
           >
             Register Interest
@@ -116,7 +116,7 @@ export default function Nav({ demoEmail: _demoEmail }: { demoEmail: string }) {
           <Link
             href="/partner#register"
             onClick={() => setOpen(false)}
-            className="mt-3 bg-brand text-white text-sm font-semibold px-5 py-3 rounded-lg text-center hover:bg-brand-dark transition-colors"
+            className="mt-3 bg-brand text-white text-sm font-semibold px-5 py-3 rounded-lg text-center hover:bg-brand-hover transition-colors"
           >
             Register Interest
           </Link>

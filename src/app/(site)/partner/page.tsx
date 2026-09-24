@@ -171,7 +171,7 @@ export default async function PartnerPage() {
                 {page?.licencesHelpBody ?? "Register your interest and we'll talk through your user numbers, reporting needs and the most suitable option."}
               </p>
             </div>
-            <a href="#register" className="btn-arrow inline-flex items-center gap-2 flex-shrink-0 self-start md:self-auto bg-brand text-white font-semibold text-sm px-6 py-3 rounded-lg hover:bg-brand-dark hover:text-white transition-colors">
+            <a href="#register" className="btn-arrow inline-flex items-center gap-2 flex-shrink-0 self-start md:self-auto bg-brand text-white font-semibold text-sm px-6 py-3 rounded-lg hover:bg-brand-hover hover:text-white transition-colors">
               <span>{page?.licencesHelpCtaLabel ?? "Register your interest"}</span> <span className="arrow">→</span>
             </a>
           </div>

@@ -110,7 +110,7 @@ export default async function HomePage() {
           <div className="flex flex-wrap items-center gap-4">
             <Link
               href="/partner#register"
-              className="inline-flex items-center gap-2 bg-brand text-white font-semibold text-sm px-6 py-3.5 rounded-lg hover:bg-brand-dark transition-colors"
+              className="inline-flex items-center gap-2 bg-brand text-white font-semibold text-sm px-6 py-3.5 rounded-lg hover:bg-brand-hover transition-colors"
             >
               {page?.heroPrimaryCtaLabel ?? "Register interest"} →
             </Link>
@@ -299,10 +299,10 @@ export default async function HomePage() {
         <h2 className="font-graphik text-3xl md:text-4xl font-bold text-ink dark:text-white tracking-tight mb-4">{page?.ctaHeading ?? "Ready to protect more people?"}</h2>
         <p className="text-muted dark:text-muted-night text-base mb-8 max-w-md mx-auto">{page?.ctaBody}</p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Link href="/partner#register" className="w-full sm:w-auto bg-brand text-white font-semibold text-sm px-7 py-3.5 rounded-lg hover:bg-brand-dark hover:text-white transition-colors text-center">
+          <Link href="/partner#register" className="w-full sm:w-auto bg-brand text-white font-semibold text-sm px-7 py-3.5 rounded-lg hover:bg-brand-hover hover:text-white transition-colors text-center">
             {page?.ctaPrimaryLabel ?? "Register interest"}
           </Link>
-          <Link href="/partner" className="w-full sm:w-auto bg-panel text-white font-semibold text-sm px-7 py-3.5 rounded-lg hover:bg-brand hover:text-white transition-colors text-center border border-transparent dark:border-border-night">
+          <Link href="/partner" className="w-full sm:w-auto bg-panel text-white font-semibold text-sm px-7 py-3.5 rounded-lg hover:opacity-85 transition-opacity text-center border border-transparent dark:border-border-night">
             {page?.ctaSecondaryLabel ?? "Partnership info"}
           </Link>
         </div>

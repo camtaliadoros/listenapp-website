@@ -30,7 +30,7 @@ export default function QuickExit() {
     <button
       onClick={exit}
       aria-label="Quick exit — leave this site immediately"
-      className="fixed bottom-6 right-6 z-[200] flex items-center gap-2 bg-brand hover:bg-brand-dark text-white text-xs font-bold uppercase tracking-widest px-4 py-2.5 rounded-full shadow-lg transition-colors"
+      className="fixed bottom-6 right-6 z-[200] flex items-center gap-2 bg-brand hover:bg-brand-hover text-white text-xs font-bold uppercase tracking-widest px-4 py-2.5 rounded-full shadow-lg transition-colors"
     >
       <span aria-hidden="true">✕</span>
       Quick exit

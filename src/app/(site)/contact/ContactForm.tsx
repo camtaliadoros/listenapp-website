@@ -113,7 +113,7 @@ export default function ContactForm({ enquiryCategories, successMessage }: Props
       <button
         type="submit"
         disabled={loading}
-        className="btn-arrow inline-flex items-center gap-2 bg-brand text-white font-semibold text-sm px-6 py-3 rounded-lg hover:bg-brand-dark hover:text-white transition-colors disabled:opacity-60"
+        className="btn-arrow inline-flex items-center gap-2 bg-brand text-white font-semibold text-sm px-6 py-3 rounded-lg hover:bg-brand-hover hover:text-white transition-colors disabled:opacity-60"
       >
         {loading ? "Sending…" : <><span>Send message</span> <span className="arrow">→</span></>}
       </button>
