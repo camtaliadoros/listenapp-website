@@ -66,19 +66,6 @@ export default function PartnerForm() {
         </div>
       ))}
 
-      <div>
-        <label className="block text-sm font-semibold text-ink dark:text-white mb-1.5">
-          Message <span className="text-brand">*</span>
-        </label>
-        <textarea
-          required
-          name="message"
-          rows={4}
-          placeholder="Tell us about your organisation and the people you support"
-          className="w-full px-3.5 py-2.5 border border-border dark:border-border-night rounded-lg text-sm text-ink dark:text-white placeholder:text-muted-light dark:bg-surface-night focus:outline-none focus:border-brand transition-colors resize-none"
-        />
-      </div>
-
       <div className="flex items-start gap-3">
         <input required type="checkbox" id="consent" name="consent" className="mt-0.5 accent-brand" />
         <label htmlFor="consent" className="text-xs text-muted dark:text-muted-night leading-relaxed">

@@ -33,7 +33,6 @@ const BOARDS: Record<FormKind, Board> = {
         text_mm7f18df: f.organisation, // Organisation
         email_mm7f9se4: { email: f.email, text: f.email },
         text_mm7f2rfc: f.beneficiaries, // Beneficaries
-        long_text_mm7fs5z5: { text: f.message },
         date_mm7fzj92: { date: today() }, // Date Registered
         color_mm7ftgjg: { label: "New" },
         text_mm7fr229: notes([["Heard about us via", f.referral], ["Source", "Website partner form"]]),
@@ -50,13 +49,13 @@ const BOARDS: Record<FormKind, Board> = {
         name,
         columns: {
           text_mm7fr0xf: name, // Name
+          text_mm7hwa5p: f.sender_type, // I Am
           text_mm7f1cs6: f.organisation, // Organisation
           email_mm7fwwxk: { email: f.email, text: f.email },
           long_text_mm7f5pe3: { text: f.message },
           date_mm7ft462: { date: today() }, // Date Received
           color_mm7fw53z: { label: "New" },
-          // "I Am" on this board is a phone-type column, so it can't hold these values yet.
-          text_mm7fpemh: notes([["I am a", f.sender_type], ["Enquiry type", f.enquiry_type], ["Source", "Website contact form"]]),
+          text_mm7fpemh: notes([["Enquiry type", f.enquiry_type], ["Source", "Website contact form"]]),
         },
       };
     },
@@ -65,7 +64,7 @@ const BOARDS: Record<FormKind, Board> = {
 
 // Fields each form must include, and the most we'll accept per field.
 const REQUIRED: Record<FormKind, string[]> = {
-  partner: ["name", "organisation", "email", "message"],
+  partner: ["name", "organisation", "email"],
   contact: ["first_name", "last_name", "email", "message"],
 };
 const MAX_LENGTH = { message: 5000, default: 300 };
