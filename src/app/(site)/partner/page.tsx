@@ -145,7 +145,7 @@ export default async function PartnerPage() {
       </section>
 
       {/* ── Licence options ── */}
-      <section className="bg-surface dark:bg-surface-night py-12 md:py-14">
+      <section id="pricing" className="scroll-mt-20 bg-surface dark:bg-surface-night py-12 md:py-14">
         <div className="max-w-5xl mx-auto px-4 md:px-8">
           <p className="text-sm font-bold uppercase tracking-widest text-brand mb-2">{page?.licencesEyebrow ?? "Pricing"}</p>
           <h2 className="font-graphik text-3xl md:text-4xl font-bold text-ink dark:text-white tracking-tight mb-10">{page?.licencesHeading ?? "Licence options"}</h2>
