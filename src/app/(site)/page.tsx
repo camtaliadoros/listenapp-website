@@ -7,6 +7,7 @@ import { buildMetadata } from "@/lib/metadata";
 import FadeUp from "@/components/FadeUp";
 import PartnerLogos, { type Partner } from "@/components/PartnerLogos";
 import Icon from "@/components/Icon";
+import DemoVideo from "@/components/DemoVideo";
 import type { Metadata } from "next";
 
 export const revalidate = 60;
@@ -119,16 +120,11 @@ export default async function HomePage() {
       <section id="demo" className="scroll-mt-20 max-w-5xl mx-auto px-4 md:px-8 pt-12 md:pt-16">
         <p className="text-sm font-bold uppercase tracking-widest text-brand mb-2">{page?.demoEyebrow ?? "Demo"}</p>
         <h2 className="font-graphik text-3xl md:text-4xl font-bold text-ink dark:text-white tracking-tight mb-8">{page?.demoHeading ?? "See ListenApp in action"}</h2>
-        <div className="relative aspect-video rounded-2xl overflow-hidden bg-ink">
+        <div className="relative aspect-video rounded-2xl overflow-hidden bg-white">
           {page?.demoVideoUrl ? (
-            <video
+            <DemoVideo
               src={page.demoVideoUrl}
-              poster={urlForImage(page.demoPoster)?.width(1600).fit("max").url()}
-              controls
-              playsInline
-              preload="metadata"
-              aria-label="ListenApp demo video"
-              className="absolute inset-0 w-full h-full"
+              poster={urlForImage(page.demoPoster)?.width(1920).fit("max").url()}
             />
           ) : (
           <iframe
