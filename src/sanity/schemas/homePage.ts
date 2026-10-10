@@ -27,7 +27,16 @@ export default defineType({
     // ── Demo video ──
     defineField({ name: "demoEyebrow", title: "Eyebrow", type: "string", group: "demo", initialValue: "Demo" }),
     defineField({ name: "demoHeading", title: "Heading", type: "string", group: "demo", initialValue: "See ListenApp in action" }),
-    defineField({ name: "demoVimeoId", title: "Vimeo video ID", type: "string", group: "demo", description: "The number in the Vimeo link, e.g. 1233840659. The hero's secondary button scrolls to this video." }),
+    defineField({
+      name: "demoVideo",
+      title: "Demo video (MP4)",
+      type: "file",
+      group: "demo",
+      options: { accept: "video/mp4" },
+      description: "Hosted by us, so there's no third-party branding or tracking. Keep it under ~30 MB (1080p H.264). The hero's secondary button scrolls to this video.",
+    }),
+    defineField({ name: "demoPoster", title: "Video cover image", type: "image", group: "demo", description: "Shown before the video plays. Use a still from the video." }),
+    defineField({ name: "demoVimeoId", title: "Vimeo video ID (fallback)", type: "string", group: "demo", description: "Only used if no MP4 is uploaded above." }),
 
     // ── Stats banner ──
     defineField({

@@ -22,6 +22,8 @@ type HomePage = {
   heroSecondaryCtaLabel: string;
   demoEyebrow?: string;
   demoHeading?: string;
+  demoVideoUrl?: string;
+  demoPoster?: { asset?: { _ref: string } };
   demoVimeoId?: string;
   featuresEyebrow: string;
   featuresHeading: string;
@@ -52,7 +54,7 @@ const FEATURE_ICON_OVERRIDES: Record<string, string> = {
 };
 
 async function getData() {
-  const { data: page } = await sanityFetch({ query: `*[_type == "homePage"][0]` });
+  const { data: page } = await sanityFetch({ query: `*[_type == "homePage"][0]{ ..., "demoVideoUrl": demoVideo.asset->url }` });
   return page as HomePage | null;
 }
 
@@ -118,6 +120,17 @@ export default async function HomePage() {
         <p className="text-sm font-bold uppercase tracking-widest text-brand mb-2">{page?.demoEyebrow ?? "Demo"}</p>
         <h2 className="font-graphik text-3xl md:text-4xl font-bold text-ink dark:text-white tracking-tight mb-8">{page?.demoHeading ?? "See ListenApp in action"}</h2>
         <div className="relative aspect-video rounded-2xl overflow-hidden bg-ink">
+          {page?.demoVideoUrl ? (
+            <video
+              src={page.demoVideoUrl}
+              poster={urlForImage(page.demoPoster)?.width(1600).fit("max").url()}
+              controls
+              playsInline
+              preload="metadata"
+              aria-label="ListenApp demo video"
+              className="absolute inset-0 w-full h-full"
+            />
+          ) : (
           <iframe
             src={`https://player.vimeo.com/video/${page?.demoVimeoId ?? DEFAULT_DEMO_VIMEO_ID}?dnt=1&title=0&byline=0&portrait=0`}
             title="ListenApp demo video"
@@ -126,6 +139,7 @@ export default async function HomePage() {
             loading="lazy"
             className="absolute inset-0 w-full h-full"
           />
+          )}
         </div>
       </section>
 
