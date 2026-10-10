@@ -25,8 +25,12 @@ type ProblemPage = {
 };
 
 async function getData() {
-  const { data: page } = await sanityFetch({ query: `*[_type == "problemPage"][0]` });
-  return page as ProblemPage | null;
+  const [{ data: page }, { data: home }] = await Promise.all([
+    sanityFetch({ query: `*[_type == "problemPage"][0]` }),
+    // The headline stats banner is edited on the Home Page document.
+    sanityFetch({ query: `*[_type == "homePage"][0]{ stats }` }),
+  ]);
+  return { page: page as ProblemPage | null, bannerStats: ((home as { stats?: Stat[] } | null)?.stats ?? []) };
 }
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -35,8 +39,10 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function ProblemPage() {
-  const page = await getData();
-  const stats = page?.stats ?? [];
+  const { page, bannerStats } = await getData();
+  // Skip grid stats already shown in the banner (matched on label)
+  const bannerLabels = new Set(bannerStats.map((s) => s.label.trim().toLowerCase()));
+  const stats = (page?.stats ?? []).filter((s) => !bannerLabels.has(s.label.trim().toLowerCase()));
   const bodyColumns = page?.bodyColumns ?? [];
   const solutionCards = page?.solutionCards ?? [];
 
@@ -49,16 +55,30 @@ export default async function ProblemPage() {
           <h1 className="font-graphik text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-4">
             {page?.heading ?? "The scale of domestic abuse is staggering."}
           </h1>
-          <p className="text-white/75 text-base max-w-xl leading-relaxed">
+          <p className="text-white text-base max-w-xl leading-relaxed">
             {page?.intro}
           </p>
         </div>
       </div>
 
+      {/* ── Stats banner ── */}
+      {bannerStats.length > 0 && (
+        <div className="bg-panel border-t border-white/20 py-8">
+          <div className="max-w-5xl mx-auto px-4 md:px-8 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-4 text-center">
+            {bannerStats.map((s) => (
+              <div key={s._key}>
+                <div className="font-tungsten text-4xl md:text-5xl font-semibold text-white tracking-normal leading-none">{s.number}</div>
+                <div className="text-xs text-white uppercase tracking-wider font-medium mt-2">{s.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* ── Stats grid ── */}
       {stats.length > 0 && (
         <section className="max-w-5xl mx-auto px-4 md:px-8 py-12">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 items-stretch">
+          <div className={`grid gap-4 items-stretch ${stats.length === 3 ? "grid-cols-1 sm:grid-cols-3" : "grid-cols-2 md:grid-cols-4"}`}>
             {stats.map((s, i) => (
               <div
                 key={s._key}

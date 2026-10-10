@@ -53,7 +53,7 @@ export default function PrivacyPolicyPage() {
           <h1 className="font-graphik text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-4">
             Privacy Policy
           </h1>
-          <p className="text-white/75 text-base leading-relaxed">
+          <p className="text-white text-base leading-relaxed">
             Your privacy is important to us. We don&apos;t ask for your personal information unless we truly need it.
           </p>
         </div>

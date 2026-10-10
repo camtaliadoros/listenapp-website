@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 
 const links = [
   { label: "The Problem", href: "/the-problem" },
-  { label: "Partner with us", href: "/partner" },
+  { label: "For organisations", href: "/partner" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
@@ -30,7 +30,7 @@ export default function Nav({ demoEmail: _demoEmail }: { demoEmail: string }) {
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       transparent
         ? "bg-transparent border-transparent"
-        : "bg-white/95 dark:bg-black/95 backdrop-blur-sm border-b border-border dark:border-border-night"
+        : "bg-white/95 dark:bg-night/95 backdrop-blur-sm border-b border-border dark:border-border-night"
     }`}>
       <div className="flex items-center justify-between px-4 md:px-8 py-4">
         <Link href="/" className="flex items-center" onClick={() => setOpen(false)}>
@@ -100,7 +100,7 @@ export default function Nav({ demoEmail: _demoEmail }: { demoEmail: string }) {
 
       {/* Mobile menu */}
       {open && (
-        <div className="md:hidden border-t border-border dark:border-border-night px-4 py-4 flex flex-col gap-1 bg-white dark:bg-black">
+        <div className="md:hidden border-t border-border dark:border-border-night px-4 py-4 flex flex-col gap-1 bg-white dark:bg-night">
           {links.map(({ label, href }) => (
             <Link
               key={href}

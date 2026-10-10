@@ -14,8 +14,8 @@
 
   /* Dark panels (hero sections, stats bar, dark cards, footer).
      Separate from ink so the panel colour can change without affecting text. */
-  --color-panel:        #770000;  /* Trial: Dark Red instead of black. Revert to #000000 */
-  --color-panel-accent: #FFB3BF;  /* Light pink, 7:1 on Dark Red. Revert to #EE0026 */
+  --color-panel:        #EE0026;  /* Mid Red, matches the buttons */
+  --color-panel-accent: #FFFFFF;  /* Eyebrow text on panels — white is the only AA-safe option on Mid Red */
 
   /* Derived utility colours */
   --color-muted:        #555555;  /* Body text — 7.46:1 on white ✓ */
@@ -24,13 +24,15 @@
   --color-surface:      #F3F3F3;  /* Light Grey */
   --color-surface-deep: #FFE8EC;  /* Light red tint for highlights */
 
-  /* Dark mode equivalents — follows prefers-color-scheme */
-  --color-surface-night:      #1A1A1A;  /* Dark section background */
-  --color-surface-raised-night: #242424;  /* Dark card, one step lighter than surface-night */
-  --color-surface-deep-night: #2A0E14;  /* Dark muted red tint */
-  --color-border-night:       #2E2E2E;  /* Dark dividers */
-  --color-muted-night:        #B3B3B3;  /* Dark body text — 10:1 on black ✓ */
-  --color-muted-light-night:  #8C8C8C;  /* Dark secondary text — 6.4:1 on black ✓ */
+  /* Dark mode equivalents — follows prefers-color-scheme.
+     Charcoal grey rather than black, per client feedback. */
+  --color-night:              #1E1E1E;  /* Dark page background */
+  --color-surface-night:      #282828;  /* Dark section background */
+  --color-surface-raised-night: #333333;  /* Dark card, one step lighter than surface-night */
+  --color-surface-deep-night: #3D1A21;  /* Dark muted red tint */
+  --color-border-night:       #3A3A3A;  /* Dark dividers */
+  --color-muted-night:        #BDBDBD;  /* Dark body text — 7.9:1 on surface-night ✓ */
+  --color-muted-light-night:  #A0A0A0;  /* Dark secondary text — 5.6:1 on surface-night ✓ */
 }
 
 /* ── Animations ── */
@@ -100,7 +102,7 @@
 
   @media (prefers-color-scheme: dark) {
     body {
-      background: #0a0a0a;
+      background: #1E1E1E;
       color: #ffffff;
     }
   }

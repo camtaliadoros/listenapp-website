@@ -42,7 +42,7 @@ export default async function ContactPage() {
           <h1 className="font-graphik text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-4">
             {page?.heading ?? "Get in touch"}
           </h1>
-          <p className="text-white/75 text-base max-w-xl leading-relaxed">{page?.intro}</p>
+          <p className="text-white text-base max-w-xl leading-relaxed">{page?.intro}</p>
         </div>
       </div>
 

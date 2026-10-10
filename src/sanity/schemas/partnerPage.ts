@@ -6,9 +6,10 @@ export default defineType({
   type: "document",
   groups: [
     { name: "hero", title: "Hero" },
-    { name: "steps", title: "How it works" },
+    { name: "why", title: "Why partner" },
+    { name: "status", title: "Current status" },
+    { name: "limitations", title: "Getting the best" },
     { name: "trust", title: "Trust cards" },
-    { name: "limitations", title: "Safety & limitations" },
     { name: "licences", title: "Licence options" },
     { name: "register", title: "Register interest" },
     { name: "seo", title: "SEO" },
@@ -17,23 +18,24 @@ export default defineType({
     defineField({ name: "heading", title: "Hero heading", type: "string", group: "hero" }),
     defineField({ name: "intro", title: "Hero intro", type: "text", rows: 2, group: "hero" }),
 
-    defineField({ name: "stepsEyebrow", title: "Eyebrow", type: "string", group: "steps", initialValue: "How it works" }),
-    defineField({ name: "stepsHeading", title: "Heading", type: "string", group: "steps", initialValue: "Simple to adopt, built to last" }),
+    defineField({ name: "whyEyebrow", title: "Eyebrow", type: "string", group: "why", initialValue: "Partnership" }),
+    defineField({ name: "whyHeading", title: "Heading", type: "string", group: "why", initialValue: "Why partner with ListenApp" }),
     defineField({
-      name: "steps",
-      title: "Steps",
+      name: "whyPoints",
+      title: "Reasons",
       type: "array",
-      group: "steps",
-      description: "Drag to reorder — step numbers follow the order here.",
+      group: "why",
+      description: "Shown as cards. Drag to reorder. Leave empty to use the built-in copy.",
       of: [
         {
           type: "object",
-          name: "partnershipStep",
+          name: "whyPoint",
           fields: [
             defineField({ name: "title", title: "Title", type: "string", validation: (r) => r.required() }),
-            defineField({ name: "body", title: "Body text", type: "text", rows: 3, validation: (r) => r.required() }),
+            defineField({ name: "body", title: "Body text", type: "text", rows: 2, validation: (r) => r.required() }),
+            defineField({ name: "icon", title: "Icon name (Tabler Icons)", type: "string", description: "e.g. ti-shield-check" }),
           ],
-          preview: { select: { title: "title" } },
+          preview: { select: { title: "title", subtitle: "body" } },
         },
       ],
     }),
@@ -43,7 +45,7 @@ export default defineType({
       title: "Trust cards",
       type: "array",
       group: "trust",
-      description: "Shown as dark cards below the steps (e.g. GDPR compliance, experience).",
+      description: "Shown as red cards below the licence options (e.g. Privacy by design).",
       of: [
         {
           type: "object",
@@ -61,11 +63,17 @@ export default defineType({
       ],
     }),
 
+    defineField({ name: "statusHeading", title: "Heading", type: "string", group: "status", initialValue: "Live on Android and in frontline use" }),
+    defineField({ name: "statusPoints", title: "Bullet points", type: "array", group: "status", of: [{ type: "text", rows: 2 }], description: "Leave empty to use the built-in copy." }),
+
     defineField({ name: "limitationsEyebrow", title: "Eyebrow", type: "string", group: "limitations", initialValue: "Safety & current limitations" }),
-    defineField({ name: "limitationsHeading", title: "Heading", type: "string", group: "limitations", initialValue: "What partners need to know" }),
-    defineField({ name: "limitationsParagraphs", title: "Paragraphs", type: "array", group: "limitations", of: [{ type: "text", rows: 3 }] }),
-    defineField({ name: "statusHeading", title: "Current status box heading", type: "string", group: "limitations", initialValue: "Now moving into frontline use" }),
-    defineField({ name: "statusParagraphs", title: "Current status box paragraphs", type: "array", group: "limitations", of: [{ type: "text", rows: 3 }] }),
+    defineField({ name: "limitationsHeading", title: "Heading", type: "string", group: "limitations", initialValue: "Getting the best from ListenApp" }),
+    defineField({ name: "limitationsIntro", title: "Intro text", type: "text", rows: 2, group: "limitations" }),
+    defineField({ name: "requirementsIntro", title: "Checklist 1 heading", type: "string", group: "limitations", initialValue: "For ListenApp to work as well as possible:" }),
+    defineField({ name: "requirements", title: "Checklist 1 items", type: "array", group: "limitations", of: [{ type: "text", rows: 2 }], description: "Leave empty to use the built-in copy." }),
+    defineField({ name: "awarenessIntro", title: "Checklist 2 heading", type: "string", group: "limitations", initialValue: "Also be aware that:" }),
+    defineField({ name: "awareness", title: "Checklist 2 items", type: "array", group: "limitations", of: [{ type: "text", rows: 2 }], description: "Leave empty to use the built-in copy." }),
+    defineField({ name: "limitationsOutro", title: "Closing text", type: "text", rows: 2, group: "limitations" }),
 
     defineField({ name: "licencesEyebrow", title: "Eyebrow", type: "string", group: "licences", initialValue: "Pricing" }),
     defineField({ name: "licencesHeading", title: "Heading", type: "string", group: "licences", initialValue: "Licence options" }),
@@ -88,7 +96,7 @@ export default defineType({
         },
       ],
     }),
-    defineField({ name: "licencesHelpHeading", title: "Help box heading", type: "string", group: "licences", initialValue: "Not sure which licence is right for your service?" }),
+    defineField({ name: "licencesHelpHeading", title: "Help box heading", type: "string", group: "licences", initialValue: "Supporting 500+ users or not sure which licence is right for your service?" }),
     defineField({ name: "licencesHelpBody", title: "Help box text", type: "text", rows: 2, group: "licences" }),
     defineField({ name: "licencesHelpCtaLabel", title: "Help box button label", type: "string", group: "licences", initialValue: "Register your interest" }),
 

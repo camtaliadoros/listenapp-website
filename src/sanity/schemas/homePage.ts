@@ -6,10 +6,10 @@ export default defineType({
   type: "document",
   groups: [
     { name: "hero", title: "Hero" },
-    { name: "stats", title: "Stats bar" },
+    { name: "demo", title: "Demo video" },
+    { name: "stats", title: "Stats banner (The Problem page)" },
     { name: "features", title: "Features" },
     { name: "screens", title: "App screenshots" },
-    { name: "security", title: "Security section" },
     { name: "disclaimer", title: "Safety disclaimer" },
     { name: "partners", title: "Partners & supporters" },
     { name: "cta", title: "Bottom CTA" },
@@ -24,13 +24,18 @@ export default defineType({
     defineField({ name: "heroPrimaryCtaLabel", title: "Primary CTA label", type: "string", group: "hero" }),
     defineField({ name: "heroSecondaryCtaLabel", title: "Secondary CTA label", type: "string", group: "hero" }),
 
-    // ── Stats bar ──
+    // ── Demo video ──
+    defineField({ name: "demoEyebrow", title: "Eyebrow", type: "string", group: "demo", initialValue: "Demo" }),
+    defineField({ name: "demoHeading", title: "Heading", type: "string", group: "demo", initialValue: "See ListenApp in action" }),
+    defineField({ name: "demoVimeoId", title: "Vimeo video ID", type: "string", group: "demo", description: "The number in the Vimeo link, e.g. 1233840659. The hero's secondary button scrolls to this video." }),
+
+    // ── Stats banner ──
     defineField({
       name: "stats",
       title: "Stats",
       type: "array",
       group: "stats",
-      description: "Shown in the dark stats bar below the hero. Drag to reorder.",
+      description: "Shown in the red stats banner at the top of The Problem page. Drag to reorder.",
       of: [
         {
           type: "object",
@@ -61,7 +66,7 @@ export default defineType({
           fields: [
             defineField({ name: "title", title: "Title", type: "string", validation: (r) => r.required() }),
             defineField({ name: "description", title: "Description", type: "text", rows: 3, validation: (r) => r.required() }),
-            defineField({ name: "icon", title: "Icon name (Tabler Icons)", type: "string", description: "e.g. ti-microphone" }),
+            defineField({ name: "icon", title: "Icon name (Tabler Icons)", type: "string", description: "e.g. ti-microphone, ti-ear" }),
           ],
           preview: { select: { title: "title", subtitle: "description" } },
         },
@@ -90,26 +95,6 @@ export default defineType({
         },
       ],
     }),
-
-    // ── Security section ──
-    defineField({ name: "securityEyebrow", title: "Eyebrow", type: "string", group: "security", initialValue: "Security by design" }),
-    defineField({ name: "securityHeading", title: "Heading", type: "string", group: "security", initialValue: "Built to protect, not attract attention" }),
-    defineField({ name: "securityBody", title: "Body text", type: "text", rows: 3, group: "security" }),
-    defineField({
-      name: "securityChecklist",
-      title: "Checklist items",
-      type: "array",
-      group: "security",
-      of: [{ type: "string" }],
-      initialValue: [
-        "Appears as a standard calculator on your home screen",
-        "Secret code unlocks the real ListenApp interface",
-        "No visible alerts, notifications, or signs of use",
-        "Works even when you cannot speak",
-      ],
-    }),
-    defineField({ name: "secretCodeHeading", title: "Keypad mockup heading", type: "string", group: "security", initialValue: "Enter your secret code" }),
-    defineField({ name: "secretCodeSubtext", title: "Keypad mockup subtext", type: "string", group: "security", initialValue: "Looks like a calculator. Acts as your guardian." }),
 
     // ── Safety disclaimer ──
     defineField({ name: "disclaimerHeading", title: "Heading", type: "string", group: "disclaimer", initialValue: "Designed to support, not replace, existing safety planning" }),

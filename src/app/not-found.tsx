@@ -8,7 +8,7 @@ export default function NotFound() {
         <h1 className="font-graphik text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-4">
           Page not found.
         </h1>
-        <p className="text-white/75 text-base max-w-md leading-relaxed mb-8">
+        <p className="text-white text-base max-w-md leading-relaxed mb-8">
           The page you&apos;re looking for doesn&apos;t exist or has been moved.
         </p>
         <Link

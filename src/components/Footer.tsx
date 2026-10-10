@@ -35,7 +35,7 @@ export default async function Footer() {
 
         <div className="flex flex-wrap gap-x-6 gap-y-2">
           <Link href="/the-problem" className="text-sm text-muted-light hover:text-white transition-colors">The Problem</Link>
-          <Link href="/partner" className="text-sm text-muted-light hover:text-white transition-colors">Partner with us</Link>
+          <Link href="/partner" className="text-sm text-muted-light hover:text-white transition-colors">For organisations</Link>
           <Link href="/about" className="text-sm text-muted-light hover:text-white transition-colors">About</Link>
           <Link href="/contact" className="text-sm text-muted-light hover:text-white transition-colors">Contact</Link>
 <Link href="/privacy-policy" className="text-sm text-muted-light hover:text-white transition-colors">Privacy policy</Link>

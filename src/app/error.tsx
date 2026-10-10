@@ -21,7 +21,7 @@ export default function Error({
         <h1 className="font-graphik text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-4">
           Something went wrong.
         </h1>
-        <p className="text-white/75 text-base max-w-md leading-relaxed mb-8">
+        <p className="text-white text-base max-w-md leading-relaxed mb-8">
           An unexpected error occurred. Please try again or return home.
         </p>
         <div className="flex gap-4">

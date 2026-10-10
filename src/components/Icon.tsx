@@ -14,6 +14,11 @@ import {
   IconFileText,
   IconEyeOff,
   IconMicrophone2,
+  IconEar,
+  IconShieldCheck,
+  IconHeartHandshake,
+  IconSchool,
+  IconBulb,
   type IconProps,
 } from "@tabler/icons-react";
 
@@ -33,6 +38,11 @@ const ICONS: Record<string, React.ComponentType<IconProps>> = {
   "ti-file-text": IconFileText,
   "ti-eye-off": IconEyeOff,
   "ti-voice": IconMicrophone2,
+  "ti-ear": IconEar,
+  "ti-shield-check": IconShieldCheck,
+  "ti-heart-handshake": IconHeartHandshake,
+  "ti-school": IconSchool,
+  "ti-bulb": IconBulb,
 };
 
 export default function Icon({ name, ...props }: { name?: string } & IconProps) {

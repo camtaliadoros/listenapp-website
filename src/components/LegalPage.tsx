@@ -69,7 +69,7 @@ export default function LegalPage({ page, fallbackTitle }: { page: LegalPageDoc 
           </h1>
           <div className="flex flex-wrap gap-2">
             {[page?.effectiveDate && `Effective date: ${page.effectiveDate}`, page?.metaLabel].filter(Boolean).map((label) => (
-              <span key={label as string} className="bg-white/10 text-white/80 text-xs font-medium px-3 py-1.5 rounded-full">{label}</span>
+              <span key={label as string} className="bg-white/15 text-white text-xs font-medium px-3 py-1.5 rounded-full">{label}</span>
             ))}
           </div>
         </div>
