@@ -107,9 +107,9 @@ export default async function HomePage() {
             >
               {page?.heroPrimaryCtaLabel ?? "Register interest"} →
             </Link>
-            <Link href="#demo" className="text-white font-semibold text-sm border-b border-white/60 hover:border-white transition-colors pb-0.5">
+            <a href="#demo" className="text-white font-semibold text-sm border-b border-white/60 hover:border-white transition-colors pb-0.5">
               {page?.heroSecondaryCtaLabel ?? "Learn how it works"}
-            </Link>
+            </a>
           </div>
           </div>
         </div>

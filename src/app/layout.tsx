@@ -46,6 +46,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      data-scroll-behavior="smooth"
       className={`${graphik.variable} ${tungsten.variable} ${gilroy.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-graphik" suppressHydrationWarning>

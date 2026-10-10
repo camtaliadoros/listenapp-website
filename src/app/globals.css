@@ -35,6 +35,13 @@
   --color-muted-light-night:  #A0A0A0;  /* Dark secondary text — 5.6:1 on surface-night ✓ */
 }
 
+/* ── Smooth scrolling for same-page anchor links (#demo, #pricing, etc.) ── */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 /* ── Animations ── */
 @keyframes fade-up {
   from { opacity: 0; transform: translateY(20px); }
