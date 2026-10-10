@@ -91,11 +91,12 @@ export default defineType({
       title: "Screenshots",
       type: "array",
       group: "screens",
-      description: "Phone screenshots (portrait). Two or three work best. Drag to reorder. Check they don't show real locations, names or numbers.",
+      description: "Plain phone screenshots (portrait), not mockups — the site adds the phone frame. If an image already has a frame, use Crop to trim it to just the screen. Drag to reorder. Check they don't show real locations, names or numbers.",
       of: [
         {
           type: "image",
           name: "appScreen",
+          options: { hotspot: true },
           fields: [
             defineField({ name: "caption", title: "Caption", type: "string", validation: (r) => r.required() }),
             defineField({ name: "alt", title: "Alt text", type: "string", description: "Describe the screen for screen-reader users." }),
