@@ -25,7 +25,7 @@ export default async function Footer() {
             alt="ListenApp"
             width={84}
             height={17}
-            style={{ height: "auto" }}
+            style={{ width: 84, height: "auto" }}
             className="mb-3"
           />
           <p className="text-sm text-muted-light leading-relaxed">
