@@ -4,6 +4,7 @@ import FadeUp from "@/components/FadeUp";
 import PartnerLogos, { type Partner } from "@/components/PartnerLogos";
 import { buildMetadata } from "@/lib/metadata";
 import PartnerForm from "./PartnerForm";
+import { IconCheck, IconAlertCircle } from "@tabler/icons-react";
 import type { Metadata } from "next";
 
 export const revalidate = 60;
@@ -81,12 +82,18 @@ export async function generateMetadata(): Promise<Metadata> {
   return buildMetadata(page?.seo as Parameters<typeof buildMetadata>[0]);
 }
 
-function Checklist({ items }: { items: string[] }) {
+function Checklist({ items, variant }: { items: string[]; variant: "check" | "alert" }) {
+  const ItemIcon = variant === "check" ? IconCheck : IconAlertCircle;
   return (
-    <ul className="space-y-3">
+    <ul className="space-y-4">
       {items.map((item) => (
-        <li key={item} className="flex items-start gap-3 text-base text-ink dark:text-white leading-relaxed">
-          <span className="w-5 h-5 bg-surface-deep dark:bg-surface-deep-night rounded-full flex items-center justify-center flex-shrink-0 mt-1 text-[10px] text-brand font-bold">✓</span>
+        <li key={item} className="flex items-start gap-3 text-[15px] text-ink dark:text-white leading-relaxed">
+          <ItemIcon
+            aria-hidden
+            size={20}
+            stroke={2}
+            className={`flex-shrink-0 mt-0.5 ${variant === "check" ? "text-[#2E7D32] dark:text-[#81C784]" : "text-brand-hover dark:text-[#FF6B81]"}`}
+          />
           {item}
         </li>
       ))}
@@ -94,10 +101,33 @@ function Checklist({ items }: { items: string[] }) {
   );
 }
 
+// Turns a licence description into an optional lead-in plus bullet items, keeping
+// every word: only commas/full stops become line breaks and each item is capitalised.
+function splitLicence(description: string) {
+  const text = description.trim().replace(/\.$/, "");
+  const leadMatch = text.match(/^(.*?\b(?:such as|including))\s+([\s\S]+)$/);
+  const lead = leadMatch ? `${leadMatch[1]}:` : null;
+  const items = (leadMatch ? leadMatch[2] : text).split(/,\s+/);
+  // "x, y and z" — split the final "and" into its own item, unless the last item
+  // already starts with a connector (e.g. "plus marketing and promotional…").
+  const last = items[items.length - 1];
+  const andAt = last.lastIndexOf(" and ");
+  if (items.length > 1 && !/^(?:and|plus)\s/i.test(last) && andAt > 0) {
+    items.splice(-1, 1, last.slice(0, andAt), last.slice(andAt + 1));
+  }
+  return { lead, items: items.map((i) => i.charAt(0).toUpperCase() + i.slice(1)) };
+}
+
 export default async function PartnerPage() {
   const { page, home } = await getData();
   const whyPoints = page?.whyPoints?.length ? page.whyPoints : DEFAULT_WHY_POINTS;
   const statusPoints = page?.statusPoints?.length ? page.statusPoints : DEFAULT_STATUS_POINTS;
+  // "Label: value." points become the fact columns; anything else is body text.
+  const statusFacts = statusPoints.flatMap((p) => {
+    const m = p.match(/^([^:]{1,24}):\s*(.+?)\.?$/);
+    return m ? [{ label: m[1], value: m[2].charAt(0).toUpperCase() + m[2].slice(1) }] : [];
+  });
+  const statusText = statusPoints.filter((p) => !/^[^:]{1,24}:/.test(p));
   const requirements = page?.requirements?.length ? page.requirements : DEFAULT_REQUIREMENTS;
   const awareness = page?.awareness?.length ? page.awareness : DEFAULT_AWARENESS;
   const licences: Licence[] = page?.licences?.length ? page.licences : [
@@ -152,81 +182,112 @@ export default async function PartnerPage() {
 
       {/* ── Current status ── */}
       <section className="max-w-5xl mx-auto px-4 md:px-8">
-        <div className="bg-panel rounded-2xl p-7 md:p-8">
-          <div className="inline-flex items-center gap-2 bg-white/20 text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider mb-4">
+        <div className="bg-panel rounded-3xl p-7 md:p-12">
+          <div className="inline-flex items-center gap-2 bg-white/20 text-white text-xs font-bold px-3.5 py-2 rounded-full uppercase tracking-[0.15em] mb-5">
             <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
             Current status
           </div>
-          <h3 className="font-graphik text-xl md:text-2xl font-bold text-white mb-4">{page?.statusHeading ?? "Live on Android and in frontline use"}</h3>
-          <ul className="space-y-2.5 max-w-3xl list-disc pl-5 marker:text-white">
-            {statusPoints.map((p) => (
-              <li key={p} className="text-sm text-white leading-relaxed">{p}</li>
-            ))}
-          </ul>
+          <h3 className="font-graphik text-3xl md:text-4xl font-bold text-white tracking-tight leading-tight mb-4">{page?.statusHeading ?? "Live on Android and in frontline use"}</h3>
+          {statusText.map((p) => (
+            <p key={p} className="text-base text-white leading-relaxed max-w-2xl mb-2 last:mb-0">{p}</p>
+          ))}
+          {statusFacts.length > 0 && (
+            <dl className="grid grid-cols-1 sm:grid-flow-col sm:auto-cols-fr gap-y-6 mt-8 pt-8 border-t border-white/30">
+              {statusFacts.map((f, i) => (
+                <div key={f.label} className={`sm:px-8 sm:first:pl-0 ${i > 0 ? "sm:border-l sm:border-white/30" : ""}`}>
+                  {/* Brand names like "iOS" keep their casing. */}
+                  <dt className={`text-xs font-bold tracking-[0.15em] text-white mb-1.5 ${/^[a-z]/.test(f.label) ? "" : "uppercase"}`}>{f.label}</dt>
+                  <dd className="font-graphik text-base md:text-lg font-semibold text-white leading-snug">{f.value}</dd>
+                </div>
+              ))}
+            </dl>
+          )}
         </div>
       </section>
 
       {/* ── Getting the best from ListenApp ── */}
-      <section className="max-w-5xl mx-auto px-4 md:px-8 py-12 md:py-14">
-        <p className="text-sm font-bold uppercase tracking-widest text-brand mb-2">{page?.limitationsEyebrow ?? "Safety & current limitations"}</p>
-        <h2 className="font-graphik text-3xl md:text-4xl font-bold text-ink dark:text-white tracking-tight mb-6">{page?.limitationsHeading ?? "Getting the best from ListenApp"}</h2>
-        <div className="max-w-3xl">
-          <p className="text-base text-muted dark:text-muted-night leading-relaxed mb-8">
+      <section className="py-14 md:py-20">
+        <div className="max-w-5xl mx-auto px-4 md:px-8">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand mb-3">{page?.limitationsEyebrow ?? "Safety & current limitations"}</p>
+          <h2 className="font-graphik text-4xl md:text-5xl font-bold text-ink dark:text-white tracking-tight leading-[1.05] mb-5 max-w-xl">{page?.limitationsHeading ?? "Getting the best from ListenApp"}</h2>
+          <p className="text-base text-muted dark:text-muted-night leading-relaxed max-w-xl mb-10">
             {page?.limitationsIntro ?? "ListenApp is an additional safety tool. It does not replace professional support, emergency services or an individual's safety plan."}
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 mb-8">
-            <div>
-              <h3 className="text-base font-semibold text-ink dark:text-white mb-4">{page?.requirementsIntro ?? "For ListenApp to work as well as possible:"}</h3>
-              <Checklist items={requirements} />
-            </div>
-            <div>
-              <h3 className="text-base font-semibold text-ink dark:text-white mb-4">{page?.awarenessIntro ?? "Also be aware that:"}</h3>
-              <Checklist items={awareness} />
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <FadeUp className="h-full">
+              <div className="bg-white dark:bg-surface-night border border-border dark:border-border-night rounded-2xl p-7 md:p-8 h-full">
+                <h3 className="font-graphik text-lg font-semibold text-ink dark:text-white mb-5">{(page?.requirementsIntro ?? "For ListenApp to work as well as possible").replace(/:$/, "")}</h3>
+                <Checklist items={requirements} variant="check" />
+              </div>
+            </FadeUp>
+            <FadeUp className="h-full" delay={80}>
+              <div className="bg-white dark:bg-surface-night border border-border dark:border-border-night rounded-2xl p-7 md:p-8 h-full flex flex-col">
+                <h3 className="font-graphik text-lg font-semibold text-ink dark:text-white mb-5">{(page?.awarenessIntro ?? "Also be aware that").replace(/:$/, "")}</h3>
+                <Checklist items={awareness} variant="alert" />
+                <p className="mt-7 bg-[#FBF0F0] dark:bg-surface-deep-night rounded-xl px-4 py-4 text-sm text-ink dark:text-white leading-relaxed">
+                  {page?.limitationsOutro ?? "We go through all of this with partner organisations, so it can be built into safe onboarding and individual safety planning."}
+                </p>
+              </div>
+            </FadeUp>
           </div>
-          <p className="text-base text-muted dark:text-muted-night leading-relaxed">
-            {page?.limitationsOutro ?? "We go through all of this with partner organisations, so it can be built into safe onboarding and individual safety planning."}
-          </p>
         </div>
       </section>
 
       {/* ── Contact form ── */}
-      <section className="scroll-mt-20 bg-surface dark:bg-surface-night py-12 md:py-14" id="register">
-        <div className="max-w-5xl mx-auto px-4 md:px-8">
-          <p className="text-sm font-bold uppercase tracking-widest text-brand mb-2">{page?.registerEyebrow ?? "Register interest"}</p>
-          <h2 className="font-graphik text-3xl md:text-4xl font-bold text-ink dark:text-white tracking-tight mb-2">{page?.registerHeading ?? "Get in touch"}</h2>
-          <p className="text-muted dark:text-muted-night text-base mb-8 max-w-lg">{page?.registerIntro}</p>
-          <PartnerForm />
+      <section className="scroll-mt-20 bg-[#FBF0F0] dark:bg-surface-night py-14 md:py-20" id="register">
+        <div className="max-w-5xl mx-auto px-4 md:px-8 grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-10 lg:gap-16 items-start">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand mb-3">{page?.registerEyebrow ?? "Register interest"}</p>
+            <h2 className="font-graphik text-4xl md:text-5xl font-bold text-ink dark:text-white tracking-tight leading-[1.05] mb-5">{page?.registerHeading ?? "Get in touch"}</h2>
+            <p className="text-base text-muted dark:text-muted-night leading-relaxed max-w-sm">{page?.registerIntro}</p>
+          </div>
+          <div className="bg-white dark:bg-surface-raised-night rounded-3xl p-6 md:p-8 shadow-[0_12px_40px_-12px_rgba(119,0,0,0.12)]">
+            <PartnerForm />
+          </div>
         </div>
       </section>
 
       {/* ── Licence options ── */}
-      <section id="pricing" className="scroll-mt-20 max-w-5xl mx-auto px-4 md:px-8 py-12 md:py-14">
-        <p className="text-sm font-bold uppercase tracking-widest text-brand mb-2">{page?.licencesEyebrow ?? "Pricing"}</p>
-        <h2 className="font-graphik text-3xl md:text-4xl font-bold text-ink dark:text-white tracking-tight mb-10">{page?.licencesHeading ?? "Licence options"}</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {licences.map((l, i) => (
-            <FadeUp key={l._key} delay={i * 80}>
-              <div className="bg-surface dark:bg-surface-night rounded-2xl p-6 h-full flex flex-col">
-                <h3 className="font-graphik text-lg font-bold text-ink dark:text-white mb-1">{l.name}</h3>
-                <p className="mb-4">
-                  <span className="font-tungsten text-4xl font-semibold text-brand tracking-normal leading-none">{l.price.split("/")[0]}</span>
-                  {l.price.includes("/") && <span className="text-sm text-muted dark:text-muted-night ml-1">/{l.price.split("/").slice(1).join("/")}</span>}
-                </p>
-                <p className="text-sm text-muted dark:text-muted-night leading-relaxed">{l.description}</p>
-              </div>
-            </FadeUp>
-          ))}
+      <section id="pricing" className="scroll-mt-20 max-w-5xl mx-auto px-4 md:px-8 py-14 md:py-24">
+        <div className="text-center mb-10">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand mb-3">{page?.licencesEyebrow ?? "Pricing"}</p>
+          <h2 className="font-graphik text-4xl md:text-5xl font-bold text-ink dark:text-white tracking-tight leading-[1.05]">{page?.licencesHeading ?? "Licence options"}</h2>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {licences.map((l, i) => {
+            const featured = i === licences.length - 1;
+            const { lead, items } = splitLicence(l.description);
+            return (
+              <FadeUp key={l._key} delay={i * 80} className="h-full">
+                <div className={`bg-white dark:bg-surface-night rounded-2xl p-6 md:p-7 h-full flex flex-col border ${featured ? "border-brand" : "border-border dark:border-border-night"}`}>
+                  <h3 className="font-graphik text-base font-semibold text-ink dark:text-white mb-4">{l.name}</h3>
+                  <p className="pb-5 mb-5 border-b border-border dark:border-border-night">
+                    <span className="font-graphik text-4xl font-bold text-ink dark:text-white tracking-tight leading-none">{l.price.split("/")[0]}</span>
+                    {l.price.includes("/") && <span className="text-xs text-muted dark:text-muted-night ml-1.5">/{l.price.split("/").slice(1).join("/")}</span>}
+                  </p>
+                  {lead && <p className="text-sm font-semibold text-ink dark:text-white leading-relaxed mb-4">{lead}</p>}
+                  <ul className="space-y-3">
+                    {items.map((item, j) => (
+                      <li key={item} className="flex items-start gap-3 text-sm text-muted dark:text-muted-night leading-relaxed">
+                        <IconCheck aria-hidden size={16} stroke={2} className="flex-shrink-0 mt-0.5 text-brand" />
+                        <span className={!lead && j === 0 ? "font-semibold text-ink dark:text-white" : undefined}>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </FadeUp>
+            );
+          })}
         </div>
 
-        <div className="mt-5 border-l-4 border-brand bg-surface dark:bg-surface-night rounded-r-2xl p-6 md:p-7 flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div className="mt-8 bg-[#FBF0F0] dark:bg-surface-night rounded-2xl p-6 md:px-7 flex flex-col md:flex-row md:items-center justify-between gap-5">
           <div>
-            <h3 className="text-base font-semibold text-ink dark:text-white mb-1">{page?.licencesHelpHeading ?? "Supporting 500+ users or not sure which licence is right for your service?"}</h3>
-            <p className="text-sm text-muted dark:text-muted-night leading-relaxed max-w-xl">
+            <h3 className="font-graphik text-base md:text-lg font-semibold text-ink dark:text-white mb-1">{page?.licencesHelpHeading ?? "Supporting 500+ users or not sure which licence is right for your service?"}</h3>
+            <p className="text-sm text-muted dark:text-muted-night leading-relaxed">
               {page?.licencesHelpBody ?? "Register your interest and we'll talk through your user numbers, reporting needs and the most suitable option."}
             </p>
           </div>
-          <a href="#register" className="btn-arrow inline-flex items-center gap-2 flex-shrink-0 self-start md:self-auto bg-brand text-white font-semibold text-sm px-6 py-3 rounded-lg hover:bg-brand-hover hover:text-white transition-colors">
+          <a href="#register" className="btn-arrow inline-flex items-center gap-2 flex-shrink-0 self-start md:self-auto bg-brand text-white font-semibold text-sm px-6 py-3 rounded-full hover:bg-brand-hover hover:text-white transition-colors">
             <span>{page?.licencesHelpCtaLabel ?? "Register your interest"}</span> <span className="arrow">→</span>
           </a>
         </div>

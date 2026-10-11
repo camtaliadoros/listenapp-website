@@ -29,7 +29,7 @@ export default function PartnerForm() {
 
   if (submitted) {
     return (
-      <div className="bg-surface-deep dark:bg-surface-deep-night rounded-2xl p-8 text-center max-w-lg">
+      <div className="bg-surface-deep dark:bg-surface-deep-night rounded-2xl p-8 text-center">
         <div className="w-12 h-12 bg-brand rounded-full flex items-center justify-center text-white text-xl mx-auto mb-4">✓</div>
         <h3 className="font-graphik text-xl font-bold text-ink dark:text-white mb-2">Enquiry sent</h3>
         <p className="text-sm text-muted dark:text-muted-night">Thanks for getting in touch. We&apos;ll be in contact to arrange a demo at a time that works for you.</p>
@@ -38,39 +38,42 @@ export default function PartnerForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-lg space-y-5">
+    <form onSubmit={handleSubmit} className="space-y-5">
       <input type="hidden" name="subject" value="New partnership enquiry — ListenApp" />
       <input type="hidden" name="from_name" value="ListenApp Website" />
 
       <input type="checkbox" name="botcheck" className="hidden" />
 
-      {[
-        { label: "Full name", name: "name", type: "text", placeholder: "Your name", required: true },
-        { label: "Organisation", name: "organisation", type: "text", placeholder: "Your charity or organisation", required: true },
-        { label: "Email address", name: "email", type: "email", placeholder: "you@organisation.org", required: true },
-        { label: "How many beneficiaries do you support?", name: "beneficiaries", type: "number", placeholder: "e.g. 250", required: false, min: 0 },
-        { label: "How did you hear about ListenApp?", name: "referral", type: "text", placeholder: "e.g. referral, event, search", required: false },
-      ].map((f) => (
-        <div key={f.name}>
-          <label className="block text-sm font-semibold text-ink dark:text-white mb-1.5">
-            {f.label} {f.required && <span className="text-brand">*</span>}
-          </label>
-          <input
-            type={f.type}
-            name={f.name}
-            placeholder={f.placeholder}
-            required={f.required}
-            min={f.min}
-            className="w-full px-3.5 py-2.5 border border-border dark:border-border-night rounded-lg text-sm text-ink dark:text-white placeholder:text-muted-light dark:bg-surface-night focus:outline-none focus:border-brand transition-colors"
-          />
-        </div>
-      ))}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-3 gap-y-4">
+        {[
+          { label: "Full name", name: "name", type: "text", placeholder: "Your name", required: true },
+          { label: "Organisation", name: "organisation", type: "text", placeholder: "Your charity or organisation", required: true },
+          { label: "Email address", name: "email", type: "email", placeholder: "you@organisation.org", required: true, wide: true },
+          { label: "How many beneficiaries do you support?", name: "beneficiaries", type: "number", placeholder: "e.g. 250", required: false, min: 0 },
+          { label: "How did you hear about ListenApp?", name: "referral", type: "text", placeholder: "e.g. referral, event, search", required: false },
+        ].map((f) => (
+          <div key={f.name} className={`flex flex-col justify-end ${f.wide ? "sm:col-span-2" : ""}`}>
+            <label htmlFor={f.name} className="block text-xs font-semibold text-ink dark:text-white mb-1.5">
+              {f.label} {f.required && <span className="text-brand">*</span>}
+            </label>
+            <input
+              id={f.name}
+              type={f.type}
+              name={f.name}
+              placeholder={f.placeholder}
+              required={f.required}
+              min={f.min}
+              className="w-full px-3.5 py-3 bg-white border border-border dark:border-border-night rounded-lg text-sm text-ink dark:text-white placeholder:text-muted-light dark:bg-surface-night focus:outline-none focus:border-brand transition-colors"
+            />
+          </div>
+        ))}
+      </div>
 
       <div className="flex items-start gap-3">
-        <input required type="checkbox" id="consent" name="consent" className="mt-0.5 accent-brand" />
+        <input required type="checkbox" id="consent" name="consent" className="mt-0.5 w-4 h-4 flex-shrink-0 accent-brand" />
         <label htmlFor="consent" className="text-xs text-muted dark:text-muted-night leading-relaxed">
           I consent to ListenApp storing my data in accordance with the{" "}
-          <a href="/privacy-policy" className="text-brand font-medium hover:underline">Privacy Policy</a>.
+          <a href="/privacy-policy" className="text-brand font-medium underline underline-offset-2 hover:no-underline">Privacy Policy</a>.
         </label>
       </div>
 
@@ -79,7 +82,7 @@ export default function PartnerForm() {
       <button
         type="submit"
         disabled={loading}
-        className="btn-arrow inline-flex items-center gap-2 bg-brand text-white font-semibold text-sm px-6 py-3 rounded-lg hover:bg-brand-hover hover:text-white transition-colors disabled:opacity-60"
+        className="btn-arrow inline-flex items-center gap-2 bg-brand text-white font-semibold text-sm px-7 py-3 rounded-full hover:bg-brand-hover hover:text-white transition-colors disabled:opacity-60"
       >
         {loading ? "Sending…" : <><span>Submit</span> <span className="arrow">→</span></>}
       </button>
