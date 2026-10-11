@@ -9,7 +9,6 @@ export default defineType({
     { name: "why", title: "Why partner" },
     { name: "status", title: "Current status" },
     { name: "limitations", title: "Getting the best" },
-    { name: "trust", title: "Trust cards" },
     { name: "licences", title: "Licence options" },
     { name: "register", title: "Register interest" },
     { name: "seo", title: "SEO" },
@@ -20,12 +19,14 @@ export default defineType({
 
     defineField({ name: "whyEyebrow", title: "Eyebrow", type: "string", group: "why", initialValue: "Partnership" }),
     defineField({ name: "whyHeading", title: "Heading", type: "string", group: "why", initialValue: "Why partner with ListenApp" }),
+    defineField({ name: "whyIntro", title: "Intro text", type: "text", rows: 2, group: "why", initialValue: "We work with charities and support organisations to bring ListenApp to the people who need it most." }),
+    defineField({ name: "whyCtaLabel", title: "Button label", type: "string", group: "why", initialValue: "Register your interest", description: "Links to the register form further down the page." }),
     defineField({
       name: "whyPoints",
       title: "Reasons",
       type: "array",
       group: "why",
-      description: "Shown as cards. Drag to reorder. Leave empty to use the built-in copy.",
+      description: "Shown as a numbered list. Drag to reorder. Leave empty to use the built-in copy.",
       of: [
         {
           type: "object",
@@ -37,29 +38,6 @@ export default defineType({
           ],
           preview: { select: { title: "title", subtitle: "body" } },
         },
-      ],
-    }),
-
-    defineField({
-      name: "trustCards",
-      title: "Trust cards",
-      type: "array",
-      group: "trust",
-      description: "Shown as red cards below the licence options (e.g. Privacy by design).",
-      of: [
-        {
-          type: "object",
-          name: "trustCard",
-          fields: [
-            defineField({ name: "title", title: "Title", type: "string", validation: (r) => r.required() }),
-            defineField({ name: "body", title: "Body text", type: "text", rows: 3, validation: (r) => r.required() }),
-          ],
-          preview: { select: { title: "title", subtitle: "body" } },
-        },
-      ],
-      initialValue: [
-        { title: "Fully GDPR compliant", body: "Personal data is saved only to the user's device — never to external servers. Anonymous usage data is available solely for your organisation's insight, never for marketing." },
-        { title: "15+ years in digital for charities", body: "Our development team has spent over 15 years building digital solutions for the charitable sector — we understand your constraints and your users." },
       ],
     }),
 

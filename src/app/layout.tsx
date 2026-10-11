@@ -24,16 +24,6 @@ const tungsten = localFont({
   ],
 });
 
-const gilroy = localFont({
-  variable: "--font-gilroy",
-  src: [
-    { path: "../../public/fonts/gilroy/Gilroy-Regular.otf", weight: "400", style: "normal" },
-    { path: "../../public/fonts/gilroy/Gilroy-Semibold.otf", weight: "600", style: "normal" },
-    { path: "../../public/fonts/gilroy/Gilroy-Bold.otf", weight: "700", style: "normal" },
-    { path: "../../public/fonts/gilroy/Gilroy-Extrabold.otf", weight: "800", style: "normal" },
-  ],
-});
-
 export async function generateMetadata(): Promise<Metadata> {
   return buildMetadata();
 }
@@ -47,7 +37,7 @@ export default function RootLayout({
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${graphik.variable} ${tungsten.variable} ${gilroy.variable} h-full antialiased`}
+      className={`${graphik.variable} ${tungsten.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-graphik" suppressHydrationWarning>
         {children}

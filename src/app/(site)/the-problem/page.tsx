@@ -97,7 +97,7 @@ export default async function ProblemPage() {
       {page?.pullQuote && (
         <div className="max-w-5xl mx-auto px-4 md:px-8 mb-10">
           <blockquote className="border-l-4 border-brand pl-6 py-3 bg-surface dark:bg-surface-night rounded-r-xl">
-            <p className="font-gilroy text-lg font-semibold text-ink dark:text-white leading-snug">&ldquo;{page.pullQuote}&rdquo;</p>
+            <p className="font-graphik text-lg font-semibold text-ink dark:text-white leading-snug">&ldquo;{page.pullQuote}&rdquo;</p>
           </blockquote>
         </div>
       )}

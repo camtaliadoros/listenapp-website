@@ -1,7 +1,6 @@
 import { client } from "@/sanity/client";
 import { sanityFetch } from "@/sanity/live";
 import FadeUp from "@/components/FadeUp";
-import Icon from "@/components/Icon";
 import PartnerLogos, { type Partner } from "@/components/PartnerLogos";
 import { buildMetadata } from "@/lib/metadata";
 import PartnerForm from "./PartnerForm";
@@ -10,15 +9,15 @@ import type { Metadata } from "next";
 export const revalidate = 60;
 
 type WhyPoint  = { _key: string; title: string; body: string; icon?: string };
-type TrustCard = { _key: string; title: string; body: string };
 type Licence   = { _key: string; name: string; price: string; description: string };
 type PartnerPage = {
   heading: string;
   intro: string;
   whyEyebrow?: string;
   whyHeading?: string;
+  whyIntro?: string;
+  whyCtaLabel?: string;
   whyPoints?: WhyPoint[];
-  trustCards: TrustCard[];
   statusHeading?: string;
   statusPoints?: string[];
   limitationsEyebrow?: string;
@@ -98,7 +97,6 @@ function Checklist({ items }: { items: string[] }) {
 export default async function PartnerPage() {
   const { page, home } = await getData();
   const whyPoints = page?.whyPoints?.length ? page.whyPoints : DEFAULT_WHY_POINTS;
-  const trustCards = page?.trustCards ?? [];
   const statusPoints = page?.statusPoints?.length ? page.statusPoints : DEFAULT_STATUS_POINTS;
   const requirements = page?.requirements?.length ? page.requirements : DEFAULT_REQUIREMENTS;
   const awareness = page?.awareness?.length ? page.awareness : DEFAULT_AWARENESS;
@@ -122,23 +120,33 @@ export default async function PartnerPage() {
       </div>
 
       {/* ── Why partner ── */}
-      <section className="max-w-5xl mx-auto px-4 md:px-8 py-12 md:py-14">
-        <p className="text-sm font-bold uppercase tracking-widest text-brand mb-2">{page?.whyEyebrow ?? "Partnership"}</p>
-        <h2 className="font-graphik text-3xl md:text-4xl font-bold text-ink dark:text-white tracking-tight mb-10">{page?.whyHeading ?? "Why partner with ListenApp"}</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {whyPoints.map((w, i) => (
-            <FadeUp key={w._key} delay={i * 80}>
-              <div className="bg-surface dark:bg-surface-night rounded-2xl p-6 h-full">
-                {w.icon && (
-                  <div className="w-10 h-10 bg-surface-deep dark:bg-surface-deep-night rounded-xl flex items-center justify-center mb-4 text-brand">
-                    <Icon name={w.icon} size={20} stroke={2} />
+      <section className="max-w-5xl mx-auto px-4 md:px-8 py-12 md:py-20">
+        <div className="grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-10 lg:gap-16">
+          <div className="lg:sticky lg:top-28 lg:self-start">
+            <p className="text-sm font-bold uppercase tracking-widest text-brand mb-3">{page?.whyEyebrow ?? "Partnership"}</p>
+            <h2 className="font-graphik text-4xl md:text-5xl font-bold text-ink dark:text-white tracking-tight leading-[1.05] mb-6">{page?.whyHeading ?? "Why partner with ListenApp"}</h2>
+            <p className="text-base text-muted dark:text-muted-night leading-relaxed max-w-md mb-8">
+              {page?.whyIntro ?? "We work with charities and support organisations to bring ListenApp to the people who need it most."}
+            </p>
+            <a href="#register" className="btn-arrow inline-flex items-center gap-2 bg-brand text-white font-semibold text-sm px-7 py-3.5 rounded-full hover:bg-brand-hover hover:text-white transition-colors">
+              <span>{page?.whyCtaLabel ?? "Register your interest"}</span> <span className="arrow">→</span>
+            </a>
+          </div>
+          <div className="border-t border-border dark:border-border-night">
+            {whyPoints.map((w, i) => (
+              <FadeUp key={w._key} delay={i * 80}>
+                <div className="grid grid-cols-[3.5rem_1fr] md:grid-cols-[6rem_1fr] gap-4 py-8 md:py-10 border-b border-border dark:border-border-night">
+                  <span className="font-graphik text-3xl md:text-4xl font-bold text-brand tracking-tight leading-none">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div>
+                    <h3 className="font-graphik text-xl md:text-2xl font-bold text-ink dark:text-white tracking-tight mb-2">{w.title.replace(/\.$/, "")}</h3>
+                    <p className="text-base text-muted dark:text-muted-night leading-relaxed">{w.body}</p>
                   </div>
-                )}
-                <h3 className="text-base font-semibold text-ink dark:text-white mb-1.5">{w.title}</h3>
-                <p className="text-sm text-muted dark:text-muted-night leading-relaxed">{w.body}</p>
-              </div>
-            </FadeUp>
-          ))}
+                </div>
+              </FadeUp>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -149,7 +157,7 @@ export default async function PartnerPage() {
             <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
             Current status
           </div>
-          <h3 className="font-gilroy text-xl md:text-2xl font-bold text-white mb-4">{page?.statusHeading ?? "Live on Android and in frontline use"}</h3>
+          <h3 className="font-graphik text-xl md:text-2xl font-bold text-white mb-4">{page?.statusHeading ?? "Live on Android and in frontline use"}</h3>
           <ul className="space-y-2.5 max-w-3xl list-disc pl-5 marker:text-white">
             {statusPoints.map((p) => (
               <li key={p} className="text-sm text-white leading-relaxed">{p}</li>
@@ -200,7 +208,7 @@ export default async function PartnerPage() {
           {licences.map((l, i) => (
             <FadeUp key={l._key} delay={i * 80}>
               <div className="bg-surface dark:bg-surface-night rounded-2xl p-6 h-full flex flex-col">
-                <h3 className="font-gilroy text-lg font-bold text-ink dark:text-white mb-1">{l.name}</h3>
+                <h3 className="font-graphik text-lg font-bold text-ink dark:text-white mb-1">{l.name}</h3>
                 <p className="mb-4">
                   <span className="font-tungsten text-4xl font-semibold text-brand tracking-normal leading-none">{l.price.split("/")[0]}</span>
                   {l.price.includes("/") && <span className="text-sm text-muted dark:text-muted-night ml-1">/{l.price.split("/").slice(1).join("/")}</span>}
@@ -223,22 +231,6 @@ export default async function PartnerPage() {
           </a>
         </div>
       </section>
-
-      {/* ── Trust cards ── */}
-      {trustCards.length > 0 && (
-        <section className="bg-surface dark:bg-surface-night py-12 md:py-14">
-          <div className="max-w-5xl mx-auto px-4 md:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              {trustCards.map((c) => (
-                <div key={c._key} className="bg-panel rounded-2xl p-7">
-                  <h3 className="font-gilroy text-base font-bold text-white mb-3">{c.title}</h3>
-                  <p className="text-sm text-white leading-relaxed">{c.body}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* ── Partners ── */}
       <PartnerLogos partners={home?.partners ?? []} heading={home?.partnersHeading} thanksNote={home?.partnersThanksNote} />

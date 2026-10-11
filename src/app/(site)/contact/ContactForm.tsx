@@ -35,7 +35,7 @@ export default function ContactForm({ enquiryCategories, successMessage }: Props
     return (
       <div className="bg-surface-deep dark:bg-surface-deep-night rounded-2xl p-8 text-center flex flex-col items-center justify-center min-h-[320px]">
         <div className="w-12 h-12 bg-brand rounded-full flex items-center justify-center text-white text-xl mx-auto mb-4">✓</div>
-        <h3 className="font-gilroy text-xl font-bold text-ink dark:text-white mb-2">
+        <h3 className="font-graphik text-xl font-bold text-ink dark:text-white mb-2">
           {successMessage?.heading ?? "Message sent"}
         </h3>
         <p className="text-sm text-muted dark:text-muted-night">{successMessage?.body ?? "We'll be in touch as soon as possible."}</p>
