@@ -63,7 +63,7 @@ export default async function ProblemPage() {
 
       {/* ── Stats banner ── */}
       {bannerStats.length > 0 && (
-        <div className="bg-panel border-t border-white/20 py-8">
+        <div className="bg-brand py-8">
           <div className="max-w-5xl mx-auto px-4 md:px-8 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-4 text-center">
             {bannerStats.map((s) => (
               <div key={s._key}>

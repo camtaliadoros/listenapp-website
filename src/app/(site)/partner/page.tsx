@@ -46,8 +46,6 @@ const DEFAULT_WHY_POINTS: WhyPoint[] = [
   { _key: "reach", icon: "ti-heart-handshake", title: "Extend your support and reach.", body: "A discreet safety tool for the people you already support, alongside your safety planning." },
   { _key: "safeguarding", icon: "ti-shield-check", title: "Add a layer of safeguarding.", body: "Extra protection behind closed doors, when it's unsafe to reach out." },
   { _key: "benefit", icon: "ti-building-community", title: "Further your public benefit.", body: "Offering ListenApp to the people you support furthers your organisation's public benefit." },
-  { _key: "onboarding", icon: "ti-school", title: "Onboarding and setup support.", body: "We provide guidance and setup instructions so your team can introduce ListenApp safely." },
-  { _key: "shape", icon: "ti-bulb", title: "Help shape what comes next.", body: "Partner feedback directly informs onboarding, accessibility and future features." },
 ];
 
 const DEFAULT_STATUS_POINTS = [
@@ -182,22 +180,22 @@ export default async function PartnerPage() {
 
       {/* ── Current status ── */}
       <section className="max-w-5xl mx-auto px-4 md:px-8">
-        <div className="bg-panel rounded-3xl p-7 md:p-12">
-          <div className="inline-flex items-center gap-2 bg-white/20 text-white text-xs font-bold px-3.5 py-2 rounded-full uppercase tracking-[0.15em] mb-5">
+        <div className="bg-panel rounded-3xl p-6 md:p-8">
+          <div className="inline-flex items-center gap-2 bg-white/20 text-white text-xs font-bold px-3.5 py-2 rounded-full uppercase tracking-[0.15em] mb-4">
             <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
             Current status
           </div>
-          <h3 className="font-graphik text-3xl md:text-4xl font-bold text-white tracking-tight leading-tight mb-4">{page?.statusHeading ?? "Live on Android and in frontline use"}</h3>
+          <h3 className="font-graphik text-2xl md:text-3xl font-bold text-white tracking-tight leading-tight mb-3">{page?.statusHeading ?? "Live on Android and in frontline use"}</h3>
           {statusText.map((p) => (
             <p key={p} className="text-base text-white leading-relaxed max-w-2xl mb-2 last:mb-0">{p}</p>
           ))}
           {statusFacts.length > 0 && (
-            <dl className="grid grid-cols-1 sm:grid-flow-col sm:auto-cols-fr gap-y-6 mt-8 pt-8 border-t border-white/30">
+            <dl className="flex flex-col md:flex-row gap-y-5 mt-6 pt-6 border-t border-white/30">
               {statusFacts.map((f, i) => (
-                <div key={f.label} className={`sm:px-8 sm:first:pl-0 ${i > 0 ? "sm:border-l sm:border-white/30" : ""}`}>
+                <div key={f.label} className={`md:px-8 md:first:pl-0 ${i > 0 ? "md:border-l md:border-white/30" : ""}`}>
                   {/* Brand names like "iOS" keep their casing. */}
                   <dt className={`text-xs font-bold tracking-[0.15em] text-white mb-1.5 ${/^[a-z]/.test(f.label) ? "" : "uppercase"}`}>{f.label}</dt>
-                  <dd className="font-graphik text-base md:text-lg font-semibold text-white leading-snug">{f.value}</dd>
+                  <dd className="font-graphik text-base font-semibold text-white leading-snug md:whitespace-nowrap">{f.value}</dd>
                 </div>
               ))}
             </dl>
@@ -255,11 +253,10 @@ export default async function PartnerPage() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {licences.map((l, i) => {
-            const featured = i === licences.length - 1;
             const { lead, items } = splitLicence(l.description);
             return (
               <FadeUp key={l._key} delay={i * 80} className="h-full">
-                <div className={`bg-white dark:bg-surface-night rounded-2xl p-6 md:p-7 h-full flex flex-col border ${featured ? "border-brand" : "border-border dark:border-border-night"}`}>
+                <div className="bg-white dark:bg-surface-night rounded-2xl p-6 md:p-7 h-full flex flex-col border border-border dark:border-border-night">
                   <h3 className="font-graphik text-base font-semibold text-ink dark:text-white mb-4">{l.name}</h3>
                   <p className="pb-5 mb-5 border-b border-border dark:border-border-night">
                     <span className="font-graphik text-4xl font-bold text-ink dark:text-white tracking-tight leading-none">{l.price.split("/")[0]}</span>

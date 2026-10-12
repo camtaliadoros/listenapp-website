@@ -13,8 +13,8 @@
 
   /* Dark panels (hero sections, stats bar, dark cards, footer).
      Separate from ink so the panel colour can change without affecting text. */
-  --color-panel:        #EE0026;  /* Mid Red, matches the buttons */
-  --color-panel-accent: #FFFFFF;  /* Eyebrow text on panels — white is the only AA-safe option on Mid Red */
+  --color-panel:        #770000;  /* Dark Red */
+  --color-panel-accent: #FFB3BF;  /* Light pink eyebrow text, 7:1 on Dark Red */
 
   /* Derived utility colours */
   --color-muted:        #555555;  /* Body text — 7.46:1 on white ✓ */
