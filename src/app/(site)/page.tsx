@@ -74,15 +74,29 @@ export default async function HomePage() {
       {/* ── Hero ── */}
       <section className="-mt-16 relative min-h-screen flex items-end overflow-hidden bg-ink">
         {page?.heroImage?.asset && (
-          <div className="absolute inset-0">
-            <Image
-              src={urlForImage(page.heroImage)?.width(1920).fit("max").url() ?? ""}
-              alt="ListenApp hero"
-              fill
-              className="object-cover object-center"
-              priority
-            />
-          </div>
+          <>
+            {/* Mobile: full-bleed photo. Desktop: a blurred copy fills the frame and the
+                whole photo sits off-centre to the right, fading into it on the left. */}
+            <div className="absolute inset-0">
+              <Image
+                src={urlForImage(page.heroImage)?.width(1920).fit("max").url() ?? ""}
+                alt="ListenApp hero"
+                fill
+                className="object-cover object-center md:blur-2xl md:scale-110"
+                priority
+              />
+            </div>
+            <div className="hidden md:block absolute inset-y-0 left-[68%] aspect-[3/2] -translate-x-1/2 [mask-image:linear-gradient(to_right,transparent,black_30%)]">
+              <Image
+                src={urlForImage(page.heroImage)?.width(1920).fit("max").url() ?? ""}
+                alt=""
+                fill
+                sizes="(min-width: 768px) 150vh, 0px"
+                className="object-cover object-center"
+                priority
+              />
+            </div>
+          </>
         )}
         {/* Light shading on the left so the text stays readable */}
         <div className="absolute inset-0 bg-gradient-to-r from-ink/60 via-ink/25 to-transparent" />
@@ -117,51 +131,57 @@ export default async function HomePage() {
       </section>
 
       {/* ── Demo video ── */}
-      <section id="demo" className="scroll-mt-20 max-w-5xl mx-auto px-4 md:px-8 pt-12 md:pt-16">
-        <p className="text-sm font-bold uppercase tracking-widest text-brand mb-2">{page?.demoEyebrow ?? "Demo"}</p>
-        <h2 className="font-graphik text-3xl md:text-4xl font-bold text-ink dark:text-white tracking-tight mb-8">{page?.demoHeading ?? "See ListenApp in action"}</h2>
-        <div className="relative aspect-video rounded-2xl overflow-hidden bg-white">
-          {page?.demoVideoUrl ? (
-            <DemoVideo
-              src={page.demoVideoUrl}
-              poster={urlForImage(page.demoPoster)?.width(1920).fit("max").url()}
+      <section id="demo" className="scroll-mt-20 max-w-5xl mx-auto px-4 md:px-8 py-16 md:py-24">
+        <div className="grid grid-cols-1 md:grid-cols-[5fr_6fr] gap-8 md:gap-16 items-center">
+          <div>
+            <p className="text-sm font-bold uppercase tracking-widest text-brand mb-2">{page?.demoEyebrow ?? "Demo"}</p>
+            <h2 className="font-graphik text-3xl md:text-4xl lg:text-5xl font-bold text-ink dark:text-white tracking-tight leading-[1.05]">{page?.demoHeading ?? "See ListenApp in action"}</h2>
+          </div>
+          <div className="relative aspect-video rounded-2xl overflow-hidden bg-white border border-border dark:border-border-night">
+            {page?.demoVideoUrl ? (
+              <DemoVideo
+                src={page.demoVideoUrl}
+                poster={urlForImage(page.demoPoster)?.width(1920).fit("max").url()}
+              />
+            ) : (
+            <iframe
+              src={`https://player.vimeo.com/video/${page?.demoVimeoId ?? DEFAULT_DEMO_VIMEO_ID}?dnt=1&title=0&byline=0&portrait=0`}
+              title="ListenApp demo video"
+              allow="fullscreen; picture-in-picture"
+              allowFullScreen
+              loading="lazy"
+              className="absolute inset-0 w-full h-full"
             />
-          ) : (
-          <iframe
-            src={`https://player.vimeo.com/video/${page?.demoVimeoId ?? DEFAULT_DEMO_VIMEO_ID}?dnt=1&title=0&byline=0&portrait=0`}
-            title="ListenApp demo video"
-            allow="fullscreen; picture-in-picture"
-            allowFullScreen
-            loading="lazy"
-            className="absolute inset-0 w-full h-full"
-          />
-          )}
+            )}
+          </div>
         </div>
       </section>
 
       {/* ── Features ── */}
-      <section className="max-w-5xl mx-auto px-4 md:px-8 py-12 md:py-16">
-        <p className="text-sm font-bold uppercase tracking-widest text-brand mb-2">{page?.featuresEyebrow ?? "How it works"}</p>
-        <h2 className="font-graphik text-3xl md:text-4xl font-bold text-ink dark:text-white tracking-tight mb-2">{page?.featuresHeading ?? "Critical features, hidden in plain sight"}</h2>
-        <p className="text-muted dark:text-muted-night text-base mb-10 max-w-lg">{page?.featuresIntro}</p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {features.map((f, i) => (
-            <FadeUp key={f._key} delay={i * 80}>
-              <div className="bg-surface dark:bg-surface-night rounded-2xl p-6 h-full">
-                <div className="w-10 h-10 bg-surface-deep dark:bg-surface-deep-night rounded-xl flex items-center justify-center mb-4 text-brand">
-                  <Icon name={FEATURE_ICON_OVERRIDES[f._key] ?? f.icon} size={20} stroke={2} />
+      <section className="bg-surface dark:bg-surface-night">
+        <div className="max-w-5xl mx-auto px-4 md:px-8 py-16 md:py-24">
+          <p className="text-sm font-bold uppercase tracking-widest text-brand mb-2">{page?.featuresEyebrow ?? "How it works"}</p>
+          <h2 className="font-graphik text-3xl md:text-4xl lg:text-5xl font-bold text-ink dark:text-white tracking-tight leading-[1.05] mb-4 max-w-2xl">{page?.featuresHeading ?? "Critical features, hidden in plain sight"}</h2>
+          <p className="text-muted dark:text-muted-night text-base md:text-lg leading-relaxed mb-10 md:mb-12 max-w-xl">{page?.featuresIntro}</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
+            {features.map((f, i) => (
+              <FadeUp key={f._key} delay={i * 80}>
+                <div className="bg-white dark:bg-surface-raised-night rounded-2xl p-6 md:p-8 h-full">
+                  <div className="w-11 h-11 bg-surface-deep dark:bg-surface-deep-night rounded-xl flex items-center justify-center mb-5 text-brand">
+                    <Icon name={FEATURE_ICON_OVERRIDES[f._key] ?? f.icon} size={20} stroke={2} />
+                  </div>
+                  <h3 className="font-graphik text-lg md:text-xl font-bold text-ink dark:text-white tracking-tight mb-2">{f.title}</h3>
+                  <p className="text-sm text-muted dark:text-muted-night leading-relaxed">{f.description}</p>
                 </div>
-                <h3 className="text-sm font-semibold text-ink dark:text-white mb-1.5">{f.title}</h3>
-                <p className="text-xs text-muted dark:text-muted-night leading-relaxed">{f.description}</p>
-              </div>
-            </FadeUp>
-          ))}
+              </FadeUp>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* ── App screenshots ── */}
       {appScreens.length > 0 && (
-        <section className="max-w-5xl mx-auto px-4 md:px-8 pb-12 md:pb-16">
+        <section className="max-w-5xl mx-auto px-4 md:px-8 py-12 md:py-16">
           <p className="text-sm font-bold uppercase tracking-widest text-brand mb-2">{page?.screensEyebrow ?? "Inside the app"}</p>
           <h2 className="font-graphik text-3xl md:text-4xl font-bold text-ink dark:text-white tracking-tight mb-2">{page?.screensHeading ?? "Simple to set up, quick to use"}</h2>
           {page?.screensIntro && <p className="text-muted dark:text-muted-night text-base max-w-lg">{page.screensIntro}</p>}
