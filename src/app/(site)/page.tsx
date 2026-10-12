@@ -158,7 +158,7 @@ export default async function HomePage() {
       </section>
 
       {/* ── Features ── */}
-      <section className="bg-surface dark:bg-surface-night">
+      <section className="bg-[#FBF0F0] dark:bg-surface-night">
         <div className="max-w-5xl mx-auto px-4 md:px-8 py-16 md:py-24">
           <p className="text-sm font-bold uppercase tracking-widest text-brand mb-2">{page?.featuresEyebrow ?? "How it works"}</p>
           <h2 className="font-graphik text-3xl md:text-4xl lg:text-5xl font-bold text-ink dark:text-white tracking-tight leading-[1.05] mb-4 max-w-2xl">{page?.featuresHeading ?? "Critical features, hidden in plain sight"}</h2>
