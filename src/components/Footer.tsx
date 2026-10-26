@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { sanityFetch } from "@/sanity/live";
+import CookieSettingsButton from "@/components/CookieSettingsButton";
 
 type Settings = { contactEmail?: string; companyNumber?: string; companyLocations?: string };
 
@@ -41,6 +42,7 @@ export default async function Footer() {
 <Link href="/privacy-policy" className="text-sm text-muted-light hover:text-white transition-colors">Privacy policy</Link>
           <Link href="/app-privacy-policy" className="text-sm text-muted-light hover:text-white transition-colors">App Privacy Policy</Link>
           <Link href="/app-terms-of-use" className="text-sm text-muted-light hover:text-white transition-colors">App Terms of Use</Link>
+          <CookieSettingsButton />
         </div>
       </div>
     </footer>

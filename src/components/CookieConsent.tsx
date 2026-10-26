@@ -17,7 +17,7 @@ export default function CookieConsent() {
         <p className="text-sm text-white/75 leading-relaxed max-w-2xl">
           We use cookies to analyse how people use our site. This helps us improve the experience for everyone.
           Read our{" "}
-          <a href="/privacy" className="underline text-white hover:text-brand transition-colors">
+          <a href="/privacy-policy" className="underline text-white hover:text-brand transition-colors">
             privacy policy
           </a>
           .
