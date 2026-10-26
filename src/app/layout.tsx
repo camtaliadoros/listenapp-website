@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { buildMetadata } from "@/lib/metadata";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
+import GoogleTagManager from "@/components/GoogleTagManager";
 import "./globals.css";
 
 const graphik = localFont({
@@ -42,6 +43,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col font-graphik" suppressHydrationWarning>
         {children}
         <GoogleAnalytics />
+        <GoogleTagManager />
       </body>
     </html>
   );
