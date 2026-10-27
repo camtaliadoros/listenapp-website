@@ -10,32 +10,29 @@ export default function CookieConsent() {
 
   if (consent !== null) return null;
 
+  const button =
+    "flex-1 py-2.5 rounded-lg border-2 border-ink dark:border-white text-sm font-semibold text-ink dark:text-white hover:bg-surface dark:hover:bg-surface-night transition-colors";
+
   return (
-    // Extra bottom (mobile) / right (sm+) padding keeps the buttons clear of the fixed Quick exit button
-    <div className="fixed bottom-0 left-0 right-0 z-50 p-4 pb-20 sm:pb-4 sm:pr-48 md:p-6 md:pr-48 bg-ink border-t border-white/10">
-      <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-start sm:items-center gap-4 justify-between">
-        <p className="text-sm text-white/75 leading-relaxed max-w-2xl">
-          We use cookies to analyse how people use our site. This helps us improve the experience for everyone.
-          Read our{" "}
-          <a href="/privacy-policy" className="underline text-white hover:text-brand transition-colors">
-            privacy policy
-          </a>
-          .
-        </p>
-        <div className="flex gap-3 flex-shrink-0">
-          <button
-            onClick={decline}
-            className="text-sm font-semibold text-white/60 hover:text-white transition-colors px-4 py-2"
-          >
-            Decline
-          </button>
-          <button
-            onClick={accept}
-            className="text-sm font-semibold bg-brand text-white px-5 py-2 rounded-lg hover:bg-brand-hover transition-colors"
-          >
-            Accept
-          </button>
-        </div>
+    // Mobile: sits above the fixed Quick exit button. sm+: bottom-left, clear of it.
+    <div
+      role="dialog"
+      aria-label="Cookie consent"
+      className="fixed z-50 inset-x-2 bottom-20 sm:inset-x-auto sm:left-5 sm:bottom-6 sm:w-80 p-4 sm:p-5 rounded-2xl bg-white dark:bg-surface-raised-night shadow-[0_4px_24px_rgba(0,0,0,0.15)]"
+    >
+      <p className="text-sm text-ink dark:text-white leading-relaxed mb-4">
+        We use cookies to understand how people use this site.{" "}
+        <a href="/privacy-policy" className="underline hover:text-brand transition-colors">
+          Privacy policy
+        </a>
+      </p>
+      <div className="flex gap-2">
+        <button onClick={decline} className={button}>
+          Decline
+        </button>
+        <button onClick={accept} className={button}>
+          Accept
+        </button>
       </div>
     </div>
   );
