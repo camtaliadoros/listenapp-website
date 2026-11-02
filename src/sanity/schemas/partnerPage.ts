@@ -55,26 +55,12 @@ export default defineType({
 
     defineField({ name: "licencesEyebrow", title: "Eyebrow", type: "string", group: "licences", initialValue: "Pricing" }),
     defineField({ name: "licencesHeading", title: "Heading", type: "string", group: "licences", initialValue: "Licence options" }),
-    defineField({
-      name: "licences",
-      title: "Licences",
-      type: "array",
-      group: "licences",
-      description: "Shown as cards, in this order. Drag to reorder.",
-      of: [
-        {
-          type: "object",
-          name: "licence",
-          fields: [
-            defineField({ name: "name", title: "Name", type: "string", validation: (r) => r.required() }),
-            defineField({ name: "price", title: "Price", type: "string", description: "e.g. £499/month", validation: (r) => r.required() }),
-            defineField({ name: "description", title: "Description", type: "text", rows: 3, validation: (r) => r.required() }),
-          ],
-          preview: { select: { title: "name", subtitle: "price" } },
-        },
-      ],
-    }),
-    defineField({ name: "licencesHelpHeading", title: "Help box heading", type: "string", group: "licences", initialValue: "Supporting 500+ users or not sure which licence is right for your service?" }),
+    defineField({ name: "packageIntro", title: "Price lead-in", type: "string", group: "licences", initialValue: "ListenApp packages start from" }),
+    defineField({ name: "packagePrice", title: "Price", type: "string", group: "licences", description: "e.g. £499", initialValue: "£499" }),
+    defineField({ name: "packagePriceUnit", title: "Price unit", type: "string", group: "licences", initialValue: "a month" }),
+    defineField({ name: "packageIncludesHeading", title: "Includes heading", type: "string", group: "licences", initialValue: "Every package includes:" }),
+    defineField({ name: "packageIncludes", title: "Includes items", type: "array", group: "licences", of: [{ type: "string" }], description: "Leave empty to use the built-in copy." }),
+    defineField({ name: "licencesHelpHeading", title: "Help box heading", type: "string", group: "licences", initialValue: "Get in touch for pricing and partner rates" }),
     defineField({ name: "licencesHelpBody", title: "Help box text", type: "text", rows: 2, group: "licences" }),
     defineField({ name: "licencesHelpCtaLabel", title: "Help box button label", type: "string", group: "licences", initialValue: "Register your interest" }),
 

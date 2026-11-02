@@ -10,7 +10,6 @@ import type { Metadata } from "next";
 export const revalidate = 60;
 
 type WhyPoint  = { _key: string; title: string; body: string; icon?: string };
-type Licence   = { _key: string; name: string; price: string; description: string };
 type PartnerPage = {
   heading: string;
   intro: string;
@@ -31,7 +30,11 @@ type PartnerPage = {
   limitationsOutro?: string;
   licencesEyebrow: string;
   licencesHeading: string;
-  licences: Licence[];
+  packageIntro?: string;
+  packagePrice?: string;
+  packagePriceUnit?: string;
+  packageIncludesHeading?: string;
+  packageIncludes?: string[];
   licencesHelpHeading: string;
   licencesHelpBody: string;
   licencesHelpCtaLabel: string;
@@ -64,6 +67,14 @@ const DEFAULT_REQUIREMENTS = [
 const DEFAULT_AWARENESS = [
   "Calls to 999 made through the app appear in the phone's call history.",
   "A green dot appears in the corner of the screen while the microphone is listening or recording. This is a standard Android privacy indicator.",
+];
+
+const DEFAULT_PACKAGE_INCLUDES = [
+  "ListenApp for the people you support",
+  "Onboarding and ongoing support",
+  "Usage reporting: active users, alerts sent and a monthly summary",
+  "Demographic insights: anonymised, aggregate age bands, gender and broad location",
+  "Opportunities for marketing and promotional collaboration",
 ];
 
 async function getData() {
@@ -99,23 +110,6 @@ function Checklist({ items, variant }: { items: string[]; variant: "check" | "al
   );
 }
 
-// Turns a licence description into an optional lead-in plus bullet items, keeping
-// every word: only commas/full stops become line breaks and each item is capitalised.
-function splitLicence(description: string) {
-  const text = description.trim().replace(/\.$/, "");
-  const leadMatch = text.match(/^(.*?\b(?:such as|including))\s+([\s\S]+)$/);
-  const lead = leadMatch ? `${leadMatch[1]}:` : null;
-  const items = (leadMatch ? leadMatch[2] : text).split(/,\s+/);
-  // "x, y and z" — split the final "and" into its own item, unless the last item
-  // already starts with a connector (e.g. "plus marketing and promotional…").
-  const last = items[items.length - 1];
-  const andAt = last.lastIndexOf(" and ");
-  if (items.length > 1 && !/^(?:and|plus)\s/i.test(last) && andAt > 0) {
-    items.splice(-1, 1, last.slice(0, andAt), last.slice(andAt + 1));
-  }
-  return { lead, items: items.map((i) => i.charAt(0).toUpperCase() + i.slice(1)) };
-}
-
 export default async function PartnerPage() {
   const { page, home } = await getData();
   const whyPoints = page?.whyPoints?.length ? page.whyPoints : DEFAULT_WHY_POINTS;
@@ -128,11 +122,7 @@ export default async function PartnerPage() {
   const statusText = statusPoints.filter((p) => !/^[^:]{1,24}:/.test(p));
   const requirements = page?.requirements?.length ? page.requirements : DEFAULT_REQUIREMENTS;
   const awareness = page?.awareness?.length ? page.awareness : DEFAULT_AWARENESS;
-  const licences: Licence[] = page?.licences?.length ? page.licences : [
-    { _key: "core", name: "Core Partner", price: "£499/month", description: "Up to 500 users, ListenApp access, onboarding/support, plus marketing and promotional collaboration opportunities." },
-    { _key: "insights", name: "Insights Partner", price: "£599/month", description: "Everything in Core, plus anonymised aggregate demographic insights such as age bands, gender and broad location." },
-    { _key: "impact", name: "Impact Partner", price: "£799/month", description: "Everything in Insights, plus deeper anonymised reporting including usage frequency, cross-feature engagement, alert counts, trigger activity, engagement trends and impact-reporting insights." },
-  ];
+  const packageIncludes = page?.packageIncludes?.length ? page.packageIncludes : DEFAULT_PACKAGE_INCLUDES;
 
   return (
     <>
@@ -251,37 +241,34 @@ export default async function PartnerPage() {
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand mb-3">{page?.licencesEyebrow ?? "Pricing"}</p>
           <h2 className="font-graphik text-4xl md:text-5xl font-bold text-ink dark:text-white tracking-tight leading-[1.05]">{page?.licencesHeading ?? "Licence options"}</h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {licences.map((l, i) => {
-            const { lead, items } = splitLicence(l.description);
-            return (
-              <FadeUp key={l._key} delay={i * 80} className="h-full">
-                <div className="bg-white dark:bg-surface-night rounded-2xl p-6 md:p-7 h-full flex flex-col border border-border dark:border-border-night">
-                  <h3 className="font-graphik text-base font-semibold text-ink dark:text-white mb-4">{l.name}</h3>
-                  <p className="pb-5 mb-5 border-b border-border dark:border-border-night">
-                    <span className="font-graphik text-4xl font-bold text-ink dark:text-white tracking-tight leading-none">{l.price.split("/")[0]}</span>
-                    {l.price.includes("/") && <span className="text-xs text-muted dark:text-muted-night ml-1.5">/{l.price.split("/").slice(1).join("/")}</span>}
-                  </p>
-                  {lead && <p className="text-sm font-semibold text-ink dark:text-white leading-relaxed mb-4">{lead}</p>}
-                  <ul className="space-y-3">
-                    {items.map((item, j) => (
-                      <li key={item} className="flex items-start gap-3 text-sm text-muted dark:text-muted-night leading-relaxed">
-                        <IconCheck aria-hidden size={16} stroke={2} className="flex-shrink-0 mt-0.5 text-brand" />
-                        <span className={!lead && j === 0 ? "font-semibold text-ink dark:text-white" : undefined}>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </FadeUp>
-            );
-          })}
-        </div>
+        <FadeUp>
+          <div className="bg-white dark:bg-surface-night rounded-2xl p-6 md:p-10 border border-border dark:border-border-night grid grid-cols-1 md:grid-cols-[2fr_3fr] gap-8 md:gap-12">
+            <div className="md:pr-12 md:border-r border-border dark:border-border-night">
+              <p className="text-sm text-muted dark:text-muted-night mb-3">{page?.packageIntro ?? "ListenApp packages start from"}</p>
+              <p>
+                <span className="font-graphik text-5xl md:text-6xl font-bold text-ink dark:text-white tracking-tight leading-none">{page?.packagePrice ?? "£499"}</span>
+                <span className="text-sm text-muted dark:text-muted-night ml-2">{page?.packagePriceUnit ?? "a month"}</span>
+              </p>
+            </div>
+            <div>
+              <h3 className="font-graphik text-base font-semibold text-ink dark:text-white mb-4">{page?.packageIncludesHeading ?? "Every package includes:"}</h3>
+              <ul className="space-y-3">
+                {packageIncludes.map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-sm text-muted dark:text-muted-night leading-relaxed">
+                    <IconCheck aria-hidden size={16} stroke={2} className="flex-shrink-0 mt-0.5 text-brand" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </FadeUp>
 
         <div className="mt-8 bg-[#FBF0F0] dark:bg-surface-night rounded-2xl p-6 md:px-7 flex flex-col md:flex-row md:items-center justify-between gap-5">
           <div>
-            <h3 className="font-graphik text-base md:text-lg font-semibold text-ink dark:text-white mb-1">{page?.licencesHelpHeading ?? "Supporting 500+ users or not sure which licence is right for your service?"}</h3>
+            <h3 className="font-graphik text-base md:text-lg font-semibold text-ink dark:text-white mb-1">{page?.licencesHelpHeading ?? "Get in touch for pricing and partner rates"}</h3>
             <p className="text-sm text-muted dark:text-muted-night leading-relaxed">
-              {page?.licencesHelpBody ?? "Register your interest and we'll talk through your user numbers, reporting needs and the most suitable option."}
+              {page?.licencesHelpBody ?? "Contact us for a quote, partner rates and current discounts. We also work with councils, PCCs and consortiums on area licences. We’re happy to arrange a free demo at a time that suits you."}
             </p>
           </div>
           <a href="#register" className="btn-arrow inline-flex items-center gap-2 flex-shrink-0 self-start md:self-auto bg-brand text-white font-semibold text-sm px-6 py-3 rounded-full hover:bg-brand-hover hover:text-white transition-colors">
