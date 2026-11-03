@@ -29,7 +29,6 @@ type PartnerPage = {
   awareness?: string[];
   limitationsOutro?: string;
   licencesEyebrow?: string;
-  licencesHeading?: string;
   packageIntro?: string;
   packagePrice?: string;
   packagePriceUnit?: string;
@@ -241,35 +240,29 @@ export default async function PartnerPage() {
       </section>
 
       {/* ── Pricing ── */}
-      <section id="pricing" className="scroll-mt-20 max-w-5xl mx-auto px-4 md:px-8 py-12 md:py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-10 lg:gap-16">
-          <div className="lg:sticky lg:top-28 lg:self-start">
-            <p className="text-sm font-bold uppercase tracking-widest text-brand mb-3">{page?.licencesEyebrow ?? "Pricing"}</p>
-            <h2 className="font-graphik text-4xl md:text-5xl font-bold text-ink dark:text-white tracking-tight leading-[1.05] mb-6">{page?.licencesHeading ?? "Licence options"}</h2>
-            <p className="text-base text-muted dark:text-muted-night leading-relaxed max-w-md mb-4">
-              <strong className="font-semibold text-ink dark:text-white">{priceLine}</strong> {contactLine}
-            </p>
-            <p className="text-base text-muted dark:text-muted-night leading-relaxed max-w-md">
-              {closingMatch ? (
-                <>
-                  <a href="mailto:info@listenapp.org" className="font-semibold text-brand hover:text-brand-hover underline underline-offset-2">{closingMatch[1]}</a>
-                  {closingMatch[2]}
-                </>
-              ) : closingText}
-            </p>
-          </div>
+      <section id="pricing" className="scroll-mt-20 max-w-5xl mx-auto px-4 md:px-8 pt-12 md:pt-16">
+        <div className="max-w-2xl space-y-4 text-base text-muted dark:text-muted-night leading-relaxed">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand">{page?.licencesEyebrow ?? "Pricing"}</p>
+          <p>
+            <strong className="font-semibold text-ink dark:text-white">{priceLine}</strong> {contactLine}
+          </p>
           <div>
-            <h3 className="font-graphik text-xl md:text-2xl font-bold text-ink dark:text-white tracking-tight mb-4">{(page?.packageIncludesHeading ?? "All packages include:").replace(/:$/, "")}</h3>
-            <ul className="border-t border-border dark:border-border-night">
+            <p className="text-ink dark:text-white mb-1">{page?.packageIncludesHeading ?? "All packages include:"}</p>
+            <ul className="list-disc pl-5 space-y-1 marker:text-brand">
               {packageIncludes.map((item) => (
-                <li key={item} className="flex items-start gap-4 py-5 border-b border-border dark:border-border-night text-base text-ink dark:text-white leading-relaxed">
-                  <IconCheck aria-hidden size={20} stroke={2} className="flex-shrink-0 mt-0.5 text-brand" />
-                  <span>{item}</span>
-                </li>
+                <li key={item}>{item}</li>
               ))}
             </ul>
-            <p className="mt-6 text-sm text-muted dark:text-muted-night leading-relaxed">{page?.packageNote ?? "Additional impact reporting available."}</p>
           </div>
+          <p>{page?.packageNote ?? "Additional impact reporting available."}</p>
+          <p>
+            {closingMatch ? (
+              <>
+                <a href="mailto:info@listenapp.org" className="font-semibold text-brand hover:text-brand-hover underline underline-offset-2">{closingMatch[1]}</a>
+                {closingMatch[2]}
+              </>
+            ) : closingText}
+          </p>
         </div>
       </section>
 

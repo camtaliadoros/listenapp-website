@@ -54,7 +54,6 @@ export default defineType({
     defineField({ name: "limitationsOutro", title: "Closing text", type: "text", rows: 2, group: "limitations" }),
 
     defineField({ name: "licencesEyebrow", title: "Eyebrow", type: "string", group: "licences", initialValue: "Pricing" }),
-    defineField({ name: "licencesHeading", title: "Heading", type: "string", group: "licences", initialValue: "Licence options" }),
     defineField({ name: "packageIntro", title: "Price lead-in", type: "string", group: "licences", initialValue: "ListenApp packages start from" }),
     defineField({ name: "packagePrice", title: "Price", type: "string", group: "licences", description: "e.g. £499", initialValue: "£499" }),
     defineField({ name: "packagePriceUnit", title: "Price unit", type: "string", group: "licences", initialValue: "a month" }),
