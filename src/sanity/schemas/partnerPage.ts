@@ -53,6 +53,8 @@ export default defineType({
     defineField({ name: "awareness", title: "Checklist 2 items", type: "array", group: "limitations", of: [{ type: "text", rows: 2 }], description: "Leave empty to use the built-in copy." }),
     defineField({ name: "limitationsOutro", title: "Closing text", type: "text", rows: 2, group: "limitations" }),
 
+    defineField({ name: "licencesEyebrow", title: "Eyebrow", type: "string", group: "licences", initialValue: "Pricing" }),
+    defineField({ name: "licencesHeading", title: "Heading", type: "string", group: "licences", initialValue: "Licence options" }),
     defineField({ name: "packageIntro", title: "Price lead-in", type: "string", group: "licences", initialValue: "ListenApp packages start from" }),
     defineField({ name: "packagePrice", title: "Price", type: "string", group: "licences", description: "e.g. £499", initialValue: "£499" }),
     defineField({ name: "packagePriceUnit", title: "Price unit", type: "string", group: "licences", initialValue: "a month" }),
@@ -60,7 +62,7 @@ export default defineType({
     defineField({ name: "packageIncludes", title: "Includes items", type: "array", group: "licences", of: [{ type: "string" }], description: "Leave empty to use the built-in copy." }),
     defineField({ name: "packageNote", title: "Note after includes", type: "string", group: "licences", initialValue: "Additional impact reporting available." }),
     defineField({ name: "licencesHelpHeading", title: "Contact line", type: "string", group: "licences", description: "Follows the price sentence.", initialValue: "Get in touch for pricing and partner rates" }),
-    defineField({ name: "packageClosing", title: "Closing text", type: "text", rows: 3, group: "licences", description: "Last paragraph under the form. A leading \"Contact us\" links to info@listenapp.org.", initialValue: "Contact us for a quote, partner rates and current discounts. We also work with councils, PCCs and consortiums on area licences. We’re happy to arrange a free demo at a time that suits you." }),
+    defineField({ name: "packageClosing", title: "Closing text", type: "text", rows: 3, group: "licences", description: "Shown under the price on the left. A leading \"Contact us\" links to info@listenapp.org.", initialValue: "Contact us for a quote, partner rates and current discounts. We also work with councils, PCCs and consortiums on area licences. We’re happy to arrange a free demo at a time that suits you." }),
 
     defineField({ name: "registerEyebrow", title: "Eyebrow", type: "string", group: "register", initialValue: "Register interest" }),
     defineField({ name: "registerHeading", title: "Heading", type: "string", group: "register", initialValue: "Get in touch" }),

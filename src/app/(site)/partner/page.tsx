@@ -28,6 +28,8 @@ type PartnerPage = {
   awarenessIntro?: string;
   awareness?: string[];
   limitationsOutro?: string;
+  licencesEyebrow?: string;
+  licencesHeading?: string;
   packageIntro?: string;
   packagePrice?: string;
   packagePriceUnit?: string;
@@ -224,7 +226,7 @@ export default async function PartnerPage() {
         </div>
       </section>
 
-      {/* ── Contact form + pricing ── */}
+      {/* ── Contact form ── */}
       <section className="scroll-mt-20 bg-[#FBF0F0] dark:bg-surface-night py-14 md:py-20" id="register">
         <div className="max-w-5xl mx-auto px-4 md:px-8 grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-10 lg:gap-16 items-start">
           <div>
@@ -232,35 +234,41 @@ export default async function PartnerPage() {
             <h2 className="font-graphik text-4xl md:text-5xl font-bold text-ink dark:text-white tracking-tight leading-[1.05] mb-5">{page?.registerHeading ?? "Get in touch"}</h2>
             <p className="text-base text-muted dark:text-muted-night leading-relaxed max-w-sm">{page?.registerIntro ?? "Tell us about your organisation and we'll arrange a demo at a time that works for you."}</p>
           </div>
+          <div className="bg-white dark:bg-surface-raised-night rounded-3xl p-6 md:p-8 shadow-[0_12px_40px_-12px_rgba(119,0,0,0.12)]">
+            <PartnerForm />
+          </div>
+        </div>
+      </section>
+
+      {/* ── Pricing ── */}
+      <section id="pricing" className="scroll-mt-20 max-w-5xl mx-auto px-4 md:px-8 py-12 md:py-20">
+        <div className="grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-10 lg:gap-16">
+          <div className="lg:sticky lg:top-28 lg:self-start">
+            <p className="text-sm font-bold uppercase tracking-widest text-brand mb-3">{page?.licencesEyebrow ?? "Pricing"}</p>
+            <h2 className="font-graphik text-4xl md:text-5xl font-bold text-ink dark:text-white tracking-tight leading-[1.05] mb-6">{page?.licencesHeading ?? "Licence options"}</h2>
+            <p className="text-base text-muted dark:text-muted-night leading-relaxed max-w-md mb-4">
+              <strong className="font-semibold text-ink dark:text-white">{priceLine}</strong> {contactLine}
+            </p>
+            <p className="text-base text-muted dark:text-muted-night leading-relaxed max-w-md">
+              {closingMatch ? (
+                <>
+                  <a href="mailto:info@listenapp.org" className="font-semibold text-brand hover:text-brand-hover underline underline-offset-2">{closingMatch[1]}</a>
+                  {closingMatch[2]}
+                </>
+              ) : closingText}
+            </p>
+          </div>
           <div>
-            <div className="bg-white dark:bg-surface-raised-night rounded-3xl p-6 md:p-8 shadow-[0_12px_40px_-12px_rgba(119,0,0,0.12)]">
-              <PartnerForm />
-            </div>
-            <div id="pricing" className="scroll-mt-20 mt-10 space-y-5 text-base text-muted dark:text-muted-night leading-relaxed">
-              <p>
-                <strong className="font-semibold text-ink dark:text-white">{priceLine}</strong> {contactLine}
-              </p>
-              <div>
-                <p className="font-semibold text-ink dark:text-white mb-2">{page?.packageIncludesHeading ?? "All packages include:"}</p>
-                <ul className="space-y-1.5">
-                  {packageIncludes.map((item) => (
-                    <li key={item} className="flex items-start gap-2.5">
-                      <IconCheck aria-hidden size={16} stroke={2} className="flex-shrink-0 mt-1 text-brand" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <p>{page?.packageNote ?? "Additional impact reporting available."}</p>
-              <p>
-                {closingMatch ? (
-                  <>
-                    <a href="mailto:info@listenapp.org" className="font-semibold text-brand hover:text-brand-hover underline underline-offset-2">{closingMatch[1]}</a>
-                    {closingMatch[2]}
-                  </>
-                ) : closingText}
-              </p>
-            </div>
+            <h3 className="font-graphik text-xl md:text-2xl font-bold text-ink dark:text-white tracking-tight mb-4">{(page?.packageIncludesHeading ?? "All packages include:").replace(/:$/, "")}</h3>
+            <ul className="border-t border-border dark:border-border-night">
+              {packageIncludes.map((item) => (
+                <li key={item} className="flex items-start gap-4 py-5 border-b border-border dark:border-border-night text-base text-ink dark:text-white leading-relaxed">
+                  <IconCheck aria-hidden size={20} stroke={2} className="flex-shrink-0 mt-0.5 text-brand" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-6 text-sm text-muted dark:text-muted-night leading-relaxed">{page?.packageNote ?? "Additional impact reporting available."}</p>
           </div>
         </div>
       </section>
