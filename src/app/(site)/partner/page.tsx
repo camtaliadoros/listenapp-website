@@ -28,14 +28,14 @@ type PartnerPage = {
   awarenessIntro?: string;
   awareness?: string[];
   limitationsOutro?: string;
-  licencesEyebrow: string;
-  licencesHeading: string;
   packageIntro?: string;
   packagePrice?: string;
   packagePriceUnit?: string;
   packageIncludesHeading?: string;
   packageIncludes?: string[];
+  packageNote?: string;
   licencesHelpHeading?: string;
+  packageClosing?: string;
   registerEyebrow: string;
   registerHeading: string;
   registerIntro?: string;
@@ -121,10 +121,11 @@ export default async function PartnerPage() {
   const requirements = page?.requirements?.length ? page.requirements : DEFAULT_REQUIREMENTS;
   const awareness = page?.awareness?.length ? page.awareness : DEFAULT_AWARENESS;
   const packageIncludes = page?.packageIncludes?.length ? page.packageIncludes : DEFAULT_PACKAGE_INCLUDES;
-  // Keep the arrow on the same line as the last word of the contact link.
-  const contactText = page?.licencesHelpHeading ?? "Get in touch for pricing and partner rates";
-  const contactLead = contactText.slice(0, contactText.lastIndexOf(" ") + 1);
-  const contactLast = contactText.slice(contactLead.length);
+  const priceLine = `${page?.packageIntro ?? "ListenApp packages start from"} ${page?.packagePrice ?? "£499"} ${page?.packagePriceUnit ?? "a month"}.`;
+  const contactLine = (page?.licencesHelpHeading ?? "Get in touch for pricing and partner rates").replace(/\.?$/, ".");
+  const closingText = page?.packageClosing ??"Contact us for a quote, partner rates and current discounts. We also work with councils, PCCs and consortiums on area licences. We’re happy to arrange a free demo at a time that suits you.";
+  // A leading "Contact us" becomes an email link.
+  const closingMatch = closingText.match(/^(contact us)([\s\S]*)$/i);
 
   return (
     <>
@@ -223,49 +224,43 @@ export default async function PartnerPage() {
         </div>
       </section>
 
-      {/* ── Licence options ── */}
-      <section id="pricing" className="scroll-mt-20 max-w-5xl mx-auto px-4 md:px-8 py-14 md:py-24">
-        <div className="text-center mb-10">
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand mb-3">{page?.licencesEyebrow ?? "Pricing"}</p>
-          <h2 className="font-graphik text-4xl md:text-5xl font-bold text-ink dark:text-white tracking-tight leading-[1.05]">{page?.licencesHeading ?? "Licence options"}</h2>
-        </div>
-        <FadeUp>
-          <div className="bg-white dark:bg-surface-night rounded-2xl p-6 md:p-10 border border-border dark:border-border-night grid grid-cols-1 md:grid-cols-[2fr_3fr] gap-8 md:gap-12">
-            <div className="md:pr-12 md:border-r border-border dark:border-border-night flex flex-col">
-              <p className="text-sm text-muted dark:text-muted-night mb-3">{page?.packageIntro ?? "ListenApp packages start from"}</p>
-              <p>
-                <span className="font-graphik text-5xl md:text-6xl font-bold text-ink dark:text-white tracking-tight leading-none">{page?.packagePrice ?? "£499"}</span>
-                <span className="text-sm text-muted dark:text-muted-night ml-2">{page?.packagePriceUnit ?? "a month"}</span>
-              </p>
-              <a href="#register" className="btn-arrow mt-8 md:mt-auto md:pt-8 self-start text-sm font-semibold text-brand hover:text-brand-hover transition-colors">
-                {contactLead}<span className="whitespace-nowrap">{contactLast} <span className="arrow">→</span></span>
-              </a>
-            </div>
-            <div>
-              <h3 className="font-graphik text-base font-semibold text-ink dark:text-white mb-4">{page?.packageIncludesHeading ?? "Every package includes:"}</h3>
-              <ul className="space-y-3">
-                {packageIncludes.map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-sm text-muted dark:text-muted-night leading-relaxed">
-                    <IconCheck aria-hidden size={16} stroke={2} className="flex-shrink-0 mt-0.5 text-brand" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </FadeUp>
-      </section>
-
-      {/* ── Contact form ── */}
+      {/* ── Contact form + pricing ── */}
       <section className="scroll-mt-20 bg-[#FBF0F0] dark:bg-surface-night py-14 md:py-20" id="register">
         <div className="max-w-5xl mx-auto px-4 md:px-8 grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-10 lg:gap-16 items-start">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand mb-3">{page?.registerEyebrow ?? "Register interest"}</p>
             <h2 className="font-graphik text-4xl md:text-5xl font-bold text-ink dark:text-white tracking-tight leading-[1.05] mb-5">{page?.registerHeading ?? "Get in touch"}</h2>
-            <p className="text-base text-muted dark:text-muted-night leading-relaxed max-w-sm">{page?.registerIntro ?? "Contact us for a quote, partner rates and current discounts. We also work with councils, PCCs and consortiums on area licences. We’re happy to arrange a free demo at a time that suits you."}</p>
+            <p className="text-base text-muted dark:text-muted-night leading-relaxed max-w-sm">{page?.registerIntro ?? "Tell us about your organisation and we'll arrange a demo at a time that works for you."}</p>
           </div>
-          <div className="bg-white dark:bg-surface-raised-night rounded-3xl p-6 md:p-8 shadow-[0_12px_40px_-12px_rgba(119,0,0,0.12)]">
-            <PartnerForm />
+          <div>
+            <div className="bg-white dark:bg-surface-raised-night rounded-3xl p-6 md:p-8 shadow-[0_12px_40px_-12px_rgba(119,0,0,0.12)]">
+              <PartnerForm />
+            </div>
+            <div id="pricing" className="scroll-mt-20 mt-10 space-y-5 text-base text-muted dark:text-muted-night leading-relaxed">
+              <p>
+                <strong className="font-semibold text-ink dark:text-white">{priceLine}</strong> {contactLine}
+              </p>
+              <div>
+                <p className="font-semibold text-ink dark:text-white mb-2">{page?.packageIncludesHeading ?? "All packages include:"}</p>
+                <ul className="space-y-1.5">
+                  {packageIncludes.map((item) => (
+                    <li key={item} className="flex items-start gap-2.5">
+                      <IconCheck aria-hidden size={16} stroke={2} className="flex-shrink-0 mt-1 text-brand" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <p>{page?.packageNote ?? "Additional impact reporting available."}</p>
+              <p>
+                {closingMatch ? (
+                  <>
+                    <a href="mailto:info@listenapp.org" className="font-semibold text-brand hover:text-brand-hover underline underline-offset-2">{closingMatch[1]}</a>
+                    {closingMatch[2]}
+                  </>
+                ) : closingText}
+              </p>
+            </div>
           </div>
         </div>
       </section>
