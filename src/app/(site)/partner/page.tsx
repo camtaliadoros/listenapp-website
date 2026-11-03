@@ -35,12 +35,10 @@ type PartnerPage = {
   packagePriceUnit?: string;
   packageIncludesHeading?: string;
   packageIncludes?: string[];
-  licencesHelpHeading: string;
-  licencesHelpBody: string;
-  licencesHelpCtaLabel: string;
+  licencesHelpHeading?: string;
   registerEyebrow: string;
   registerHeading: string;
-  registerIntro: string;
+  registerIntro?: string;
   seo?: object;
 };
 type HomePartners = { partners?: Partner[]; partnersHeading?: string; partnersThanksNote?: string };
@@ -123,6 +121,10 @@ export default async function PartnerPage() {
   const requirements = page?.requirements?.length ? page.requirements : DEFAULT_REQUIREMENTS;
   const awareness = page?.awareness?.length ? page.awareness : DEFAULT_AWARENESS;
   const packageIncludes = page?.packageIncludes?.length ? page.packageIncludes : DEFAULT_PACKAGE_INCLUDES;
+  // Keep the arrow on the same line as the last word of the contact link.
+  const contactText = page?.licencesHelpHeading ?? "Get in touch for pricing and partner rates";
+  const contactLead = contactText.slice(0, contactText.lastIndexOf(" ") + 1);
+  const contactLast = contactText.slice(contactLead.length);
 
   return (
     <>
@@ -221,20 +223,6 @@ export default async function PartnerPage() {
         </div>
       </section>
 
-      {/* ── Contact form ── */}
-      <section className="scroll-mt-20 bg-[#FBF0F0] dark:bg-surface-night py-14 md:py-20" id="register">
-        <div className="max-w-5xl mx-auto px-4 md:px-8 grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-10 lg:gap-16 items-start">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand mb-3">{page?.registerEyebrow ?? "Register interest"}</p>
-            <h2 className="font-graphik text-4xl md:text-5xl font-bold text-ink dark:text-white tracking-tight leading-[1.05] mb-5">{page?.registerHeading ?? "Get in touch"}</h2>
-            <p className="text-base text-muted dark:text-muted-night leading-relaxed max-w-sm">{page?.registerIntro}</p>
-          </div>
-          <div className="bg-white dark:bg-surface-raised-night rounded-3xl p-6 md:p-8 shadow-[0_12px_40px_-12px_rgba(119,0,0,0.12)]">
-            <PartnerForm />
-          </div>
-        </div>
-      </section>
-
       {/* ── Licence options ── */}
       <section id="pricing" className="scroll-mt-20 max-w-5xl mx-auto px-4 md:px-8 py-14 md:py-24">
         <div className="text-center mb-10">
@@ -243,12 +231,15 @@ export default async function PartnerPage() {
         </div>
         <FadeUp>
           <div className="bg-white dark:bg-surface-night rounded-2xl p-6 md:p-10 border border-border dark:border-border-night grid grid-cols-1 md:grid-cols-[2fr_3fr] gap-8 md:gap-12">
-            <div className="md:pr-12 md:border-r border-border dark:border-border-night">
+            <div className="md:pr-12 md:border-r border-border dark:border-border-night flex flex-col">
               <p className="text-sm text-muted dark:text-muted-night mb-3">{page?.packageIntro ?? "ListenApp packages start from"}</p>
               <p>
                 <span className="font-graphik text-5xl md:text-6xl font-bold text-ink dark:text-white tracking-tight leading-none">{page?.packagePrice ?? "£499"}</span>
                 <span className="text-sm text-muted dark:text-muted-night ml-2">{page?.packagePriceUnit ?? "a month"}</span>
               </p>
+              <a href="#register" className="btn-arrow mt-8 md:mt-auto md:pt-8 self-start text-sm font-semibold text-brand hover:text-brand-hover transition-colors">
+                {contactLead}<span className="whitespace-nowrap">{contactLast} <span className="arrow">→</span></span>
+              </a>
             </div>
             <div>
               <h3 className="font-graphik text-base font-semibold text-ink dark:text-white mb-4">{page?.packageIncludesHeading ?? "Every package includes:"}</h3>
@@ -263,17 +254,19 @@ export default async function PartnerPage() {
             </div>
           </div>
         </FadeUp>
+      </section>
 
-        <div className="mt-8 bg-[#FBF0F0] dark:bg-surface-night rounded-2xl p-6 md:px-7 flex flex-col md:flex-row md:items-center justify-between gap-5">
+      {/* ── Contact form ── */}
+      <section className="scroll-mt-20 bg-[#FBF0F0] dark:bg-surface-night py-14 md:py-20" id="register">
+        <div className="max-w-5xl mx-auto px-4 md:px-8 grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-10 lg:gap-16 items-start">
           <div>
-            <h3 className="font-graphik text-base md:text-lg font-semibold text-ink dark:text-white mb-1">{page?.licencesHelpHeading ?? "Get in touch for pricing and partner rates"}</h3>
-            <p className="text-sm text-muted dark:text-muted-night leading-relaxed">
-              {page?.licencesHelpBody ?? "Contact us for a quote, partner rates and current discounts. We also work with councils, PCCs and consortiums on area licences. We’re happy to arrange a free demo at a time that suits you."}
-            </p>
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand mb-3">{page?.registerEyebrow ?? "Register interest"}</p>
+            <h2 className="font-graphik text-4xl md:text-5xl font-bold text-ink dark:text-white tracking-tight leading-[1.05] mb-5">{page?.registerHeading ?? "Get in touch"}</h2>
+            <p className="text-base text-muted dark:text-muted-night leading-relaxed max-w-sm">{page?.registerIntro ?? "Contact us for a quote, partner rates and current discounts. We also work with councils, PCCs and consortiums on area licences. We’re happy to arrange a free demo at a time that suits you."}</p>
           </div>
-          <a href="#register" className="btn-arrow inline-flex items-center gap-2 flex-shrink-0 self-start md:self-auto bg-brand text-white font-semibold text-sm px-6 py-3 rounded-full hover:bg-brand-hover hover:text-white transition-colors">
-            <span>{page?.licencesHelpCtaLabel ?? "Register your interest"}</span> <span className="arrow">→</span>
-          </a>
+          <div className="bg-white dark:bg-surface-raised-night rounded-3xl p-6 md:p-8 shadow-[0_12px_40px_-12px_rgba(119,0,0,0.12)]">
+            <PartnerForm />
+          </div>
         </div>
       </section>
 

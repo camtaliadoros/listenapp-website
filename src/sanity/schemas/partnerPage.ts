@@ -60,9 +60,7 @@ export default defineType({
     defineField({ name: "packagePriceUnit", title: "Price unit", type: "string", group: "licences", initialValue: "a month" }),
     defineField({ name: "packageIncludesHeading", title: "Includes heading", type: "string", group: "licences", initialValue: "Every package includes:" }),
     defineField({ name: "packageIncludes", title: "Includes items", type: "array", group: "licences", of: [{ type: "string" }], description: "Leave empty to use the built-in copy." }),
-    defineField({ name: "licencesHelpHeading", title: "Help box heading", type: "string", group: "licences", initialValue: "Get in touch for pricing and partner rates" }),
-    defineField({ name: "licencesHelpBody", title: "Help box text", type: "text", rows: 2, group: "licences" }),
-    defineField({ name: "licencesHelpCtaLabel", title: "Help box button label", type: "string", group: "licences", initialValue: "Register your interest" }),
+    defineField({ name: "licencesHelpHeading", title: "Contact link text", type: "string", group: "licences", description: "Shown under the price, links to the register form.", initialValue: "Get in touch for pricing and partner rates" }),
 
     defineField({ name: "registerEyebrow", title: "Eyebrow", type: "string", group: "register", initialValue: "Register interest" }),
     defineField({ name: "registerHeading", title: "Heading", type: "string", group: "register", initialValue: "Get in touch" }),

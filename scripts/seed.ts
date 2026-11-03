@@ -195,7 +195,7 @@ async function seed() {
     ],
     registerEyebrow: "Register interest",
     registerHeading: "Get in touch",
-    registerIntro: "Tell us about your organisation and we'll arrange a demo at a time that works for you.",
+    registerIntro: "Contact us for a quote, partner rates and current discounts. We also work with councils, PCCs and consortiums on area licences. We’re happy to arrange a free demo at a time that suits you.",
   });
   console.log("✓ partnerPage");
 
