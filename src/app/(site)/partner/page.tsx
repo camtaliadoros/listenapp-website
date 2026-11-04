@@ -122,7 +122,7 @@ export default async function PartnerPage() {
   const requirements = page?.requirements?.length ? page.requirements : DEFAULT_REQUIREMENTS;
   const awareness = page?.awareness?.length ? page.awareness : DEFAULT_AWARENESS;
   const packageIncludes = page?.packageIncludes?.length ? page.packageIncludes : DEFAULT_PACKAGE_INCLUDES;
-  const priceLine = `${page?.packageIntro ?? "ListenApp packages start from"} ${page?.packagePrice ?? "£499"} ${page?.packagePriceUnit ?? "a month"}.`;
+  const priceLine = `${page?.packageIntro ?? "ListenApp packages start from"} ${page?.packagePrice ?? "£499"} ${page?.packagePriceUnit ?? "per month"}.`;
   const contactLine = (page?.licencesHelpHeading ?? "Get in touch for pricing and partner rates").replace(/\.?$/, ".");
   const closingText = page?.packageClosing ??"Contact us for a quote, partner rates and current discounts. We also work with councils, PCCs and consortiums on area licences. We’re happy to arrange a free demo at a time that suits you.";
   // A leading "Contact us" becomes an email link.

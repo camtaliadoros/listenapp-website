@@ -56,7 +56,7 @@ export default defineType({
     defineField({ name: "licencesEyebrow", title: "Eyebrow", type: "string", group: "licences", initialValue: "Pricing" }),
     defineField({ name: "packageIntro", title: "Price lead-in", type: "string", group: "licences", initialValue: "ListenApp packages start from" }),
     defineField({ name: "packagePrice", title: "Price", type: "string", group: "licences", description: "e.g. £499", initialValue: "£499" }),
-    defineField({ name: "packagePriceUnit", title: "Price unit", type: "string", group: "licences", initialValue: "a month" }),
+    defineField({ name: "packagePriceUnit", title: "Price unit", type: "string", group: "licences", initialValue: "per month" }),
     defineField({ name: "packageIncludesHeading", title: "Includes heading", type: "string", group: "licences", initialValue: "All packages include:" }),
     defineField({ name: "packageIncludes", title: "Includes items", type: "array", group: "licences", of: [{ type: "string" }], description: "Leave empty to use the built-in copy." }),
     defineField({ name: "packageNote", title: "Note after includes", type: "string", group: "licences", initialValue: "Additional impact reporting available." }),
